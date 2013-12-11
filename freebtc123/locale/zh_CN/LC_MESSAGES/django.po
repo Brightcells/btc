@@ -1,0 +1,167 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-08 14:09+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: models.py:10
+msgid "walleturl"
+msgstr "钱包地址"
+
+#: models.py:14 models.py:15 models.py:25 models.py:104 models.py:121
+#: models.py:137
+msgid "wallet"
+msgstr "钱包"
+
+#: models.py:22
+#, fuzzy
+msgid "username"
+msgstr "用户名"
+
+#: models.py:23
+msgid "password"
+msgstr "密码"
+
+#: models.py:24
+msgid "email"
+msgstr "邮箱"
+
+#: models.py:29 models.py:30
+#, fuzzy
+msgid "userinfo"
+msgstr "用户信息"
+
+#: models.py:37
+msgid "navname"
+msgstr "导航名称"
+
+#: models.py:38
+msgid "navtitle"
+msgstr "导航标题"
+
+#: models.py:39
+msgid "navposition"
+msgstr "导航位置"
+
+#: models.py:43 models.py:44 models.py:55
+msgid "nav"
+msgstr "导航"
+
+#: models.py:51
+msgid "csyname"
+msgstr "分类名称"
+
+#: models.py:52
+msgid "csydescription"
+msgstr "分类描述"
+
+#: models.py:59 models.py:60 models.py:76
+msgid "classify"
+msgstr "分类"
+
+#: models.py:67
+msgid "sitename"
+msgstr "网站名称"
+
+#: models.py:68
+msgid "sitedescription"
+msgstr "网站描述"
+
+#: models.py:69
+msgid "siteurl"
+msgstr "网站网址"
+
+#: models.py:70
+msgid "siteclicknum"
+msgstr "网站点击数"
+
+#: models.py:71
+msgid "siteevaluatenum"
+msgstr "网站评论数"
+
+#: models.py:72
+msgid "sitelikenum"
+msgstr "网站赞数"
+
+#: models.py:73
+msgid "siteunlikenum"
+msgstr "网站踩数"
+
+#: models.py:74
+#, fuzzy
+msgid "sitefavnum"
+msgstr "网站名称"
+
+#: models.py:75
+msgid "sitedatetime"
+msgstr "网站提交时间"
+
+#: models.py:80 models.py:81 models.py:88 models.py:102 models.py:119
+#: models.py:135
+msgid "site"
+msgstr "网站"
+
+#: models.py:89
+msgid "eavcontent"
+msgstr "评价内容"
+
+#: models.py:90
+msgid "evadatetime"
+msgstr "评价时间"
+
+#: models.py:94 models.py:95
+msgid "evaluate"
+msgstr "网站评价"
+
+#: models.py:103 models.py:120 models.py:136
+msgid "user"
+msgstr "用户名"
+
+#: models.py:105 models.py:122 models.py:138
+msgid "host"
+msgstr "用户IP"
+
+#: models.py:106
+msgid "flag"
+msgstr "标识"
+
+#: models.py:107
+#, fuzzy
+msgid "liketime"
+msgstr "喜恶"
+
+#: models.py:111 models.py:112
+msgid "like"
+msgstr "喜恶"
+
+#: models.py:123
+#, fuzzy
+msgid "favoritetime"
+msgstr "评价时间"
+
+#: models.py:127 models.py:128
+msgid "favorite"
+msgstr "收藏"
+
+#: models.py:139
+#, fuzzy
+msgid "visittime"
+msgstr "网站提交时间"
+
+#: models.py:143 models.py:144
+msgid "visit"
+msgstr "访问记录"

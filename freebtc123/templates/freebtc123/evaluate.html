@@ -1,0 +1,51 @@
+{% extends "freebtc123.html" %}
+
+{% block title %}
+	<title>FreeBTC123 - 网站评价</title>
+{% endblock %}
+
+{% block alert %}
+{% endblock %}
+
+{% block befcon %}
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span12">
+				<a name="unpaid"></a>
+				<div class="hero-unit">
+					<form class="form-horizontal" action="{% url 'freebtc123:evaluate' siteid %}" method='post'>
+						<div class="control-group">
+							<label class="control-label" for="inputEvaluateContent"><b>评价内容：</b></label>
+							<div class="controls">
+								<input type="text" id="inputEvaluateContent" name="content" placeholder="评价内容">
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<button type="submit" class="btn">提交</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span12">
+				<a name="unpaid"></a>
+				<div class="hero-unit">
+				    {% for e in eva %}
+					    <div class="evaluate">
+							{{ e.evaDateTime }}</br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ e.evaContent }}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

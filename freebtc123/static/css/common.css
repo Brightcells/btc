@@ -1,0 +1,81 @@
+/* - 
+    common.css is must header before bootstrap-responsive(.min).css
+	otherwise navbar will display error when browser half-screen
+   - */
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+
+/* - 
+    Alignment of bootstrap's table content
+    .hvcenter - 
+	.hcenter - 
+	.vcenter - 
+   - */
+.hvcenter {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.hcenter {
+    text-align: center !important;
+}
+
+.vcenter {
+    vertical-align: middle !important;
+}
+
+/* - 
+    force break long word/url etc
+	to make it not overflow container
+	ref: http://www.cnblogs.com/2050/archive/2012/08/10/2632256.html
+   - */
+.table-layout {
+    table-layout: fixed;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+/* - 
+    Style of description
+   - */
+.description {
+    padding: 8px 35px 8px 14px;
+	border-top: 3px double #000;
+}
+
+/* - 
+    Style of back top
+   - */
+.backtop {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	display: none;
+	width: 49px;
+	height: 35px;
+	text-decoration: none;
+	opacity: 0.5;
+	background: url(//style.neoease.org/img/paled/sprite.png?v=010514) no-repeat 0 -424px;
+}
+
+/* - 
+    Style of evaluate
+   - */
+.evaluate {
+	padding: 8px 35px 8px 14px;
+	border-bottom: 1px groove #ddd;
+}
+
+.tHeight{
+    height: 40px;
+	overflow: hidden;
+}
+
+.thumbs-up{
+    border-bottom:1px solid #ddd
+}
+.thumbs-down{
+	border-top:0px solid #ddd
+}

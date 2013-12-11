@@ -1,0 +1,139 @@
+/** 
+ * @fileOverview pam.css which to simply deal with picture\audio\movie 
+ * @author HQM
+ * @date 2013/06/27
+ * @e-mail qiminis0801@gmail.com
+ * @github https://github.com/HQMIS
+ * @version 0.0.1 
+ */
+ 
+ /**
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * 
+ * the css below is for audio
+ * 
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ */
+
+/* set audio && switch's position */
+.audio,.switch {
+	position: fixed;
+	right: 20px;
+	bottom: 10px;
+	z-index: 88888888;
+	display: block;
+}
+
+/**
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * 
+ * the css below is for picture
+ * 
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ */
+ 
+/* set the style of the div which is used to contain the background img */
+div.bgDiv {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: -88888888;
+}
+
+/* set the style of the background img */
+div.bgDiv>img {
+	height: 100%;
+	width: 100%;
+	border: 0;
+}
+
+/**
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * 
+ * the css below is for movie(video)
+ * 
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ */
+ 
+/* set the style of the div which is used to contain the background movie */
+div.movieDiv {
+	position: fixed;
+	top: -130px;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: -88888888;
+}
+ 
+/* set the style of the background movie */
+div.movieDiv>video {
+	height: 120%;
+	width: 100%;
+	border: 0;
+}
+
+/**
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * 
+ * the css is for wap div to show above background(picture\movie\video)
+ * 
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ */
+ 
+/* this div is used to cover the div whose class is bgDiv && movieDiv */
+div.Div {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 0;
+}
+
+div.DivWhite {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 0;
+	background-color: white;
+	filter: alpha(opacity =   95);
+	opacity: .95;
+}
+
+div.DivGray {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 0;
+	background-color: gray;
+	filter: alpha(opacity =   80);
+	opacity: .8;
+}
+
+/**
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ * 
+ * the css is for for movie(video) on IE
+ * 
+ * ########## ########## ########## ########## ########## ########## ########## ########## ########## *
+ */
+ 
+.ieMovieDiv {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: -50px;
+	right: 0;
+	z-index: -88888888;
+}
+
+.ieEmbed {
+	height: 100%;
+	width: 100%;
+}

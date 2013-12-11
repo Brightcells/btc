@@ -1,0 +1,45 @@
+{% extends "freebtc123.html" %}
+
+{% block title %}
+	<title>FreeBTC123 - 提交BTC相关网址</title>
+{% endblock %}
+
+{% block alert %}
+{% endblock %}
+
+{% block befcon %}
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span12">
+				<a name="unpaid"></a>
+				<div class="hero-unit">
+					<form class="form-horizontal" action="{% url 'freebtc123:submitsite' %}" method='post'>
+						<div class="control-group">
+							<label class="control-label" for="inputSiteName"><b>网站名称：</b></label>
+							<div class="controls">
+								<input type="text" id="inputSiteName" name="name" placeholder="网站名称">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputSiteDescription"><b>网站描述：</b></label>
+							<div class="controls">
+								<input type="text" id="inputSiteDescription" name="description" placeholder="网站描述">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="inputSiteUrl"><b>网站网址：</b></label>
+							<div class="controls">
+								<input type="text" id="inputSiteUrl" name="url" placeholder="网站网址">
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<button type="submit" class="btn">提交</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
