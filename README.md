@@ -16,5 +16,6 @@ A Navigation Site For BTC
 ### TODO:
 
 * 前端页面优化
+* 取消赞和收藏
 * 密码修改/找回
 * 比特币相关服务
