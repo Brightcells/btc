@@ -1,3 +1,16 @@
+function visit(_url, sid, url){
+    window.open(url);
+	$.ajax({
+		type: "post",
+		url: _url,
+		data: {siteid: sid},
+		success: function(json){
+            // do nothing 
+		}
+	});
+	event.preventDefault();
+}
+
 function myLikeFavAjax(_iObj, _spanObj, _url, _data){
 	/* http://stackoverflow.com/questions/2360625/add-class-to-an-element */
 	var iObj = _iObj;

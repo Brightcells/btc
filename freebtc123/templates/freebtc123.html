@@ -116,7 +116,7 @@
 									<tr>
 										<td class="hvcenter"><div class="tHeight"><span>{{ site.siteName }}</span></div></td>
 										<td class="hvcenter"><div class="tHeight"><span title="{{ site.siteDescription|safe }}">{{ site.siteDescription|safe }}</span></div></td>
-										<td class="hvcenter"><div class="tHeight"><a href="{% url 'freebtc123:visit' site.id %}" target="_blank" title="{{ site.siteUrl }}">{{ site.siteUrl }}</a></div></td>
+										<td class="hvcenter"><div class="tHeight"><a id="{{ site.id }}" href="javascript:void(0)" target="_blank" onclick="visit('{% url 'freebtc123:visit' %}', this.id, this.title);return false;" title="{{ site.siteUrl }}">{{ site.siteUrl }}</a></div></td>
 										<td class="hvcenter">
 											<a href="{% url 'freebtc123:evaluate' site.id %}" target="_blank"><i class="icon-eye-open"></i></a></br>
 											{{ site.siteEvaluateNum }}/{{ site.siteClickNum }}

@@ -11,7 +11,9 @@
 # ErrorCode: 300***, for Favorite
 #     {'errorCode': 300200, 'errorString': 'Favorite the site success'}
 #     {'errorCode': 300201, 'errorString': 'The parm of siteid not transmitted success'}
-# ErrorCode: 400***, for
+# ErrorCode: 400***, for Visit
+#     {'errorCode': 400200, 'errorString': 'Record the visit success'}
+#     {'errorCode': 400201, 'errorString': 'Record the visit failure'}
 # ErrorCode: 500***, for
 ###
 
@@ -175,17 +177,19 @@ def submitsite(request):
     return render_to_response('freebtc123/submitsite.html', reDict)
 
 
-def visit(request, siteid):
+def visit(request):
+    _siteid = request.POST.get('siteid', '')
     _usr, _host = getUsrHost(request)
     try:
         u = UserInfo.objects.get(username=_usr)
-        Visit.objects.create(site_id=siteid, user=u, host=_host)
+        Visit.objects.create(site_id=_siteid, user=u, host=_host)
     except:
-        Visit.objects.create(site_id=siteid, host=_host)
-    s = Site.objects.get(id=siteid)
+        Visit.objects.create(site_id=_siteid, host=_host)
+    s = Site.objects.get(id=_siteid)
     s.siteClickNum = s.siteClickNum + 1
     s.save()
-    return HttpResponseRedirect(s.siteUrl)
+    errorCode = {'errorCode': 400200, 'errorString': 'Record the visit success'}
+    return HttpResponse(json.dumps(errorCode))
 
 
 def evaluate(request, siteid):
