@@ -87,7 +87,7 @@ class Site(models.Model):
 
 class Evaluate(models.Model):
     site = models.ForeignKey(Site, verbose_name=_(u'site'), blank=True, null=True)
-    evaContent = models.CharField(_(u'eavcontent'), max_length=255)
+    evaContent = models.TextField(_(u'eavcontent'), blank=True, null=True)
     evaDateTime = models.DateTimeField(_(u'evadatetime'), blank=True, null=True,  auto_now_add=True)
 
     class Meta:
@@ -143,6 +143,23 @@ class Visit(models.Model):
         db_table = u'visit'
         verbose_name = _(u'visit')
         verbose_name_plural = _(u'visit')
+
+    def __unicode__(self):
+        return unicode(self.id)
+
+
+class Log(models.Model):
+    site = models.ForeignKey(Site, verbose_name=_(u'site'), blank=True, null=True)
+    user = models.ForeignKey(UserInfo, verbose_name=_(u'user'), blank=True, null=True)
+    wallet = models.ForeignKey(Wallet, verbose_name=_(u'wallet'), blank=True, null=True)
+    host = models.GenericIPAddressField(_('host'), max_length=20, blank=True, null=True)
+    descr = models.TextField(_('description'), blank=True, null=True)
+    logTime = models.DateTimeField(_(u'logtime'), blank=True, null=True,  auto_now_add=True)
+
+    class Meta:
+        db_table = u'log'
+        verbose_name = _(u'log')
+        verbose_name_plural = _(u'log')
 
     def __unicode__(self):
         return unicode(self.id)

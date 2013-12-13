@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
-from freebtc123.models import Wallet, UserInfo, Nav, Classify, Site, Evaluate, Like, Favorite, Visit
+from freebtc123.models import Wallet, UserInfo, Nav, Classify, Site, Evaluate, Like, Favorite, Visit, Log
 
 
 class WalletAdmin(admin.ModelAdmin):
@@ -41,6 +41,11 @@ class FavoriteAdmin(admin.ModelAdmin):
 class VisitAdmin(admin.ModelAdmin):
     list_display = ('site', 'user', 'wallet', 'host', 'visitTime')
 
+
+class LogAdmin(admin.ModelAdmin):
+    list_display = ('site', 'user', 'wallet', 'host', 'descr', 'logTime')
+
+
 admin.site.register(Wallet, WalletAdmin)
 admin.site.register(UserInfo, UserInfoAdmin)
 admin.site.register(Nav, NavAdmin)
@@ -50,3 +55,4 @@ admin.site.register(Evaluate, EvaluateAdmin)
 admin.site.register(Like, LikeAdmin)
 admin.site.register(Favorite, FavoriteAdmin)
 admin.site.register(Visit, VisitAdmin)
+admin.site.register(Log, LogAdmin)

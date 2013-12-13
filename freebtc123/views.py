@@ -8,9 +8,11 @@
 # ErrorCode: 200***, for likeSite
 #     {'errorCode': 200200, 'errorString': 'Like/Unlike the site success'}
 #     {'errorCode': 200201, 'errorString': 'You have already like/unlike the site, don\'t hesitate'}
+#     {'errorCode': 200202, 'errorString': 'Cancel like/unlike the site success'}
 # ErrorCode: 300***, for Favorite
 #     {'errorCode': 300200, 'errorString': 'Favorite the site success'}
 #     {'errorCode': 300201, 'errorString': 'The parm of siteid not transmitted success'}
+#     {'errorCode': 300202, 'errorString': 'Cancel favorite the site success'}
 # ErrorCode: 400***, for Visit
 #     {'errorCode': 400200, 'errorString': 'Record the visit success'}
 #     {'errorCode': 400201, 'errorString': 'Record the visit failure'}
@@ -18,7 +20,7 @@
 ###
 
 from django.contrib.auth.models import User
-from freebtc123.models import Wallet, UserInfo, Nav, Classify, Site, Evaluate, Like, Favorite, Visit
+from freebtc123.models import Wallet, UserInfo, Nav, Classify, Site, Evaluate, Like, Favorite, Visit, Log
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -206,6 +208,12 @@ def evaluate(request, siteid):
     return render_to_response('freebtc123/evaluate.html', reDict)
 
 
+def siteLikeChange(_siteid, _flag, _num):
+    s = Site.objects.get(id=_siteid)
+    s.siteLikeNum = s.siteLikeNum + _num if _flag else s.siteUnlikeNum + _num
+    s.save()
+
+
 def like(request):
     _flag = 'false' != request.POST.get('flag', '')
     _siteid = request.POST.get('siteid', '')
@@ -217,19 +225,39 @@ def like(request):
             errorCode = {'errorCode': 200201, 'errorString': 'You have already like/unlike the site, don\'t hesitate'}
             return HttpResponse(json.dumps(errorCode))
         except:
-            Like.objects.create(site_id=_siteid, user=u, host=_host, flag=_flag)
+            try:
+                Like.objects.get(site_id=_siteid, user=u, flag=_flag).delete()
+                siteLikeChange(_siteid, _flag, -1)
+                Log.objects.create(site_id=_siteid, user=u, host=_host, descr="Cancel like/unlike")
+                errorCode = {'errorCode': 200202, 'errorString': 'Cancel like/unlike the site success'}
+                return HttpResponse(json.dumps(errorCode))
+            except:
+                Like.objects.create(site_id=_siteid, user=u, host=_host, flag=_flag)
+                Log.objects.create(site_id=_siteid, user=u, host=_host, descr="Insert like/unlike")
     except:
         try:
             Like.objects.get(site_id=_siteid, host=_host, flag=not _flag)
             errorCode = {'errorCode': 200201, 'errorString': 'You have already like/unlike the site, don\'t hesitate'}
             return HttpResponse(json.dumps(errorCode))
         except:
-            Like.objects.create(site_id=_siteid, host=_host, flag=_flag)
-    s = Site.objects.get(id=_siteid)
-    s.siteLikeNum = s.siteLikeNum + 1 if _flag else s.siteUnlikeNum + 1
-    s.save()
+            try:
+                Like.objects.get(site_id=_siteid, host=_host, flag=_flag).delete()
+                siteLikeChange(_siteid, _flag, -1)
+                Log.objects.create(site_id=_siteid, host=_host, descr="Cancel like/unlike")
+                errorCode = {'errorCode': 200202, 'errorString': 'Cancel like/unlike the site success'}
+                return HttpResponse(json.dumps(errorCode))
+            except:
+                Like.objects.create(site_id=_siteid, host=_host, flag=_flag)
+                Log.objects.create(site_id=_siteid, host=_host, descr="Insert like/unlike")
+    siteLikeChange(_siteid, _flag, 1)
     errorCode = {'errorCode': 200200, 'errorString': 'Like/Unlike the site success'}
     return HttpResponse(json.dumps(errorCode))
+
+
+def siteFavChange(_siteid, _num):
+    s = Site.objects.get(id=_siteid)
+    s.siteFavNum = s.siteFavNum + _num
+    s.save()
 
 
 def favorite(request):
@@ -238,12 +266,26 @@ def favorite(request):
         _usr, _host = getUsrHost(request)
         u = UserInfo.objects.filter(username=_usr)
         if u.count() == 1:
-            Favorite.objects.create(site_id=_siteid, user=u[0], host=_host)
+            try:
+                Favorite.objects.get(site_id=_siteid, user=u[0], host=_host).delete()
+                siteFavChange(_siteid, -1)
+                Log.objects.create(site_id=_siteid, user=u[0], host=_host, descr="Cancel Favorite")
+                errorCode = {'errorCode': 300202, 'errorString': 'Cancel favorite the site success'}
+                return HttpResponse(json.dumps(errorCode))
+            except:
+                Favorite.objects.create(site_id=_siteid, user=u[0], host=_host)
+                Log.objects.create(site_id=_siteid, user=u[0], host=_host, descr="Inset Favorite")
         else:
-            Favorite.objects.create(site_id=_siteid, host=_host)
-        s = Site.objects.get(id=_siteid)
-        s.siteFavNum = s.siteFavNum + 1
-        s.save()
+            try:
+                Favorite.objects.get(site_id=_siteid, host=_host).delete()
+                siteFavChange(_siteid, -1)
+                Log.objects.create(site_id=_siteid, host=_host, descr="Cancel Favorite")
+                errorCode = {'errorCode': 300202, 'errorString': 'Cancel favorite the site success'}
+                return HttpResponse(json.dumps(errorCode))
+            except:
+                Favorite.objects.create(site_id=_siteid, host=_host)
+                Log.objects.create(site_id=_siteid, host=_host, descr="Insert Favorite")
+        siteFavChange(_siteid, 1)
         errorCode = {'errorCode': 300200, 'errorString': 'Favorite the site success'}
         return HttpResponse(json.dumps(errorCode))
     else:

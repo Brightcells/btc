@@ -5,7 +5,7 @@ function visit(_url, sid, url){
 		url: _url,
 		data: {siteid: sid},
 		success: function(json){
-            // do nothing 
+            // do nothing no matter what server response
 		}
 	});
 	event.preventDefault();
@@ -15,28 +15,26 @@ function myLikeFavAjax(_iObj, _spanObj, _url, _data){
 	/* http://stackoverflow.com/questions/2360625/add-class-to-an-element */
 	var iObj = _iObj;
 	var spanObj = _spanObj;
-	if(iObj.classList.contains('done')){
-		/* do nothing */ 
-	}else{
-		iObj.classList.add("clicked");
-		$.ajax({
-			type: "post",
-			url: _url,
-			data: _data,
-			success: function(json){
-				jsonObj = eval ("(" + json + ")");
-				if(jsonObj['errorCode'] in {'200200': '', '300200': ''}){
-					iObj.classList.add("icon-white", "done");
-					spanObj.text(parseInt(spanObj.text())+1);
-					// alert('yeah');
-				}else{
-					// alert('oh no');
-				}
+		
+	iObj.classList.add("clicked");
+	$.ajax({
+		type: "post",
+		url: _url,
+		data: _data,
+		success: function(json){
+			jsonObj = eval ("(" + json + ")");
+			num = jsonObj['errorCode'];
+			if(num in {'200200': '', '300200': ''}){
+			    iObj.classList.add("icon-white", "done");
+			    spanObj.text(parseInt(spanObj.text())+1);
+			}else if(num in {'200202': '', '300202': ''}){
+				iObj.classList.remove("icon-white", "done");
+			    spanObj.text(parseInt(spanObj.text())-1);
 			}
-		});
-		event.preventDefault();
-		iObj.classList.remove("clicked");
-	}	
+		}
+	});
+	event.preventDefault();
+	iObj.classList.remove("clicked");	
 }
 
 /**

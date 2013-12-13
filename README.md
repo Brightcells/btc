@@ -6,6 +6,7 @@ A Navigation Site For BTC
 ### [FreeBTC123](http://freebtc123.com/)（[HereBTC](http://herebtc.com/)）
 
 * 免费获取比特币网址导航，同时也囊括比特币、山寨币网址导航，后续也会推出其他比特币相关服务
+
 * 执行： python manage.py syncdb
 * 执行： python manage.py collectstatic
 * 执行： python manage.py runserver 0.0.0.0:80
@@ -16,6 +17,6 @@ A Navigation Site For BTC
 ### TODO:
 
 * 前端页面优化
-* 取消赞和收藏
+* 取消赞和收藏        √
 * 密码修改/找回
 * 比特币相关服务
