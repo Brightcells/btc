@@ -175,7 +175,7 @@ def submitsite(request):
     else:
         csySet = Classify.objects.get(nav__navName='submitsite')
         Site.objects.create(siteName=_name, siteDescription=_description, siteUrl=_url, classify_id=csySet.id)
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'altcoin'), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'submitsite'), 'usr': getUsr(request)}
     return render_to_response('freebtc123/submitsite.html', reDict)
 
 
