@@ -5,6 +5,8 @@
 body {
 	padding-top: 60px;
 	padding-bottom: 40px;
+	background-color: #f9f9f9;
+	font: normal 14px/1.5 Tahoma,Helvetica,arial,sans-serif
 }
 
 /* - 
@@ -68,14 +70,36 @@ body {
 	border-bottom: 1px groove #ddd;
 }
 
-.tHeight{
-    height: 40px;
+/* - 
+    Style for table to both center and hidden
+   - */
+.limit{
+    height: 30px;
 	overflow: hidden;
+	line-height:30px;
+}
+		
+.limit span{
+	display             : -moz-inline-box;  /* FF2 or lower */
+	display             : inline-block;     /* FF3, Opera, Safari */
+	line-height         : normal;
 }
 
+/* - 
+    Separate line between thumbs-up and thumbs-down
+   - */
 .thumbs-up{
     border-bottom:1px solid #ddd
 }
+
 .thumbs-down{
 	border-top:0px solid #ddd
+}
+
+/* - 
+    Style of icon of some site
+   - */
+.icon{
+	width: 50px;
+	height: 50px;
 }
