@@ -79,104 +79,110 @@
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="alert alert-danger">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<b>风险提示</b>：</br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、比特币的交易有<b>极高的风险</b>，它没有像中国股市那样的<b>涨跌停限制</b>，同时交易是<b>24小时开放</b>的。比特币由于筹码较少，价格<b>易受到庄家控制</b>，有可能出现一天价格涨几倍的情况，同时也可能出现<b>一天内价格跌去一半</b>的情况！<b>入市须谨慎，一定注意控制好风险！</b></br>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、大家一定要妥善保管好<b>钱包、交易平台</b>帐户信息，不要轻易告诉其他人，以免丢失钱、币！</br>
-		</div>
-		
-		{% block alert %}
-		{% endblock %}
-		
-		{% block befcon %}
-		{% endblock %}
-		
-		{% block content %}
-			{% for cs in csysite %}
-				<div class="row table-responsive">
-					<div class="span12">
-						<a name="unpaid"></a>
-						<h2>{{ cs.csyName|safe }}</h2>
-						<div class="description">
-							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cs.csyDescription|safe }}</span>
-						</div>
-						<table class="table table-bordered table-striped table-hover table-condensed table-layout">
-							<thead>
-								<tr>
-									<th width="16%" class="hvcenter">网站名称</th>
-									<th width="*%" class="hvcenter">网站描述</th>
-									<th width="16%" class="hvcenter">网站链接</th>
-									<th width="16%" class="hvcenter">网站评论</th>
-									<th width="16%" class="hvcenter">网站评价</th>
-									<th width="8%" class="hvcenter">收藏</th>
-								</tr>
-							<thead>
-							<tbody>
-								{% for site in cs.siteSet %}
-									<tr>
-										<td class="hvcenter"><div class="limit"><span>{{ site.siteName }}</span></div></td>
-										<td class="hvcenter"><div class="limit"><span title="{{ site.siteDescription|safe }}">{{ site.siteDescription|safe }}</span></div></td>
-										<td class="hvcenter"><div class="limit"><span><a id="{{ site.id }}" href="javascript:void(0)" target="_blank" onclick="visit('{% url 'freebtc123:visit' %}', this.id, this.title);return false;" title="{{ site.siteUrl }}">{{ site.siteUrl }}</a><span></div></td>
-										<td class="hvcenter">
-											<a href="{% url 'freebtc123:evaluate' site.id %}" target="_blank"><i class="icon-eye-open"></i></a></br>
-											{{ site.siteEvaluateNum }}/{{ site.siteClickNum }}
-										</td>
-										<td class="hvcenter">
-											<div class="thumbs-up">
-												{% if site.like %}
-													<i id="{{ site.id }}" class="icon-thumbs-up icon-white done"></i>
-												{% else %}
-													<i id="{{ site.id }}" class="icon-thumbs-up"></i>
-												{% endif %}
-												&nbsp;&nbsp;&nbsp;&nbsp;
-												<span>{{ site.siteLikeNum }}</span>
-											</div>
-											
-											<div class="thumbs-down">
-												{% if site.unlike %}
-													<i id="{{ site.id }}" class="icon-thumbs-down icon-white done"></i>
-												{% else %}
-													<i id="{{ site.id }}" class="icon-thumbs-down"></i>
-												{% endif %}
-												&nbsp;&nbsp;&nbsp;&nbsp;
-												<span>{{ site.siteUnlikeNum }}</span>
-											</div>
-										</td>
-										<td class="hvcenter">
-											{% if site.fav %}
-											    <i id="{{ site.id }}" class="icon-bookmark icon-white done"></i></br>
-											{% else %}
-											    <i id="{{ site.id }}" class="icon-bookmark"></i></br>
-											{% endif %}
-											<span>{{ site.siteFavNum }}</span>
-										</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-						</table>
-					</div>
-				</div>
-			{% endfor %}
-		{% endblock %}
-		
-		{% block aftcon %}
-		{% endblock %}
-		
-		<hr>
 
-		<footer>
-			<p class="pull-right">Donate: 13Y4K9Lkrd9rCxHnF8b3axUKbjtA3ZWF1d</p>
-			<p>Coments, suggestions, problems?</p>
-			<p><a href="https://github.com/Brightcells/btc" target="_blank" title="网站Github源码地址"><img src="{% static 'img/github.jpg' %}" class="icon"></a></p>
-			<p>&copy; FreeBTC123 2013</p>
-			<p>Powered by <a href="http://www.brightcells.com/" target="_blank" title="BrightCells团队官网">BrightCells</a> !</p>
-		</footer>
+	<div class="bodyer">
+		<div class="container">
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<b>风险提示</b>：</br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、比特币的交易有<b>极高的风险</b>，它没有像中国股市那样的<b>涨跌停限制</b>，同时交易是<b>24小时开放</b>的。比特币由于筹码较少，价格<b>易受到庄家控制</b>，有可能出现一天价格涨几倍的情况，同时也可能出现<b>一天内价格跌去一半</b>的情况！<b>入市须谨慎，一定注意控制好风险！</b></br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、大家一定要妥善保管好<b>钱包、交易平台</b>帐户信息，不要轻易告诉其他人，以免丢失钱、币！</br>
+			</div>
 		
-		<a id="backtop" class="backtop" href="javascript:backtop();"></a>
+			{% block alert %}
+			{% endblock %}
+		
+			{% block befcon %}
+			{% endblock %}
+		
+			{% block content %}
+				{% for cs in csysite %}
+					<div class="row table-responsive">
+						<div class="span12">
+							<a name="unpaid"></a>
+							<h2>{{ cs.csyName|safe }}</h2>
+							<div class="description">
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cs.csyDescription|safe }}</span>
+							</div>
+							<table class="table table-bordered table-striped table-hover table-condensed table-layout">
+								<thead>
+									<tr>
+										<th width="16%" class="hvcenter">网站名称</th>
+										<th width="*%" class="hvcenter">网站描述</th>
+										<th width="16%" class="hvcenter">网站链接</th>
+										<th width="16%" class="hvcenter">网站评论</th>
+										<th width="16%" class="hvcenter">网站评价</th>
+										<th width="8%" class="hvcenter">收藏</th>
+									</tr>
+								<thead>
+								<tbody>
+									{% for site in cs.siteSet %}
+										<tr>
+											<td class="hvcenter"><div class="limit"><span>{{ site.siteName }}</span></div></td>
+											<td class="hvcenter"><div class="limit"><span title="{{ site.siteDescription|safe }}">{{ site.siteDescription|safe }}</span></div></td>
+											<td class="hvcenter"><div class="limit"><span><a id="{{ site.id }}" href="javascript:void(0)" target="_blank" onclick="visit('{% url 'freebtc123:visit' %}', this.id, this.title);return false;" title="{{ site.siteUrl }}">{{ site.siteUrl }}</a><span></div></td>
+											<td class="hvcenter">
+												<a href="{% url 'freebtc123:evaluate' site.id %}" target="_blank"><i class="icon-eye-open"></i></a></br>
+												{{ site.siteEvaluateNum }}/{{ site.siteClickNum }}
+											</td>
+											<td class="hvcenter">
+												<div class="thumbs-up">
+													{% if site.like %}
+														<i id="{{ site.id }}" class="icon-thumbs-up icon-white done"></i>
+													{% else %}
+														<i id="{{ site.id }}" class="icon-thumbs-up"></i>
+													{% endif %}
+													&nbsp;&nbsp;&nbsp;&nbsp;
+													<span>{{ site.siteLikeNum }}</span>
+												</div>
+											
+												<div class="thumbs-down">
+													{% if site.unlike %}
+														<i id="{{ site.id }}" class="icon-thumbs-down icon-white done"></i>
+													{% else %}
+														<i id="{{ site.id }}" class="icon-thumbs-down"></i>
+													{% endif %}
+													&nbsp;&nbsp;&nbsp;&nbsp;
+													<span>{{ site.siteUnlikeNum }}</span>
+												</div>
+											</td>
+											<td class="hvcenter">
+												{% if site.fav %}
+													<i id="{{ site.id }}" class="icon-bookmark icon-white done"></i></br>
+												{% else %}
+													<i id="{{ site.id }}" class="icon-bookmark"></i></br>
+												{% endif %}
+												<span>{{ site.siteFavNum }}</span>
+											</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				{% endfor %}
+			{% endblock %}
+		
+			{% block aftcon %}
+			{% endblock %}
+		</div>
+		<!-- /container -->
 	</div>
-	<!-- /container -->
+	
+	<div class="footer">
+		<div class="container">
+		    <hr>
+			<a id="backtop" class="backtop" href="javascript:backtop();"></a>
+			<footer>
+				<p class="pull-right">Donate: 13Y4K9Lkrd9rCxHnF8b3axUKbjtA3ZWF1d</p>
+				<p>Coments, suggestions, problems?</p>
+				<p><a href="https://github.com/Brightcells/btc" target="_blank" title="网站Github源码地址"><img src="{% static 'img/github.jpg' %}" class="icon"></a></p>
+				<p>&copy; FreeBTC123 2013</p>
+				<p>Powered by <a href="http://www.brightcells.com/" target="_blank" title="BrightCells团队官网">BrightCells</a> !</p>
+			</footer>
+		</div>
+		<!-- /container -->
+	</div>
 
 	<!-- Begin BShare -->
 	<a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#uuid=&amp;style=4&amp;fs=4&amp;bgcolor=Grey"></script>
@@ -210,7 +216,7 @@
 		})();
 		
 		var res = ["{% static 'img/background.png' %}",];
-		_bg(0, res, 10000);
+		// _bg(0, res, 10000);
 	</script>
 	
 	{% block script %}

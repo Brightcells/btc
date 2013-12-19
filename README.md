@@ -10,6 +10,7 @@ A Navigation Site For BTC
 * 执行： python manage.py syncdb
 * 执行： python manage.py collectstatic
 * 执行： python manage.py runserver 0.0.0.0:80
+
 * 本机通过IP访问 或者 通过127.0.0.1访问
 
 * 如果线上运行的话，请使用Nginx或者使用Apache等HTTP服务器
@@ -17,6 +18,7 @@ A Navigation Site For BTC
 ### TODO:
 
 * 前端页面优化
+* 表格按列排序
 * 取消赞和收藏        √
 * 密码修改/找回
 * 比特币相关服务

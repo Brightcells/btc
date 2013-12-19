@@ -4,16 +4,15 @@
    - */
 body {
 	padding-top: 60px;
-	padding-bottom: 40px;
-	background-color: #f9f9f9;
+	padding-bottom: 20px;
 	font: normal 14px/1.5 Tahoma,Helvetica,arial,sans-serif
 }
 
 /* - 
     Alignment of bootstrap's table content
-    .hvcenter - 
-	.hcenter - 
-	.vcenter - 
+    .hvcenter - 水平/垂直 居中
+	.hcenter - 水平居中
+	.vcenter - 垂直居中
    - */
 .hvcenter {
     text-align: center !important;
@@ -72,11 +71,12 @@ body {
 
 /* - 
     Style for table to both center and hidden
+	ref: http://stackoverflow.com/questions/4095165/center-single-and-multi-line-li-text-vertically
    - */
 .limit{
     height: 30px;
-	overflow: hidden;
 	line-height:30px;
+	overflow: hidden;
 }
 		
 .limit span{
