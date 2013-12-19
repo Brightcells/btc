@@ -74,8 +74,8 @@ body {
 	ref: http://stackoverflow.com/questions/4095165/center-single-and-multi-line-li-text-vertically
    - */
 .limit{
-    height: 30px;
-	line-height:30px;
+    height: 32px;
+	line-height: 32px;
 	overflow: hidden;
 }
 		
@@ -89,11 +89,11 @@ body {
     Separate line between thumbs-up and thumbs-down
    - */
 .thumbs-up{
-    border-bottom:1px solid #ddd
+    border-bottom: 1px solid #ddd
 }
 
 .thumbs-down{
-	border-top:0px solid #ddd
+	border-top: 0px solid #ddd
 }
 
 /* - 
