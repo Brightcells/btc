@@ -14,7 +14,7 @@ body {
 	.hcenter - 水平居中
 	.vcenter - 垂直居中
    - */
-.hvcenter {
+.hvcenter, th, td {
     text-align: center !important;
     vertical-align: middle !important;
 }
@@ -73,13 +73,13 @@ body {
     Style for table to both center and hidden
 	ref: http://stackoverflow.com/questions/4095165/center-single-and-multi-line-li-text-vertically
    - */
-.limit{
+.limit {
     height: 32px;
 	line-height: 32px;
 	overflow: hidden;
 }
 		
-.limit span{
+.limit span {
 	display             : -moz-inline-box;  /* FF2 or lower */
 	display             : inline-block;     /* FF3, Opera, Safari */
 	line-height         : normal;
@@ -88,18 +88,32 @@ body {
 /* - 
     Separate line between thumbs-up and thumbs-down
    - */
-.thumbs-up{
+.thumbs-up {
     border-bottom: 1px solid #ddd
 }
 
-.thumbs-down{
+.thumbs-down {
 	border-top: 0px solid #ddd
 }
 
 /* - 
     Style of icon of some site
    - */
-.icon{
-	width: 50px;
-	height: 50px;
+.icon {
+	width: 32px;
+	height: 32px;
 }
+
+/* - 
+    Style to make div center
+   - */
+.divCenter{
+	margin: 0 auto;
+	width: 500px;
+}
+
+/* -
+	ref: http://www.terrill.ca/sorting/table_sort_example.html
+   - */
+.sortable th.descend{background: #E4EDFC 95% 50% url('../img/caret_up.gif') no-repeat;}
+.sortable th.ascend{background: #E4EDFC 95% 50% url('../img/caret_down.gif') no-repeat;}

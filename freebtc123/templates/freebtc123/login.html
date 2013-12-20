@@ -13,57 +13,59 @@
 			<div class="span12">
 				<a name="unpaid"></a>
 				<div class="hero-unit">
-					<form class="form-horizontal" action="{% url 'freebtc123:login' %}" method='post'>
-					    {% if notexists %}
-							<div id="divUserName" class="control-group error">
-								<label class="control-label" for="inputUserName"><b>用户名：</b></label>
-								<div class="controls">
-									<input type="text" id="inputUserName" name="usr" placeholder="用户名">
-									<span id="spanUserName" class="help-inline">该用户名不存在</span>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="inputPassword"><b>密码：</b></label>
-								<div class="controls">
-									<input type="password" id="inputPassword" name="pwd" placeholder="密码">
-								</div>
-							</div>
-						{% else %}
-							<div id="divUserName" class="control-group">
-								<label class="control-label" for="inputUserName"><b>用户名：</b></label>
-								<div class="controls">
-									<input type="text" id="inputUserName" name="usr" placeholder="用户名" onblur="userCheck()">
-									<span id="spanUserName" class="help-inline hide">该用户名不存在</span>
-								</div>
-							</div>
-							{% if pwderror %}
-								<div class="control-group error">
-									<label class="control-label" for="inputPassword"><b>密码：</b></label>
+					<div class="divCenter">
+						<form class="form-horizontal" action="{% url 'freebtc123:login' %}" method='post'>
+							{% if notexists %}
+								<div id="divUserName" class="control-group error">
+									<label class="control-label" for="inputUserName"><b>用户名：</b></label>
 									<div class="controls">
-										<input type="password" id="inputPassword" name="pwd" placeholder="密码">
-										<span id="spanUserName" class="help-inline">密码与用户名不匹配</span>
+										<input type="text" id="inputUserName" name="usr" placeholder="用户名">
+										<span id="spanUserName" class="help-inline">该用户名不存在</span>
 									</div>
 								</div>
-							{% else %}
 								<div class="control-group">
 									<label class="control-label" for="inputPassword"><b>密码：</b></label>
 									<div class="controls">
 										<input type="password" id="inputPassword" name="pwd" placeholder="密码">
 									</div>
 								</div>
+							{% else %}
+								<div id="divUserName" class="control-group">
+									<label class="control-label" for="inputUserName"><b>用户名：</b></label>
+									<div class="controls">
+										<input type="text" id="inputUserName" name="usr" placeholder="用户名" onblur="userCheck()">
+										<span id="spanUserName" class="help-inline hide">该用户名不存在</span>
+									</div>
+								</div>
+								{% if pwderror %}
+									<div class="control-group error">
+										<label class="control-label" for="inputPassword"><b>密码：</b></label>
+										<div class="controls">
+											<input type="password" id="inputPassword" name="pwd" placeholder="密码">
+											<span id="spanUserName" class="help-inline">密码与用户名不匹配</span>
+										</div>
+									</div>
+								{% else %}
+									<div class="control-group">
+										<label class="control-label" for="inputPassword"><b>密码：</b></label>
+										<div class="controls">
+											<input type="password" id="inputPassword" name="pwd" placeholder="密码">
+										</div>
+									</div>
+								{% endif %}
 							{% endif %}
-						{% endif %}
-						<div class="control-group">
-							<div class="controls">
-								<button type="submit" class="btn">登录</button>
+							<div class="control-group">
+								<div class="controls">
+									<button type="submit" class="btn">登录</button>
+								</div>
 							</div>
-						</div>
-						<div class="control-group">
-							<div class="controls">
-								<nobr>还没注册帐户？</nobr><a href="{% url 'freebtc123:signup' %}">立即注册</a>
+							<div class="control-group">
+								<div class="controls">
+									<nobr>还没注册帐户？</nobr><a href="{% url 'freebtc123:signup' %}">立即注册</a>
+								</div>
 							</div>
-						</div>
-					</form>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
