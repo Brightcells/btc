@@ -1,26 +1,9 @@
 # Create your views here.
 # -*- coding: utf-8 -*-
 
-###
-# ErrorCode: 100***, for userCheck
-#     {'errorCode': 100200, 'errorString': 'User not exists, you can use it to register'}
-#     {'errorCode': 100201, 'errorString': 'User already exists, pls change a username to register'}
-# ErrorCode: 200***, for likeSite
-#     {'errorCode': 200200, 'errorString': 'Like/Unlike the site success'}
-#     {'errorCode': 200201, 'errorString': 'You have already like/unlike the site, don\'t hesitate'}
-#     {'errorCode': 200202, 'errorString': 'Cancel like/unlike the site success'}
-# ErrorCode: 300***, for Favorite
-#     {'errorCode': 300200, 'errorString': 'Favorite the site success'}
-#     {'errorCode': 300201, 'errorString': 'The parm of siteid not transmitted success'}
-#     {'errorCode': 300202, 'errorString': 'Cancel favorite the site success'}
-# ErrorCode: 400***, for Visit
-#     {'errorCode': 400200, 'errorString': 'Record the visit success'}
-#     {'errorCode': 400201, 'errorString': 'Record the visit failure'}
-# ErrorCode: 500***, for
-###
-
 from django.contrib.auth.models import User
-from freebtc123.models import Wallet, UserInfo, Nav, Classify, Site, Evaluate, Like, Favorite, Visit, Log
+from accounts.models import Wallet, UserInfo
+from freebtc123.models import Nav, Classify, Site, Evaluate, Like, Favorite, Visit, Log
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -35,37 +18,13 @@ from django.core import serializers
 from django.utils.encoding import smart_str
 from django.forms.models import model_to_dict
 
+import re
 import json
 import time
 import random
 import hashlib
 
-
-def getUsr(request):
-    '''
-        @function: get usr from cookies, and if not exists, set usr None
-        @paras:
-        @returns: usr string
-    '''
-    return request.COOKIES['usr'] if 'usr' in request.COOKIES else None
-
-
-def getIP(request):
-    '''
-        @function: get current ip for the desktop which visit from
-        @paras:
-        @returns: ip string
-    '''
-    return request.META['HTTP_X_FORWARDED_FOR'] if 'HTTP_X_FORWARDED_FOR' in request.META else request.META['REMOTE_ADDR']
-
-
-def getUsrHost(request):
-    '''
-        @function: get usr and ip together
-        @paras:
-        @returns: (usr, ip) tuple
-    '''
-    return getUsr(request), getIP(request)
+from utils.utils import getNav, getUsr, getIP, getUsrHost, getErrorCode
 
 
 def getLikeFlag(request, siteid, _flag):
@@ -117,15 +76,6 @@ def getCsySite(request, _nav):
         csyDict['siteSet'] = site
         csysite.append(csyDict)
     return csysite
-
-
-def getNav(request):
-    '''
-        @function: get all nav from table Nav
-        @paras:
-        @returns: nav dict query set
-    '''
-    return Nav.objects.all().order_by('navPosition')
 
 
 def getFavSite(request):
@@ -190,8 +140,7 @@ def visit(request):
     s = Site.objects.get(id=_siteid)
     s.siteClickNum = s.siteClickNum + 1
     s.save()
-    errorCode = {'errorCode': 400200, 'errorString': 'Record the visit success'}
-    return HttpResponse(json.dumps(errorCode))
+    return HttpResponse(json.dumps(getErrorCode('record_visit_success')))
 
 
 def evaluate(request, siteid):
@@ -222,36 +171,31 @@ def like(request):
         u = UserInfo.objects.get(username=_usr)
         try:
             Like.objects.get(site_id=_siteid, user=u, flag=not _flag)
-            errorCode = {'errorCode': 200201, 'errorString': 'You have already like/unlike the site, don\'t hesitate'}
-            return HttpResponse(json.dumps(errorCode))
+            return HttpResponse(json.dumps(getErrorCode('already_like_unlike')))
         except:
             try:
                 Like.objects.get(site_id=_siteid, user=u, flag=_flag).delete()
                 siteLikeChange(_siteid, _flag, -1)
                 Log.objects.create(site_id=_siteid, user=u, host=_host, descr="Cancel like/unlike")
-                errorCode = {'errorCode': 200202, 'errorString': 'Cancel like/unlike the site success'}
-                return HttpResponse(json.dumps(errorCode))
+                return HttpResponse(json.dumps(getErrorCode('cancel_like_unlike_success')))
             except:
                 Like.objects.create(site_id=_siteid, user=u, host=_host, flag=_flag)
                 Log.objects.create(site_id=_siteid, user=u, host=_host, descr="Insert like/unlike")
     except:
         try:
             Like.objects.get(site_id=_siteid, host=_host, flag=not _flag)
-            errorCode = {'errorCode': 200201, 'errorString': 'You have already like/unlike the site, don\'t hesitate'}
-            return HttpResponse(json.dumps(errorCode))
+            return HttpResponse(json.dumps(getErrorCode('already_like_unlike')))
         except:
             try:
                 Like.objects.get(site_id=_siteid, host=_host, flag=_flag).delete()
                 siteLikeChange(_siteid, _flag, -1)
                 Log.objects.create(site_id=_siteid, host=_host, descr="Cancel like/unlike")
-                errorCode = {'errorCode': 200202, 'errorString': 'Cancel like/unlike the site success'}
-                return HttpResponse(json.dumps(errorCode))
+                return HttpResponse(json.dumps(getErrorCode('cancel_like_unlike_success')))
             except:
                 Like.objects.create(site_id=_siteid, host=_host, flag=_flag)
                 Log.objects.create(site_id=_siteid, host=_host, descr="Insert like/unlike")
     siteLikeChange(_siteid, _flag, 1)
-    errorCode = {'errorCode': 200200, 'errorString': 'Like/Unlike the site success'}
-    return HttpResponse(json.dumps(errorCode))
+    return HttpResponse(json.dumps(getErrorCode('like_unlike_success')))
 
 
 def siteFavChange(_siteid, _num):
@@ -270,8 +214,7 @@ def favorite(request):
                 Favorite.objects.get(site_id=_siteid, user=u[0], host=_host).delete()
                 siteFavChange(_siteid, -1)
                 Log.objects.create(site_id=_siteid, user=u[0], host=_host, descr="Cancel Favorite")
-                errorCode = {'errorCode': 300202, 'errorString': 'Cancel favorite the site success'}
-                return HttpResponse(json.dumps(errorCode))
+                return HttpResponse(json.dumps(getErrorCode('favorite_site_success')))
             except:
                 Favorite.objects.create(site_id=_siteid, user=u[0], host=_host)
                 Log.objects.create(site_id=_siteid, user=u[0], host=_host, descr="Inset Favorite")
@@ -280,86 +223,23 @@ def favorite(request):
                 Favorite.objects.get(site_id=_siteid, host=_host).delete()
                 siteFavChange(_siteid, -1)
                 Log.objects.create(site_id=_siteid, host=_host, descr="Cancel Favorite")
-                errorCode = {'errorCode': 300202, 'errorString': 'Cancel favorite the site success'}
-                return HttpResponse(json.dumps(errorCode))
+                return HttpResponse(json.dumps(getErrorCode('cancel_favorite_success')))
             except:
                 Favorite.objects.create(site_id=_siteid, host=_host)
                 Log.objects.create(site_id=_siteid, host=_host, descr="Insert Favorite")
         siteFavChange(_siteid, 1)
-        errorCode = {'errorCode': 300200, 'errorString': 'Favorite the site success'}
-        return HttpResponse(json.dumps(errorCode))
+        return HttpResponse(json.dumps(getErrorCode('favorite_site_success')))
     else:
-        errorCode = {'errorCode': 300201, 'errorString': 'The parm of siteid not transmitted success'}
-        return HttpResponse(json.dumps(errorCode))
-
-
-def pwd2hash(pwd):
-    '''
-        @function: change pwd 2 hash by use hashlib's md5 method
-        @paras:
-        @returns: hexdigest string
-    '''
-    hashpwd = hashlib.md5()
-    hashpwd.update(pwd)
-    return hashpwd.hexdigest()
+        return HttpResponse(json.dumps(getErrorCode('site_id_not_exists')))
 
 
 def login(request):
-    if request.method == 'GET':
-        reDict = {'nav': getNav(request)}
-        return render_to_response('freebtc123/login.html', reDict)
-    else:
-        _usr = request.POST.get('usr', '')
-        _pwd = request.POST.get('pwd', '')
-        userInfoList = UserInfo.objects.filter(username=_usr)
-        if userInfoList.count() == 0:
-            return render_to_response('freebtc123/login.html', {'notexists': True})
-        else:
-            if userInfoList[0].password == pwd2hash(_pwd):
-                response = HttpResponseRedirect(reverse('freebtc123:fav'))
-                response.set_cookie('usr', smart_str(_usr))
-                return response
-            else:
-                print {'exists': True, 'pwderror': True}
-                return render_to_response('freebtc123/login.html', {'notexists': False, 'pwderror': True})
+    return HttpResponseRedirect(reverse('accounts:login'))
 
 
 def signup(request):
-    if request.method == 'GET':
-        reDict = {'nav': getNav(request)}
-        return render_to_response('freebtc123/signup.html', reDict)
-    else:
-        _usr = request.POST.get('usr', '')
-        _pwd = request.POST.get('pwd', '')
-        _email = request.POST.get('email', '')
-        _wallet = request.POST.get('wallet', '')
-        if UserInfo.objects.filter(username=_usr).count() != 0:
-            return render_to_response('freebtc123/signup.html', {'exists': True})
-        else:
-            w = Wallet.objects.create(walletUrl=_wallet)
-            u = UserInfo.objects.create(username=_usr, password=pwd2hash(_pwd), email=_email, wallet=w)
-            response = HttpResponseRedirect(reverse('freebtc123:fav'))
-            response.set_cookie('usr', smart_str(_usr))
-            return response
+    return HttpResponseRedirect(reverse('accounts:signup'))
 
 
 def logout(request):
-    response = HttpResponseRedirect(reverse('freebtc123:fav'))
-    if 'usr' in request.COOKIES:
-        response.delete_cookie('usr')
-    return response
-
-
-def usercheck(request):
-    '''
-        @function: check whether user has already been registered
-        @paras:
-        @returns: errorCode json string
-    '''
-    _usr = request.POST.get('usr', '')
-    if UserInfo.objects.filter(username=_usr).count() == 0:
-        errorCode = {'errorCode': 100200, 'errorString': 'User not exists, you can use it to register'}
-        return HttpResponse(json.dumps(errorCode))
-    else:
-        errorCode = {'errorCode': 100201, 'errorString': 'User already exists, pls change a username to register'}
-        return HttpResponse(json.dumps(errorCode))
+    return HttpResponseRedirect(reverse('accounts:logout'))

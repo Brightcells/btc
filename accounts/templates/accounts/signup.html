@@ -1,0 +1,104 @@
+{% extends "common/btc.html" %}
+
+{% block title %}
+	<title>FreeBTC123 - 登录FreeBTC123</title>
+{% endblock %}
+
+{% block alert %}
+	<div class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		1、现在的帐号系统服务于收藏页面，后续推出其他帐号相关联服务；</br>
+		2、密码直接使用python的hashlib进行hash，不可逆；</br>
+		3、邮箱用于忘记密码时进行修改密码；</br>
+		4、比特币钱包暂未用到，后续相关服务可以使用；</br>
+		5、本站不会以任何方式向您索取比特币钱包密码，请您妥善保管；</br>
+	</div>
+{% endblock %}
+
+{% block befcon %}
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span12">
+				<a name="unpaid"></a>
+				<div class="hero-unit">
+					<div class="divCenter">
+						<form class="form-horizontal" action="{% url 'accounts:signup' %}" method='post'>
+							{% if exists %}
+								<div id="divUserName" class="control-group error">
+									<label class="control-label" for="inputUserName"><b>用户名：</b></label>
+									<div class="controls">
+										<input type="text" id="inputUserName" name="usr" placeholder="用户名" onblur="userCheck()">
+										<span id="spanUserName" class="help-inline">该用户名已经存在</span>
+									</div>
+								</div>
+							{% else %}
+								<div id="divUserName" class="control-group">
+									<label class="control-label" for="inputUserName"><b>用户名：</b></label>
+									<div class="controls">
+										<input type="text" id="inputUserName" name="usr" placeholder="用户名" onblur="userCheck()">
+										<span id="spanUserName" class="help-inline hide">该用户名已经存在</span>
+									</div>
+								</div>
+							{% endif %}
+							<div class="control-group">
+								<label class="control-label" for="inputPassword"><b>密码：</b></label>
+								<div class="controls">
+									<input type="password" id="inputPassword" name="pwd" placeholder="密码">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputEmail"><b>邮箱：</b></label>
+								<div class="controls">
+									<input type="email" id="inputEmail" name="email" placeholder="邮箱">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputWallet"><b>钱包地址：</b></label>
+								<div class="controls">
+									<input type="text" id="inputWallet" name="wallet" placeholder="钱包地址">
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<button type="submit" class="btn">注册</button>
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<nobr>已经注册帐户？</nobr><a href="{% url 'accounts:login' %}">立即登录</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block script %}
+	<script>
+		function userCheck(){
+			$.ajax({
+				type: "post",
+				url: "{% url 'accounts:usercheck' %}",
+				data: {"usr": $("#inputUserName").val()},
+				success: function(json){
+				    jsonObj = eval ("(" + json + ")");
+					if(jsonObj['errorCode'] == '100200'){
+						$("#divUserName").removeClass("error");
+						$("#spanUserName").addClass("hide");
+						// alert('yeah');
+					}else{
+						$("#divUserName").addClass("error");
+						$("#spanUserName").removeClass("hide");
+						// alert('oh no');
+					}
+				}
+			});
+		}
+	</script>
+{% endblock %}
