@@ -219,7 +219,7 @@ def favorite(request):
                 Favorite.objects.get(site_id=_siteid, user=u[0], host=_host).delete()
                 siteFavChange(_siteid, -1)
                 Log.objects.create(site_id=_siteid, user=u[0], host=_host, descr="Cancel Favorite")
-                return HttpResponse(json.dumps(getErrorCode('favorite_site_success')))
+                return HttpResponse(json.dumps(getErrorCode('cancel_favorite_success')))
             except:
                 Favorite.objects.create(site_id=_siteid, user=u[0], host=_host)
                 Log.objects.create(site_id=_siteid, user=u[0], host=_host, descr="Inset Favorite")
