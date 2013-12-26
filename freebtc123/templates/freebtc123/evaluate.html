@@ -1,7 +1,7 @@
 {% extends "common/btc.html" %}
 
 {% block title %}
-	<title>FreeBTC123 - 网站评价</title>
+	<title>FreeBTC123 - 网站评论</title>
 {% endblock %}
 
 {% block alert %}
@@ -13,19 +13,21 @@
 			<div class="span12">
 				<a name="unpaid"></a>
 				<div class="hero-unit">
-					<form class="form-horizontal" action="{% url 'freebtc123:evaluate' siteid %}" method='post'>
-						<div class="control-group">
-							<label class="control-label" for="inputEvaluateContent"><b>评价内容：</b></label>
-							<div class="controls">
-								<input type="text" id="inputEvaluateContent" name="content" placeholder="评价内容">
+					<div class="divCenter">
+						<form class="form-horizontal" action="{% url 'freebtc123:evaluate' siteid %}" method='post'>
+						    <div class="control-group">
+							    <label class="control-label" for="inputEvaluateContent"><b>评论内容：</b></label>
+								<div class="controls">
+									<input type="text" id="inputEvaluateContent" name="content" placeholder="评论内容">
+								</div>
 							</div>
-						</div>
-						<div class="control-group">
-							<div class="controls">
-								<button type="submit" class="btn">提交</button>
+							<div class="control-group">
+								<div class="controls">
+									<button type="submit" class="btn">提交</button>
+								</div>
 							</div>
-						</div>
-					</form>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
