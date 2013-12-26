@@ -107,12 +107,16 @@ body {
 /* - 
     Style to make div center
    - */
-.divCenter{
+.divCenter {
 	margin: 0 auto;
-	width: 500px;
+	width: 700px;
 }
 
-/* -
+.controls input, .controls textarea {
+	width: 400px;
+}
+
+/* -Di
 	ref: http://www.terrill.ca/sorting/table_sort_example.html
    - */
 .sortable th.descend{background: #E4EDFC 95% 50% url('../img/caret_up.gif') no-repeat;}
