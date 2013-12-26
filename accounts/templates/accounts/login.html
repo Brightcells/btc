@@ -12,7 +12,7 @@
 		<div class="row-fluid">
 			<div class="span12">
 				<a name="unpaid"></a>
-				<div class="hero-unit">
+				<div class="hero-unit nopaddinglr">
 					<div class="divCenter">
 						<form class="form-horizontal" action="{% url 'accounts:login' %}" method='post'>
 							{% if notexists %}
@@ -54,15 +54,11 @@
 									</div>
 								{% endif %}
 							{% endif %}
-							<div class="control-group">
-								<div class="controls">
-									<button type="submit" class="btn">登录</button>
-								</div>
+							<div class="control-group text-center">
+								<button type="submit" class="btn">登录</button>
 							</div>
-							<div class="control-group">
-								<div class="controls">
-									<nobr>还没注册帐户？</nobr><a href="{% url 'accounts:signup' %}">立即注册</a>
-								</div>
+							<div class="control-group text-center">
+								<nobr>还没注册帐户？</nobr><a href="{% url 'accounts:signup' %}">立即注册</a>
 							</div>
 						</form>
 					</div>

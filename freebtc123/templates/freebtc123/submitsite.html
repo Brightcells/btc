@@ -12,7 +12,7 @@
 		<div class="row-fluid">
 			<div class="span12">
 				<a name="unpaid"></a>
-				<div class="hero-unit">
+				<div class="hero-unit nopaddinglr">
 					<div class="divCenter">
 						<form class="form-horizontal" action="{% url 'freebtc123:submitsite' %}" method='post'>
 							<div class="control-group">
@@ -33,10 +33,8 @@
 									<input type="text" id="inputSiteUrl" name="url" placeholder="网站网址">
 								</div>
 							</div>
-							<div class="control-group">
-								<div class="controls">
+							<div class="control-group text-center">
 									<button type="submit" class="btn">提交</button>
-								</div>
 							</div>
 						</form>
 					</div>

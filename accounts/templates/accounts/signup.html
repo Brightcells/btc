@@ -20,7 +20,7 @@
 		<div class="row-fluid">
 			<div class="span12">
 				<a name="unpaid"></a>
-				<div class="hero-unit">
+				<div class="hero-unit nopaddinglr">
 					<div class="divCenter">
 						<form class="form-horizontal" action="{% url 'accounts:signup' %}" method='post'>
 							{% if exists %}
@@ -58,15 +58,11 @@
 									<input type="text" id="inputWallet" name="wallet" placeholder="钱包地址">
 								</div>
 							</div>
-							<div class="control-group">
-								<div class="controls">
+							<div class="control-group text-center">
 									<button type="submit" class="btn">注册</button>
-								</div>
 							</div>
-							<div class="control-group">
-								<div class="controls">
-									<nobr>已经注册帐户？</nobr><a href="{% url 'accounts:login' %}">立即登录</a>
-								</div>
+							<div class="control-group text-center">
+								<nobr>已经注册帐户？</nobr><a href="{% url 'accounts:login' %}">立即登录</a>
 							</div>
 						</form>
 					</div>

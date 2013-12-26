@@ -109,11 +109,20 @@ body {
    - */
 .divCenter {
 	margin: 0 auto;
-	width: 700px;
+	width: 550px;
+}
+
+.nopaddinglr{
+	padding-left: 0 !important;
+	padding-right: 0 !important;
 }
 
 .controls input, .controls textarea {
-	width: 400px;
+	width: 250px;
+}
+
+.control-group .btn{
+	width: 200px;
 }
 
 /* -Di
