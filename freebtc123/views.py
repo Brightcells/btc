@@ -146,14 +146,19 @@ def visit(request):
 def evaluate(request, siteid):
     _content = request.POST.get('content', '')
     if _content == '':
-        print 'error'
+        print 'Just get Evaluates!!!'
     else:
         s = Site.objects.get(id=siteid)
         s.siteEvaluateNum = s.siteEvaluateNum + 1
         s.save()
         Evaluate.objects.create(site_id=siteid, evaContent=_content)
+    site = Site.objects.get(id=siteid)
+    siteDict = model_to_dict(site)
+    siteDict['like'] = getLikeFlag(request, siteid, True)
+    siteDict['unlike'] = getLikeFlag(request, siteid, False)
+    siteDict['fav'] = getFavFlag(request, siteid)
     eva = Evaluate.objects.filter(site__id=siteid).order_by('-evaDateTime')
-    reDict = {'nav': getNav(request), 'siteid': siteid, 'eva': eva}
+    reDict = {'nav': getNav(request), 'siteid': siteid, 'site': siteDict, 'eva': eva}
     return render_to_response('freebtc123/evaluate.html', reDict)
 
 

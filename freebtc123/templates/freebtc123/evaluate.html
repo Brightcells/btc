@@ -8,6 +8,68 @@
 {% endblock %}
 
 {% block befcon %}
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row-fluid">
+			<div class="span12">
+							<table id="table{{ cs.id }}" class="table table-bordered table-striped table-hover table-condensed table-layout sortable">
+								<thead>
+									<tr>
+										<th width="16%" abbr="sName">网站名称</th>
+										<th width="*%" abbr="sDescription">网站描述</th>
+										<th width="16%" abbr="sLink">网站链接</th>
+										<th width="16%" abbr="sPingLun">网站评论</th>
+										<th width="16%" abbr="sPingJia">网站评价</th>
+										<th width="8%" abbr="sShouCang">收藏</th>
+									</tr>
+								<thead>
+								<tbody>
+										<tr>
+											<td><div class="limit"><span>{{ site.siteName }}</span></div></td>
+											<td><div class="limit"><span title="{{ site.siteDescription|safe }}">{{ site.siteDescription|safe }}</span></div></td>
+											<td><div class="limit"><span><a id="{{ site.id }}" href="javascript:void(0)" target="_blank" onclick="visit('{% url 'freebtc123:visit' %}', this.id, this.title);return false;" title="{{ site.siteUrl }}">{{ site.siteUrl }}</a><span></div></td>
+											<td>
+												<a href="{% url 'freebtc123:evaluate' site.id %}" target="_blank"><i class="icon-eye-open"></i></a></br>
+												<span>{{ site.siteEvaluateNum }}</span>/<span>{{ site.siteClickNum }}</span>
+											</td>
+											<td>
+												<div class="thumbs-up">
+													{% if site.like %}
+														<i id="{{ site.id }}" class="icon-thumbs-up icon-white done"></i>
+													{% else %}
+														<i id="{{ site.id }}" class="icon-thumbs-up"></i>
+													{% endif %}
+													&nbsp;&nbsp;&nbsp;&nbsp;
+													<span>{{ site.siteLikeNum }}</span>
+												</div>
+											
+												<div class="thumbs-down">
+													{% if site.unlike %}
+														<i id="{{ site.id }}" class="icon-thumbs-down icon-white done"></i>
+													{% else %}
+														<i id="{{ site.id }}" class="icon-thumbs-down"></i>
+													{% endif %}
+													&nbsp;&nbsp;&nbsp;&nbsp;
+													<span>{{ site.siteUnlikeNum }}</span>
+												</div>
+											</td>
+											<td>
+												{% if site.fav %}
+													<i id="{{ site.id }}" class="icon-bookmark icon-white done"></i></br>
+												{% else %}
+													<i id="{{ site.id }}" class="icon-bookmark"></i></br>
+												{% endif %}
+												<span>{{ site.siteFavNum }}</span>
+											</td>
+										</tr>
+								</tbody>
+							</table>
+			</div>
+		</div>
+	</div>
+	
 	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
@@ -32,9 +94,7 @@
 			</div>
 		</div>
 	</div>
-{% endblock %}
-
-{% block content %}
+	
 	<div class="container">
 		<div class="row-fluid">
 			<div class="span12">
@@ -50,4 +110,7 @@
 			</div>
 		</div>
 	</div>
+{% endblock %}
+
+{% block aftcon %}
 {% endblock %}
