@@ -103,7 +103,8 @@
 				    {% for e in eva %}
 					    <div class="evaluate">
 							{{ e.evaDateTime }}</br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ e.evaContent }}
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="content">{{ e.evaContent }}</span>
 						</div>
 					{% endfor %}
 				</div>
@@ -113,4 +114,14 @@
 {% endblock %}
 
 {% block aftcon %}
+{% endblock %}
+
+{% block script %}
+	<script>
+		(function(){
+		    	$(".evaluate span").each(function(){
+				    $(this).html($(this).html().httpHtml());
+				});
+		})();
+	</script>
 {% endblock %}
