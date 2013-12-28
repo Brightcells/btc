@@ -70,6 +70,20 @@ class Evaluate(models.Model):
         return self.evaContent
 
 
+class Proof(models.Model):
+    site = models.ForeignKey(Site, verbose_name=_(u'site'), blank=True, null=True)
+    proofContent = models.TextField(_(u'proofcontent'), blank=True, null=True)
+    proofDateTime = models.DateTimeField(_(u'proofdatetime'), blank=True, null=True,  auto_now_add=True)
+
+    class Meta:
+        db_table = u'proof'
+        verbose_name = _(u'proof')
+        verbose_name_plural = _(u'proof')
+
+    def __unicode__(self):
+        return self.proofContent
+
+
 class Like(models.Model):
     site = models.ForeignKey(Site, verbose_name=_(u'site'), blank=True, null=True)
     user = models.ForeignKey(UserInfo, verbose_name=_(u'user'), blank=True, null=True)

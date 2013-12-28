@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
-from freebtc123.models import Nav, Classify, Site, Evaluate, Like, Favorite, Visit, Log
+from freebtc123.models import Nav, Classify, Site, Evaluate, Proof, Like, Favorite, Visit, Log
 
 
 class NavAdmin(admin.ModelAdmin):
@@ -28,6 +28,13 @@ class EvaluateAdmin(admin.ModelAdmin):
     search_fields = ('site__siteName', 'evaContent')
     list_filter = ('evaDateTime', 'site__siteName')
     date_hierarchy = 'evaDateTime'
+
+
+class ProofAdmin(admin.ModelAdmin):
+    list_display = ('site', 'proofContent', 'proofDateTime')
+    search_fields = ('site__siteName', 'proofContent')
+    list_filter = ('proofDateTime', 'site__siteName')
+    date_hierarchy = 'proofDateTime'
 
 
 class LikeAdmin(admin.ModelAdmin):
@@ -62,6 +69,7 @@ admin.site.register(Nav, NavAdmin)
 admin.site.register(Classify, ClassifyAdmin)
 admin.site.register(Site, SiteAdmin)
 admin.site.register(Evaluate, EvaluateAdmin)
+admin.site.register(Proof, ProofAdmin)
 admin.site.register(Like, LikeAdmin)
 admin.site.register(Favorite, FavoriteAdmin)
 admin.site.register(Visit, VisitAdmin)

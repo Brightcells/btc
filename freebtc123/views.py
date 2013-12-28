@@ -3,7 +3,7 @@
 
 from django.contrib.auth.models import User
 from accounts.models import Wallet, UserInfo
-from freebtc123.models import Nav, Classify, Site, Evaluate, Like, Favorite, Visit, Log
+from freebtc123.models import Nav, Classify, Site, Evaluate, Proof, Like, Favorite, Visit, Log
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -158,7 +158,25 @@ def evaluate(request, siteid):
     siteDict['unlike'] = getLikeFlag(request, siteid, False)
     siteDict['fav'] = getFavFlag(request, siteid)
     eva = Evaluate.objects.filter(site__id=siteid).order_by('-evaDateTime')
-    reDict = {'nav': getNav(request), 'siteid': siteid, 'site': siteDict, 'eva': eva}
+    proof = Proof.objects.filter(site__id=siteid).order_by('-proofDateTime')
+    reDict = {'nav': getNav(request), 'siteid': siteid, 'site': siteDict, 'eva': eva, 'proof': proof}
+    return render_to_response('freebtc123/evaluate.html', reDict)
+
+
+def proof(request, siteid):
+    _proof = request.POST.get('proof', '')
+    if _proof == '':
+        print 'Just get Proofs!!!'
+    else:
+        Proof.objects.create(site_id=siteid, proofContent=_proof)
+    site = Site.objects.get(id=siteid)
+    siteDict = model_to_dict(site)
+    siteDict['like'] = getLikeFlag(request, siteid, True)
+    siteDict['unlike'] = getLikeFlag(request, siteid, False)
+    siteDict['fav'] = getFavFlag(request, siteid)
+    eva = Evaluate.objects.filter(site__id=siteid).order_by('-evaDateTime')
+    proof = Proof.objects.filter(site__id=siteid).order_by('-proofDateTime')
+    reDict = {'nav': getNav(request), 'siteid': siteid, 'site': siteDict, 'eva': eva, 'proof': proof}
     return render_to_response('freebtc123/evaluate.html', reDict)
 
 

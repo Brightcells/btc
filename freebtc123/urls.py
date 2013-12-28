@@ -15,6 +15,7 @@ urlpatterns = patterns('freebtc123.views',
     url(r'^submitsite$', 'submitsite', name='submitsite'),
     url(r'^visit$', 'visit', name='visit'),
     url(r'^evaluate/(?P<siteid>\d+)/$', 'evaluate', name='evaluate'),
+    url(r'^proof/(?P<siteid>\d+)/$', 'proof', name='proof'),
     url(r'^like$', 'like', name='like'),
     url(r'^favorite$', 'favorite', name='favorite'),
 
