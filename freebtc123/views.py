@@ -143,6 +143,18 @@ def visit(request):
     return HttpResponse(json.dumps(getErrorCode('record_visit_success')))
 
 
+def getEvaluateDict(request, siteid):
+    site = Site.objects.get(id=siteid)
+    siteDict = model_to_dict(site)
+    siteDict['like'] = getLikeFlag(request, siteid, True)
+    siteDict['unlike'] = getLikeFlag(request, siteid, False)
+    siteDict['fav'] = getFavFlag(request, siteid)
+    eva = Evaluate.objects.filter(site__id=siteid).order_by('-evaDateTime')
+    proof = Proof.objects.filter(site__id=siteid).order_by('-proofDateTime')
+    reDict = {'nav': getNav(request), 'siteid': siteid, 'site': siteDict, 'eva': eva, 'proof': proof}
+    return reDict
+
+
 def evaluate(request, siteid):
     _content = request.POST.get('content', '')
     if _content == '':
@@ -152,15 +164,7 @@ def evaluate(request, siteid):
         s.siteEvaluateNum = s.siteEvaluateNum + 1
         s.save()
         Evaluate.objects.create(site_id=siteid, evaContent=_content)
-    site = Site.objects.get(id=siteid)
-    siteDict = model_to_dict(site)
-    siteDict['like'] = getLikeFlag(request, siteid, True)
-    siteDict['unlike'] = getLikeFlag(request, siteid, False)
-    siteDict['fav'] = getFavFlag(request, siteid)
-    eva = Evaluate.objects.filter(site__id=siteid).order_by('-evaDateTime')
-    proof = Proof.objects.filter(site__id=siteid).order_by('-proofDateTime')
-    reDict = {'nav': getNav(request), 'siteid': siteid, 'site': siteDict, 'eva': eva, 'proof': proof}
-    return render_to_response('freebtc123/evaluate.html', reDict)
+    return render_to_response('freebtc123/evaluate.html', getEvaluateDict(request, siteid))
 
 
 def proof(request, siteid):
@@ -169,15 +173,7 @@ def proof(request, siteid):
         print 'Just get Proofs!!!'
     else:
         Proof.objects.create(site_id=siteid, proofContent=_proof)
-    site = Site.objects.get(id=siteid)
-    siteDict = model_to_dict(site)
-    siteDict['like'] = getLikeFlag(request, siteid, True)
-    siteDict['unlike'] = getLikeFlag(request, siteid, False)
-    siteDict['fav'] = getFavFlag(request, siteid)
-    eva = Evaluate.objects.filter(site__id=siteid).order_by('-evaDateTime')
-    proof = Proof.objects.filter(site__id=siteid).order_by('-proofDateTime')
-    reDict = {'nav': getNav(request), 'siteid': siteid, 'site': siteDict, 'eva': eva, 'proof': proof}
-    return render_to_response('freebtc123/evaluate.html', reDict)
+    return render_to_response('freebtc123/evaluate.html', getEvaluateDict(request, siteid))
 
 
 def siteLikeChange(_siteid, _flag, _num):
