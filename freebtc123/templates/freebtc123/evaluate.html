@@ -70,37 +70,43 @@
 		</div>
 	</div>
 	
-	<div class="container">
-		<div class="row-fluid">
-			<div class="span12">
-				<a name="unpaid"></a>
-				<div class="hero-unit">
-				    {% for p in proof %}
-					    <div class="evaluate">
-							<span class="content">{{ p.proofContent }}</span>
-						</div>
-					{% endfor %}
+	{% if proof %}
+		<div class="container">
+			<div class="row-fluid">
+				<div class="span12">
+					<a name="unpaid"></a>
+					<div class="hero-unit">
+						{% for p in proof %}
+							<div class="evaluate">
+								<span class="content">{{ p.proofContent }}</span>
+							</div>
+							{% if forloop.last %}{% else %}<hr>{% endif %}
+						{% endfor %}
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	{% endif %}
 	
-	<div class="container">
-		<div class="row-fluid">
-			<div class="span12">
-				<a name="unpaid"></a>
-				<div class="hero-unit">
-				    {% for e in eva %}
-					    <div class="evaluate">
-							{{ e.evaDateTime }}</br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<span class="content">{{ e.evaContent }}</span>
-						</div>
-					{% endfor %}
+	{% if eva %}
+		<div class="container">
+			<div class="row-fluid">
+				<div class="span12">
+					<a name="unpaid"></a>
+					<div class="hero-unit">
+						{% for e in eva %}
+							<div class="evaluate">
+								{{ e.evaDateTime }}</br>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="content">{{ e.evaContent }}</span>
+							</div>
+							{% if forloop.last %}{% else %}<hr>{% endif %}
+						{% endfor %}
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	{% endif %}
 	
 	<div class="container">
 		<div class="row-fluid">
@@ -108,14 +114,14 @@
 				<a name="unpaid"></a>
 				<div class="hero-unit nopaddinglr">
 					<div class="divCenter">
-						<form class="form-horizontal" action="{% url 'freebtc123:proof' siteid %}" method='post'>
+						<form class="form-horizontal nomarginb" action="{% url 'freebtc123:proof' siteid %}" method='post'>
 						    <div class="control-group">
 							    <label class="control-label" for="inputProofContent"><b>BTC收入转账记录：</b></label>
 								<div class="controls">
 									<textarea id="inputProofContent" name="proof" cols="50" rows="2" onscroll="this.rows++;" placeholder="BTC收入转账记录"></textarea>
 								</div>
 							</div>
-							<div class="control-group text-center">
+							<div class="control-group text-center nomarginb">
 									<button type="submit" class="btn">提交</button>
 							</div>
 						</form>
@@ -131,14 +137,14 @@
 				<a name="unpaid"></a>
 				<div class="hero-unit nopaddinglr">
 					<div class="divCenter">
-						<form class="form-horizontal" action="{% url 'freebtc123:evaluate' siteid %}" method='post'>
+						<form class="form-horizontal nomarginb" action="{% url 'freebtc123:evaluate' siteid %}" method='post'>
 						    <div class="control-group">
 							    <label class="control-label" for="inputEvaluateContent"><b>评论内容：</b></label>
 								<div class="controls">
 									<textarea id="inputEvaluateContent" name="content" cols="50" rows="2" onscroll="this.rows++;" placeholder="评论内容"></textarea>
 								</div>
 							</div>
-							<div class="control-group text-center">
+							<div class="control-group text-center nomarginb">
 									<button type="submit" class="btn">提交</button>
 							</div>
 						</form>

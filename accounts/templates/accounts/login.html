@@ -14,7 +14,7 @@
 				<a name="unpaid"></a>
 				<div class="hero-unit nopaddinglr">
 					<div class="divCenter">
-						<form class="form-horizontal" action="{% url 'accounts:login' %}" method='post'>
+						<form class="form-horizontal nomarginb" action="{% url 'accounts:login' %}" method='post'>
 							{% if notexists %}
 								<div id="divUserName" class="control-group error">
 									<label class="control-label" for="inputUserName"><b>用户名：</b></label>
@@ -57,7 +57,7 @@
 							<div class="control-group text-center">
 								<button type="submit" class="btn">登录</button>
 							</div>
-							<div class="control-group text-center">
+							<div class="control-group text-center nomarginb">
 								<nobr>还没注册帐户？</nobr><a href="{% url 'accounts:signup' %}">立即注册</a>
 							</div>
 						</form>

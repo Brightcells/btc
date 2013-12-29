@@ -65,8 +65,7 @@ body {
     Style of evaluate
    - */
 .evaluate {
-	padding: 8px 35px 8px 14px;
-	border-bottom: 1px groove #ddd;
+	padding: 0 35px 0 14px;
 }
 
 /* - 
@@ -117,6 +116,14 @@ body {
 	padding-right: 0 !important;
 }
 
+.nopaddingb{
+	padding-bottom: 0 !important;
+}
+
+.nomarginb{
+	margin-bottom: 0 !important;
+}
+
 .controls input, .controls textarea {
 	width: 250px;
 }
@@ -125,7 +132,7 @@ body {
 	width: 200px;
 }
 
-/* -Di
+/* -
 	ref: http://www.terrill.ca/sorting/table_sort_example.html
    - */
 .sortable th.descend{background: #E4EDFC 95% 50% url('../img/caret_up.gif') no-repeat;}
