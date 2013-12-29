@@ -1,0 +1,14 @@
+#collector-iframe-container {
+	position: absolute;
+	top: 42px;
+	bottom: 0;
+	height: auto;
+	width: 100%;
+}
+
+#collector-iframe {
+	border: 0;
+	height: 100%;
+	vertical-align: top;
+	width: 100%;
+}
