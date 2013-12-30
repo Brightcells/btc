@@ -96,6 +96,14 @@ def fav(request):
     return render_to_response('freebtc123/fav.html', reDict)
 
 
+def getNumSite(request, num):
+    qs = Site.objects.all().filter(classify__nav__navName='freebtc').exclude(classify__in=[36, 30, 27, 6, 5])
+    try:
+        return qs[num], num+1
+    except:
+        return qs[0], 1
+
+
 def next(request, num):
     numsite, num = getNumSite(request, int(num))
     reDict = {'nav': getNav(request), 'numsite': numsite, 'num': num, 'usr': getUsr(request)}
@@ -105,14 +113,6 @@ def next(request, num):
 def btcreaper(request):
     reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'freebtc'), 'numsite': -1, 'num': 0, 'usr': getUsr(request)}
     return render_to_response('freebtc123/btcreaper.html', reDict)
-
-
-def getNumSite(request, num):
-    qs = Site.objects.all()
-    try:
-        return qs[num], num+1
-    except:
-        return qs[0], 1
 
 
 def freebtc(request):

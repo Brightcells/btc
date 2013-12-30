@@ -51,6 +51,9 @@
 			        </ul>
 					<ul class="nav pull-right">
 						<li>
+                            <a href="javascript:void(0);" onclick="refresh();" id="next">刷新</a>
+                        </li>
+						<li>
                             <a href="{% url 'freebtc123:next' num %}" id="next">下一个</a>
                         </li>					
                     </ul>
@@ -99,6 +102,11 @@
 	<script src="{% static 'js/common.js' %}" type="text/javascript"></script>
 	<script src="{% static 'js/pam.js' %}" type="text/javascript"></script>
 	<script>
+		function refresh(){
+			var url = $("#collector-iframe").attr("src");
+			$("#collector-iframe").attr("src", url);
+		}
+		
 		var res = ["{% static 'img/background.png' %}",];
 		// _bg(0, res, 10000);
 	</script>
