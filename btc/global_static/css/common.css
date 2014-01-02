@@ -111,24 +111,29 @@ body {
 	width: 550px;
 }
 
-.nopaddinglr{
+.nopaddinglr {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
 }
 
-.nopaddingb{
+.nopaddingb {
 	padding-bottom: 0 !important;
 }
 
-.nomarginb{
+.nomarginb {
 	margin-bottom: 0 !important;
+}
+
+.borderlr {
+	border-left: 1px solid #eee !important;
+	border-right: 1px solid #eee !important;
 }
 
 .controls input, .controls textarea {
 	width: 250px;
 }
 
-.control-group .btn{
+.control-group .btn {
 	width: 200px;
 }
 
@@ -137,3 +142,4 @@ body {
    - */
 .sortable th.descend{background: #E4EDFC 95% 50% url('../img/caret_up.gif') no-repeat;}
 .sortable th.ascend{background: #E4EDFC 95% 50% url('../img/caret_down.gif') no-repeat;}
+
