@@ -100,7 +100,10 @@
 					<div class="row table-responsive">
 						<div class="span12">
 							<a name="unpaid"></a>
-							<h2>{{ cs.csyName|safe }}</h2>
+							<div>
+								<h2><p class="pull-right"><a href="{% url 'freebtc123:btcreaper' cs.id %}" target="_blank">Reaper</a></p></h2>
+								<h2><p>{{ cs.csyName|safe }}</p></h2>
+							</div>
 							<div class="description">
 								<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cs.csyDescription|safe }}</span>
 							</div>

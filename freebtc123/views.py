@@ -104,15 +104,25 @@ def getNumSite(request, num):
         return qs[0], 1
 
 
-def next(request, num):
-    numsite, num = getNumSite(request, int(num))
-    reDict = {'nav': getNav(request), 'numsite': numsite, 'num': num, 'usr': getUsr(request)}
-    return render_to_response('freebtc123/btcreaper.html', reDict)
+def getCsyNumSite(request, num, csyid):
+    qs = Site.objects.all().filter(classify_id=csyid)
+    try:
+        return qs[num], num+1
+    except:
+        return qs[0], 1
 
 
-def btcreaper(request):
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'freebtc'), 'numsite': -1, 'num': 0, 'usr': getUsr(request)}
-    return render_to_response('freebtc123/btcreaper.html', reDict)
+def next(request, num, csyid=-1):
+    numsite, num = getNumSite(request, int(num)) if -1 == csyid else getCsyNumSite(request, int(num), int(csyid))
+    reDict = {'nav': getNav(request), 'csyid': csyid, 'numsite': numsite, 'num': num, 'usr': getUsr(request)}
+    reHtml = 'freebtc123/btcreaper.html' if -1 == csyid else 'freebtc123/csyreaper.html'
+    return render_to_response(reHtml, reDict)
+
+
+def btcreaper(request, csyid=-1):
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'freebtc'), 'csyid': csyid, 'numsite': -1, 'num': 0, 'usr': getUsr(request)}
+    reHtml = 'freebtc123/btcreaper.html' if -1 == csyid else 'freebtc123/csyreaper.html'
+    return render_to_response(reHtml, reDict)
 
 
 def freebtc(request):

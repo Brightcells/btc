@@ -1,0 +1,23 @@
+{% extends "common/reaper.html" %}
+
+{% block title %}
+	<title>FreeBTC123 - 免费获取比特币网址导航</title>
+{% endblock %}
+
+{% block next %}
+	<li>
+		<a href="{% url 'freebtc123:next' num csyid %}" id="next">下一个</a>
+	</li>
+{% endblock %}
+
+{% block reaper %}
+	{% ifequal -1 numsite %}
+		<div id="collector-iframe-container">
+			<iframe name="collector-iframe" id="collector-iframe" src="http://indogewetrust.com/"></iframe>
+		</div>
+	{% else %}
+		<div id="collector-iframe-container">
+			<iframe name="collector-iframe" id="collector-iframe" src="{{ numsite.siteUrl }}"></iframe>
+		</div>
+	{% endifequal %}
+{% endblock %}
