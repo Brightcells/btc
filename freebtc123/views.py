@@ -54,18 +54,19 @@ def getFavFlag(request, siteid):
         return Favorite.objects.filter(host=getIP(request), site__id=siteid).count() != 0
 
 
-def getCsySite(request, _nav):
+def getCsySite(request, _nav, _rank):
     '''
         @function: get site list for different classify in a certain nav
         @paras:
             _nav - the certain nav for which to get csy site
+            _rank - rank site by desc or asc, 1 for desc, 0 for asc
         @returns: csysite dict
     '''
     csySetList = Classify.objects.filter(nav__navName=_nav).order_by('csyPosition')
     csysite = []
     for csySet in csySetList:
         csyDict = model_to_dict(csySet)
-        siteSetList = csySet.site_set.filter()
+        siteSetList = csySet.site_set.filter().order_by('-siteDateTime') if 1 == _rank else csySet.site_set.filter()
         site = []
         for siteSet in siteSetList:
             siteDict = model_to_dict(siteSet)
@@ -120,28 +121,28 @@ def next(request, num, csyid=-1):
 
 
 def btcreaper(request, csyid=-1):
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'freebtc'), 'csyid': csyid, 'numsite': -1, 'num': 0, 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'freebtc', 0), 'csyid': csyid, 'numsite': -1, 'num': 0, 'usr': getUsr(request)}
     reHtml = 'freebtc123/btcreaper.html' if -1 == csyid else 'freebtc123/csyreaper.html'
     return render_to_response(reHtml, reDict)
 
 
 def freebtc(request):
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'freebtc'), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'freebtc', 0), 'usr': getUsr(request)}
     return render_to_response('freebtc123/freebtc.html', reDict)
 
 
 def altcoin(request):
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'altcoin'), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'altcoin', 0), 'usr': getUsr(request)}
     return render_to_response('freebtc123/altcoin.html', reDict)
 
 
 def btcforum(request):
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'btcforum'), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'btcforum', 0), 'usr': getUsr(request)}
     return render_to_response('freebtc123/btcforum.html', reDict)
 
 
 def btcwiki(request):
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'btcwiki'), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'btcwiki', 1), 'usr': getUsr(request)}
     return render_to_response('freebtc123/btcwiki.html', reDict)
 
 
@@ -154,7 +155,7 @@ def submitsite(request):
     else:
         csySet = Classify.objects.get(nav__navName='submitsite')
         Site.objects.create(siteName=_name, siteDescription=_description, siteUrl=_url, classify_id=csySet.id)
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'submitsite'), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'submitsite', 1), 'usr': getUsr(request)}
     return render_to_response('freebtc123/submitsite.html', reDict)
 
 
