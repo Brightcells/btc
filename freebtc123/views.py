@@ -92,8 +92,12 @@ def getFavSite(request):
     return favsite
 
 
+def getLastestSite(request):
+    return Site.objects.all().order_by('-siteDateTime')[:8]
+
+
 def fav(request):
-    reDict = {'nav': getNav(request), 'favsite': getFavSite(request), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'favsite': getFavSite(request), 'lastest': getLastestSite(request), 'usr': getUsr(request)}
     return render_to_response('freebtc123/fav.html', reDict)
 
 
