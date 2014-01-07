@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="keywords" content="比特币，BTC，Bitcoin，疯狂比特币，山寨币，AltCoin，莱特币，LTC、阿侬币，ANC、质数币，XPM、安全币，SRC、比特股，PTS、瑞波币，XRP，免费比特币，FreeBTC，Free Bitcoin，免费领取比特币，免费获得比特币，免费获取比特币，免费送比特币，免费拿比特币，免费得比特币，比特币导航，比特币网址导航，免费比特币导航，免费比特币网址导航，山寨币导航，山寨币网址导航，比特币论坛网址导航">
 	<meta name="description" content="FreeBTC123 - 挖矿获取比特币，现在俨然已成为装备竞赛的时代；没有高性能矿机，挖不倒比特币，而又想搞那么一点比特币玩玩，怎么办？免费获取比特币网址导航为您带来各种可以免费获取比特币的网站，希望对您的比特币之旅有所助益。当然，本站还囊括了山寨币网址导航、比特币论坛网址导航，借此希望全方位的让您的比特币之旅更方便快捷。">
+	<meta name="author" content="Qimin Huang -- qiminis0801#gmail.com">
 
 	<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
 	
@@ -17,6 +18,8 @@
 	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 	<link href="{% static 'css/bootstrap-responsive.min.css' %}" rel="stylesheet">
 	<link href="{% static 'css/pam.css' %}" rel="stylesheet">
+	{% block css %}
+	{% endblock %}
 	
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -34,7 +37,7 @@
 	</script>
 </head>
 
-<body>
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -80,97 +83,100 @@
 		</div>
 	</div>
 
+	
 	<div class="bodyer">
-		<div class="container">
-			<div class="alert alert-danger">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<b>风险提示</b>：</br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、比特币的交易有<b>极高的风险</b>，它没有像中国股市那样的<b>涨跌停限制</b>，同时交易是<b>24小时开放</b>的。比特币由于筹码较少，价格<b>易受到庄家控制</b>，有可能出现一天价格涨几倍的情况，同时也可能出现<b>一天内价格跌去一半</b>的情况！<b>入市须谨慎，一定注意控制好风险！</b></br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、选择交易平台一定要慎重，谨防交易平台<b>关站携款跑路</b>，造成您钱、币损失！<b>跑路案例：BTC888.NET</b></br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、大家一定要妥善保管好<b>钱包、交易平台</b>帐户信息，不要轻易告诉其他人，以免丢失钱、币！</br>
-			</div>
+		{% block bodyer %}
+			<div class="container">
+				<div class="alert alert-danger">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<b>风险提示</b>：</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、比特币的交易有<b>极高的风险</b>，它没有像中国股市那样的<b>涨跌停限制</b>，同时交易是<b>24小时开放</b>的。比特币由于筹码较少，价格<b>易受到庄家控制</b>，有可能出现一天价格涨几倍的情况，同时也可能出现<b>一天内价格跌去一半</b>的情况！<b>入市须谨慎，一定注意控制好风险！</b></br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、选择交易平台一定要慎重，谨防交易平台<b>关站携款跑路</b>，造成您钱、币损失！<b>跑路案例：BTC888.NET</b></br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3、大家一定要妥善保管好<b>钱包、交易平台</b>帐户信息，不要轻易告诉其他人，以免丢失钱、币！</br>
+				</div>
 		
-			{% block alert %}
-			{% endblock %}
+				{% block alert %}
+				{% endblock %}
 		
-			{% block befcon %}
-			{% endblock %}
+				{% block befcon %}
+				{% endblock %}
 		
-			{% block content %}
-				{% for cs in csysite %}
-					<div class="row table-responsive">
-						<div class="span12">
-							<a name="unpaid"></a>
-							<div>
-								<h2><p class="pull-right"><a href="{% url 'freebtc123:btcreaper' cs.id %}" target="_blank">Reaper</a></p></h2>
-								<h2><p>{{ cs.csyName|safe }}</p></h2>
-							</div>
-							<div class="description">
-								<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cs.csyDescription|safe }}</span>
-							</div>
-							<table id="table{{ cs.id }}" class="table table-bordered table-striped table-hover table-condensed table-layout sortable">
-								<thead>
-									<tr>
-										<th width="16%" abbr="sName">网站名称</th>
-										<th width="*%" abbr="sDescription">网站描述</th>
-										<th width="16%" abbr="sLink">网站链接</th>
-										<th width="16%" abbr="sPingLun">网站评论</th>
-										<th width="16%" abbr="sPingJia">网站评价</th>
-										<th width="8%" abbr="sShouCang">收藏</th>
-									</tr>
-								<thead>
-								<tbody>
-									{% for site in cs.siteSet %}
+				{% block content %}
+					{% for cs in csysite %}
+						<div class="row table-responsive">
+							<div class="span12">
+								<a name="unpaid"></a>
+								<div>
+									<h2><p class="pull-right"><a href="{% url 'freebtc123:btcreaper' cs.id %}" target="_blank">Reaper</a></p></h2>
+									<h2><p>{{ cs.csyName|safe }}</p></h2>
+								</div>
+								<div class="description">
+									<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cs.csyDescription|safe }}</span>
+								</div>
+								<table id="table{{ cs.id }}" class="table table-bordered table-striped table-hover table-condensed table-layout sortable">
+									<thead>
 										<tr>
-											<td><div class="limit"><span>{{ site.siteName }}</span></div></td>
-											<td><div class="limit"><span title="{{ site.siteDescription|safe }}">{{ site.siteDescription|safe }}</span></div></td>
-											<td><div class="limit"><span><a id="{{ site.id }}" href="javascript:void(0)" target="_blank" onclick="visit('{% url 'freebtc123:visit' %}', this.id, this.title);return false;" title="{{ site.siteUrl }}">{{ site.siteUrl }}</a><span></div></td>
-											<td>
-												<a href="{% url 'freebtc123:evaluate' site.id %}" target="_blank"><i class="icon-eye-open"></i></a></br>
-												<span>{{ site.siteEvaluateNum }}</span>/<span>{{ site.siteClickNum }}</span>
-											</td>
-											<td>
-												<div class="thumbs-up">
-													{% if site.like %}
-														<i id="{{ site.id }}" class="icon-thumbs-up icon-white done"></i>
-													{% else %}
-														<i id="{{ site.id }}" class="icon-thumbs-up"></i>
-													{% endif %}
-													&nbsp;&nbsp;&nbsp;&nbsp;
-													<span>{{ site.siteLikeNum }}</span>
-												</div>
-											
-												<div class="thumbs-down">
-													{% if site.unlike %}
-														<i id="{{ site.id }}" class="icon-thumbs-down icon-white done"></i>
-													{% else %}
-														<i id="{{ site.id }}" class="icon-thumbs-down"></i>
-													{% endif %}
-													&nbsp;&nbsp;&nbsp;&nbsp;
-													<span>{{ site.siteUnlikeNum }}</span>
-												</div>
-											</td>
-											<td>
-												{% if site.fav %}
-													<i id="{{ site.id }}" class="icon-bookmark icon-white done"></i></br>
-												{% else %}
-													<i id="{{ site.id }}" class="icon-bookmark"></i></br>
-												{% endif %}
-												<span>{{ site.siteFavNum }}</span>
-											</td>
+											<th width="16%" abbr="sName">网站名称</th>
+											<th width="*%" abbr="sDescription">网站描述</th>
+											<th width="16%" abbr="sLink">网站链接</th>
+											<th width="16%" abbr="sPingLun">网站评论</th>
+											<th width="16%" abbr="sPingJia">网站评价</th>
+											<th width="8%" abbr="sShouCang">收藏</th>
 										</tr>
-									{% endfor %}
-								</tbody>
-							</table>
+									<thead>
+									<tbody>
+										{% for site in cs.siteSet %}
+											<tr>
+												<td><div class="limit"><span>{{ site.siteName }}</span></div></td>
+												<td><div class="limit"><span title="{{ site.siteDescription|safe }}">{{ site.siteDescription|safe }}</span></div></td>
+												<td><div class="limit"><span><a id="{{ site.id }}" href="javascript:void(0)" target="_blank" onclick="visit('{% url 'freebtc123:visit' %}', this.id, this.title);return false;" title="{{ site.siteUrl }}">{{ site.siteUrl }}</a><span></div></td>
+												<td>
+													<a href="{% url 'freebtc123:evaluate' site.id %}" target="_blank"><i class="icon-eye-open"></i></a></br>
+													<span>{{ site.siteEvaluateNum }}</span>/<span>{{ site.siteClickNum }}</span>
+												</td>
+												<td>
+													<div class="thumbs-up">
+														{% if site.like %}
+															<i id="{{ site.id }}" class="icon-thumbs-up icon-white done"></i>
+														{% else %}
+															<i id="{{ site.id }}" class="icon-thumbs-up"></i>
+														{% endif %}
+														&nbsp;&nbsp;&nbsp;&nbsp;
+														<span>{{ site.siteLikeNum }}</span>
+													</div>
+											
+													<div class="thumbs-down">
+														{% if site.unlike %}
+															<i id="{{ site.id }}" class="icon-thumbs-down icon-white done"></i>
+														{% else %}
+															<i id="{{ site.id }}" class="icon-thumbs-down"></i>
+														{% endif %}
+														&nbsp;&nbsp;&nbsp;&nbsp;
+														<span>{{ site.siteUnlikeNum }}</span>
+													</div>
+												</td>
+												<td>
+													{% if site.fav %}
+														<i id="{{ site.id }}" class="icon-bookmark icon-white done"></i></br>
+													{% else %}
+														<i id="{{ site.id }}" class="icon-bookmark"></i></br>
+													{% endif %}
+													<span>{{ site.siteFavNum }}</span>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
 						</div>
-					</div>
-				{% endfor %}
-			{% endblock %}
+					{% endfor %}
+				{% endblock %}
 		
-			{% block aftcon %}
-			{% endblock %}
-		</div>
-		<!-- /container -->
+				{% block aftcon %}
+				{% endblock %}
+			</div>
+			<!-- /container -->
+		{% endblock %}
 	</div>
 	
 	<div class="footer">
@@ -179,7 +185,7 @@
 			<a id="backtop" class="backtop" href="javascript:backtop();"></a>
 			<div class="row-fluid">
 				<div class="span4">
-					<p>Coments, suggestions, problems?</p>
+					<p><a href="{% url 'freebtc123:about' %}" target="_blank">关于FreeBTC</a></p>
 					<p>
 						<a href="https://github.com/Brightcells/btc" target="_blank" title="网站Github源码地址"><img border="0" src="{% static 'img/github.jpg' %}" class="img-polaroid icon" alt="网站Github源码地址" title="网站Github源码地址"></a>
 						<a href="http://weibo.com/u/3880423895" target="_blank" title="BrightCells微博"><img border="0" src="{% static 'img/weibo.ico' %}" class="img-polaroid icon" alt="BrightCells微博" title="BrightCells微博"></a>

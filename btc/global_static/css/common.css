@@ -148,3 +148,21 @@ body {
 .sortable th.descend{background: #E4EDFC 95% 50% url('../img/caret_up.gif') no-repeat;}
 .sortable th.ascend{background: #E4EDFC 95% 50% url('../img/caret_down.gif') no-repeat;}
 
+
+/* -
+    for about.html
+   - */
+.bs-docs-sidenav {
+		top: 0;
+		width: 218px;
+		margin-top: 30px;
+		margin-right: 0;
+	}
+	
+	.bs-docs-sidenav {
+		width: 166px;
+		margin-top: 20px;
+	}
+	.bs-docs-sidenav.affix {
+		top: 0;
+	}

@@ -1,0 +1,210 @@
+{% extends "common/btc.html" %}
+{% load staticfiles %}
+
+{% block css %}
+	<link href="{% static 'css/about.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="span3 bs-docs-sidebar">
+				<ul class="nav nav-list bs-docs-sidenav">
+					<li>
+						<a href="#aboutsite"><i class="icon-chevron-right"></i>关于本站</a>
+					</li>
+					<li>
+						<a href="#navigation"><i class="icon-chevron-right"></i>本站导航</a>
+					</li>
+					<li>
+						<a href="#favsite"><i class="icon-chevron-right"></i>站点收藏</a>
+					</li>
+					<li>
+						<a href="#likesite"><i class="icon-chevron-right"></i>站点评价</a>
+					</li>
+					<li>
+						<a href="#evasite"><i class="icon-chevron-right"></i>站点评论</a>
+					</li>
+					<li>
+						<a href="#ranksite"><i class="icon-chevron-right"></i>站点排序</a>
+					</li>
+					<li>
+						<a href="#reapersite"><i class="icon-chevron-right"></i>FreeBTC收割</a>
+					</li>
+					<li>
+						<a href="#submitsite"><i class="icon-chevron-right"></i>站点提交</a>
+					</li>
+					<li>
+						<a href="#discuss"><i class="icon-chevron-right"></i>讨论建议</a>
+					</li>
+					<li>
+						<a href="#aboutus"><i class="icon-chevron-right"></i>关于我们</a>
+					</li>
+				</ul>
+			</div>
+			<div class="span9">
+				<section id="aboutsite">
+					<div class="page-header">
+						<h1>
+						关于
+						</h1>
+					</div>
+					<blockquote><br>
+						<strong>
+							<p>挖矿获取比特币，现在俨然已成为装备竞赛的时代；没有高性能矿机，挖不倒比特币，而又想搞那么一点比特币玩玩，怎么办？</p><br>
+							<p>免费获取比特币网址导航为您带来各种可以免费获取比特币的网站，希望对您的比特币之旅有所助益。</p><br>
+							<p>当然，本站还囊括了山寨币网址导航、比特币论坛网址导航，借此希望全方位的让您的比特币之旅更方便快捷。</p><br>
+						</strong>
+					</blockquote>
+				</section>
+
+				<section id="navigation">
+					<div class="page-header">
+						<h1>
+							本站导航
+						</h1>
+					</div>
+					<blockquote><br>
+						<strong><a href="{% url 'freebtc123:fav' %}" target="_blank">1.HOME</a></strong><br>
+						<p>FreeBTC123主页 -- 显示您收藏的网站（所有），以及本站最新收录的网站（8个）；</p><br>
+						<strong><a href="{% url 'freebtc123:btcreaper' %}" target="_blank">2.BTCReaper</a></strong><br>
+						<p>免费BTC收割页面 -- 显示本站收录的某一个免费领取比特币的网站，点击右上角的“下一个”，则会向服务器请求显示下一个网站，循环往复；</p><br>
+						<strong><a href="{% url 'freebtc123:freebtc' %}" target="_blank">3.FreeBTC</a></strong><br>
+						<p>免费BTC列表页面 -- 按照分类显示各分类下的所有免费领取比特币的网站；</p><br>
+						<strong><a href="{% url 'freebtc123:altcoin' %}" target="_blank">4.AltCoin</a></strong><br>
+						<p>山寨币网址列表页面 -- 按照山寨币分类显示各各山寨币相关的网站（官网、钱包、矿池、论坛、导航等等）；</p><br>
+						<strong><a href="{% url 'freebtc123:btcforum' %}" target="_blank">5.BTCForum</a></strong><br>
+						<p>比特币网址列表页面 -- 比特币相关的网站（官网、钱包、行情、交易平台、论坛、导航等等）；</p><br>
+						<strong><a href="{% url 'freebtc123:btcwiki' %}" target="_blank">6.BTCWiki</a></strong><br>
+						<p>BTC百科页面 -- 比特币人物百科、大事件百科；</p><br>
+						<strong><a href="{% url 'freebtc123:altcoin' %}" target="_blank">7.AltCoin</a></strong><br>
+						<p>山寨币网址列表页面 -- 按照山寨币分类显示各各山寨币相关的网站（官网、矿池、论坛、导航等等）；</p><br>
+					</blockquote>
+				</section>
+				
+				<section id="favsite">
+					<div class="page-header">
+						<h1>
+							站点收藏
+						</h1>
+					</div>
+					<blockquote><br>
+						<strong>1.点击如下图红圈中的“收藏”图标，进行收藏，收藏之后即可在“<a href="{% url 'freebtc123:fav' %}" target="_blank">FreeBTC123主页</a>”收藏站点里看到；</strong><br>
+						<img src="{% static 'img/about_favsite_1.png' %}"><br><br>
+						<strong>2.再次点击如上图红圈中的“收藏”图标，即可取消收藏；</strong><br><br>
+						<strong class="red">3.跟收藏相关的是帐户和IP，即便您没有登录，同样可以进行收藏；</strong><br><br>
+					</blockquote>
+				</section>
+
+				<section id="likesite">
+					<div class="page-header">
+						<h1>
+							站点评价
+						</h1>
+					</div>
+					<blockquote><br>
+						<strong>1.点击如下图红圈中的“评价”图标（喜欢--上竖拇指，不喜欢--下竖拇指），进行评价；</strong><br>
+						<img src="{% static 'img/about_likesite_1.png' %}"><br><br>
+						<strong>2.再次点击如上图红圈中的“评价”图标（喜欢--上竖拇指，不喜欢--下竖拇指），即可取消评价；</strong><br><br>
+					</blockquote>
+				</section>
+
+				<section id="evasite">
+					<div class="page-header">
+						<h1>
+							站点评论
+						</h1>
+					</div>
+					<blockquote><br>
+						<strong>1.点击如下图红圈中的“评论”图标，进入评论页面；</strong><br>
+						<img src="{% static 'img/about_evasite_1.png' %}"><br><br>
+						<strong>2.在评论页面可以提交“BTC收入转账记录”，“网站相关评论”（褒贬不论）；</strong><br>
+						<img src="{% static 'img/about_evasite_2.png' %}"><br><br>
+						<strong>3.“BTC收入转账记录”没有固定要求，可以是blockchain的收款链接，亦可以是其他相关证明；</strong><br>
+						<img src="{% static 'img/about_evasite_3.png' %}"><br><br>
+					</blockquote>
+				</section>
+				
+				<section id="ranksite">
+					<div class="page-header">
+						<h1>
+							站点排序
+						</h1>
+					</div>
+					<blockquote><br>
+						<strong>1.默认，是按照站点录入本站的时间进行排序的；</strong><br>
+						<img src="{% static 'img/about_rank_1.png' %}"><br><br>
+						<strong>2.当点击各表头时，表格将按照各表头相关设定进行排序；</strong><br>
+						<img src="{% static 'img/about_rank_2.png' %}"><br><br>
+						<blockquote><br>
+							<strong>网站名称：字母序</strong><br><br>
+							<strong>网站描述：字母序</strong><br><br>
+							<strong>网站链接：字母序</strong><br><br>
+							<strong>网站评论：访问量的数值序</strong><br><br>
+							<strong>网站评价：评价量（喜欢）的数值序</strong><br><br>
+							<strong>收藏：收藏量的数值序</strong><br><br>
+						</blockquote>
+					</blockquote>
+				</section>
+
+				<section id="reapersite">
+					<div class="page-header">
+						<h1>
+							FreeBTC收割
+						</h1>
+					</div>
+					<blockquote><br>
+						<strong>1.点击如下图红圈中的链接，进入Reaper页面，导航栏链接进入全站Reaper模式，各个分类链接进入分类Reaper模式；</strong><br>
+						<img src="{% static 'img/about_reaper_1.png' %}"><br><br>
+						<strong>2.Reaper页面，右上角有三个按钮（如下图红圈中），功能分别同文字描述；</strong><br>
+						<img src="{% static 'img/about_reaper_2.png' %}"><br><br>
+					</blockquote>
+				</section>
+
+				<section id="submitsite">
+					<div class="page-header">
+						<h1>
+							站点提交
+						</h1>
+					</div>
+					<blockquote><br>
+						<strong>1.点击如下图红圈中的导航，进入“站点提交”页面；</strong><br>
+						<img src="{% static 'img/about_submite_1.png' %}"><br><br>
+						<strong>2.在该页面，您可以提交您认为的比特币或者山寨币相关的站点，繁荣该站点；</strong><br><br>
+					</blockquote>
+				</section>
+
+				<section id="discuss">
+					<div class="page-header">
+						<h1>
+							讨论建议
+						</h1>
+					</div>
+					<blockquote><br>
+						<strong>1.QQ群：FreeBTC123 44407854</strong><br><br>
+						<blockquote><br>
+							<strong>讨论内容包括但不止：</strong><br><br>
+							<blockquote><br>
+								<strong>哪个免费领取比特币的站点回报率高；</strong><br><br>
+								<strong>哪个交易平台更靠谱；</strong><br><br>
+								<strong>比特币行情如何，是否该抛售，是否该抄底；</strong><br><br>
+								<strong>等等...</strong><br><br>
+							</blockquote>
+						</blockquote>
+					</blockquote>
+				</section>
+
+				<section id="aboutus">
+					<div class="page-header">
+						<h1>
+							关于我们
+						</h1>
+					</div>
+					<blockquote><br>
+						<strong></strong><br><br>
+					</blockquote>
+				</section>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -296,3 +296,8 @@ def signup(request):
 
 def logout(request):
     return HttpResponseRedirect(reverse('accounts:logout'))
+
+
+def about(request):
+    reDict = {'nav': getNav(request), 'usr': getUsr(request)}
+    return render_to_response('freebtc123/about.html', reDict)
