@@ -96,8 +96,12 @@ def getLastestSite(request):
     return Site.objects.all().order_by('-siteDateTime')[:8]
 
 
+def gethottestSite(request):
+    return Site.objects.all().exclude(classify__in=[37, 27, 6]).order_by('-siteClickNum')[:8]
+
+
 def fav(request):
-    reDict = {'nav': getNav(request), 'favsite': getFavSite(request), 'lastest': getLastestSite(request), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'favsite': getFavSite(request), 'lastest': getLastestSite(request), 'hottest': gethottestSite(request), 'usr': getUsr(request)}
     return render_to_response('freebtc123/fav.html', reDict)
 
 
