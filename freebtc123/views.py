@@ -66,7 +66,7 @@ def getCsySite(request, _nav, _rank):
     csysite = []
     for csySet in csySetList:
         csyDict = model_to_dict(csySet)
-        siteSetList = csySet.site_set.filter().order_by('-siteDateTime') if 1 == _rank else csySet.site_set.filter()
+        siteSetList = csySet.site_set.filter().order_by('-siteDateTime') if 1 == _rank else csySet.site_set.filter().order_by('-siteClickNum')
         site = []
         for siteSet in siteSetList:
             siteDict = model_to_dict(siteSet)
@@ -81,7 +81,7 @@ def getCsySite(request, _nav, _rank):
 
 def getFavSite(request):
     _usr, _host = getUsrHost(request)
-    favSetList = Favorite.objects.filter(user__username=_usr) if 'usr' in request.COOKIES else Favorite.objects.filter(host=_host)
+    favSetList = Favorite.objects.filter(user__username=_usr).order_by('-site__siteClickNum') if 'usr' in request.COOKIES else Favorite.objects.filter(host=_host).order_by('-site__siteClickNum')
     favsite = []
     for siteSet in favSetList:
         siteDict = model_to_dict(siteSet.site)
