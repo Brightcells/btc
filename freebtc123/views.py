@@ -129,7 +129,7 @@ def next(request, num, csyid=-1):
 
 
 def btcreaper(request, csyid=-1):
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'freebtc', 0), 'csyid': csyid, 'numsite': -1, 'num': 0, 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csyid': csyid, 'numsite': -1, 'num': 0, 'usr': getUsr(request)}
     reHtml = 'freebtc123/btcreaper.html' if -1 == csyid else 'freebtc123/csyreaper.html'
     return render_to_response(reHtml, reDict)
 
