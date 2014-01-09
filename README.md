@@ -14,9 +14,8 @@ A Navigation Site For BTC
   
   >执行： python manage.py runserver 0.0.0.0:80
 
-* 本机通过IP访问 或者 通过127.0.0.1访问
-* IP/admin 或者 127.0.0.1/admin访问后台管理界面
-* 如果线上运行的话，请使用Nginx或者使用Apache等HTTP服务器
+* 本机通过IP访问 或者 通过127.0.0.1访问，IP/admin 或者 127.0.0.1/admin访问后台管理界面
+* 如果线上运行的话，推荐使用[Nginx](http://nginx.org/)或者使用[Apache](http://httpd.apache.org/)等HTTP服务器 + [uwsgi](https://uwsgi.readthedocs.org/en/latest/tutorials/Django_and_nginx.html)
 
 ### TODO:
 
