@@ -93,11 +93,11 @@ def getFavSite(request):
 
 
 def getLastestSite(request):
-    return Site.objects.all().order_by('-siteDateTime')[:8]
+    return Site.objects.all().exclude(classify__in=[37, 27, 6]).order_by('-siteDateTime')[:8]
 
 
 def gethottestSite(request):
-    return Site.objects.all().exclude(classify__in=[37, 27, 6]).order_by('-siteClickNum')[:8]
+    return Site.objects.all().exclude(classify__in=[18, 6]).order_by('-siteClickNum')[:8]
 
 
 def fav(request):
