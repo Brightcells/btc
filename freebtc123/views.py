@@ -93,7 +93,7 @@ def getFavSite(request):
 
 
 def getLastestSite(request):
-    return Site.objects.all().exclude(classify__in=[37, 27, 6]).order_by('-siteDateTime')[:8]
+    return Site.objects.all().exclude(classify__in=[37, 27, 18, 6]).order_by('-siteDateTime')[:8]
 
 
 def gethottestSite(request):
