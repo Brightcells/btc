@@ -134,6 +134,9 @@ body {
 	border-right: 1px solid #eee !important;
 }
 
+/* - 
+    Style for input textarea button
+   - */
 .controls input, .controls textarea {
 	width: 250px;
 }
@@ -145,24 +148,49 @@ body {
 /* -
 	ref: http://www.terrill.ca/sorting/table_sort_example.html
    - */
-.sortable th.descend{background: #E4EDFC 95% 50% url('../img/caret_up.gif') no-repeat;}
-.sortable th.ascend{background: #E4EDFC 95% 50% url('../img/caret_down.gif') no-repeat;}
+.sortable th.descend {
+	background: #E4EDFC 95% 50% url('../img/caret_up.gif') no-repeat;
+}
 
+.sortable th.ascend {
+	background: #E4EDFC 95% 50% url('../img/caret_down.gif') no-repeat;
+}
 
-/* -
-    for about.html
+/* - 
+    Style for friend link
    - */
-.bs-docs-sidenav {
-		top: 0;
-		width: 218px;
-		margin-top: 30px;
-		margin-right: 0;
-	}
-	
-	.bs-docs-sidenav {
-		width: 166px;
-		margin-top: 20px;
-	}
-	.bs-docs-sidenav.affix {
-		top: 0;
-	}
+.pflink ul, .pflink li, .wflink ul, .wflink li {
+	float: left;
+	list-style-type: none;
+	margin: 0 8px 3px 0;
+}
+
+.pflink img {
+	width: 101px;
+	height: 32px;
+}
+
+.pflink {
+	margin-bottom: -3px;
+}
+
+.wflink {
+	margin-top: 8px;
+	border-top: 1px dashed #eee;
+	padding-top: 8px;
+}
+
+/* - 
+    Style for friend link
+   - */
+.alert p {
+	margin-bottom: 0;
+}
+
+.ads {
+	padding-top: 5px;
+	background-color: #fcf8e3;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
