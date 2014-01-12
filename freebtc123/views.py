@@ -45,13 +45,36 @@ def getFavFlag(request, siteid):
     '''
         @function: get the flag of whether usr and ip favorite the, and usr first
         @paras:
-            sited - the site.pk, unique identification the table
+            sited - the site.pk, unique identification the site
         @returns: True or False boolean
     '''
     if 'usr' in request.COOKIES:
         return Favorite.objects.filter(user__username=request.COOKIES['usr'], site__id=siteid).count() != 0
     else:
         return Favorite.objects.filter(host=getIP(request), site__id=siteid).count() != 0
+
+
+def getProofNum(request, siteid):
+    '''
+        @function: get the num of site's proof
+        @paras:
+            sited - the site.pk, unique identification the site
+        @returns: num int
+    '''
+    return Proof.objects.filter(site__id=siteid).count()
+
+
+def sitePerfectInfo(request, siteSetList, flag):
+    site = []
+    for siteSet in siteSetList:
+        siteid = siteSet.id if 0 == flag else siteSet.site_id
+        siteDict = model_to_dict(siteSet) if 0 == flag else model_to_dict(siteSet.site)
+        siteDict['like'] = getLikeFlag(request, siteid, True)
+        siteDict['unlike'] = getLikeFlag(request, siteid, False)
+        siteDict['fav'] = getFavFlag(request, siteid)
+        siteDict['siteProofNum'] = getProofNum(request, siteid)
+        site.append(siteDict)
+    return site
 
 
 def getCsySite(request, _nav, _rank):
@@ -67,14 +90,7 @@ def getCsySite(request, _nav, _rank):
     for csySet in csySetList:
         csyDict = model_to_dict(csySet)
         siteSetList = csySet.site_set.filter().order_by('-siteDateTime') if 1 == _rank else csySet.site_set.filter().order_by('-siteClickNum')
-        site = []
-        for siteSet in siteSetList:
-            siteDict = model_to_dict(siteSet)
-            siteDict['like'] = getLikeFlag(request, siteSet.id, True)
-            siteDict['unlike'] = getLikeFlag(request, siteSet.id, False)
-            siteDict['fav'] = getFavFlag(request, siteSet.id)
-            site.append(siteDict)
-        csyDict['siteSet'] = site
+        csyDict['siteSet'] = sitePerfectInfo(request, siteSetList, 0)
         csysite.append(csyDict)
     return csysite
 
@@ -82,26 +98,26 @@ def getCsySite(request, _nav, _rank):
 def getFavSite(request):
     _usr, _host = getUsrHost(request)
     favSetList = Favorite.objects.filter(user__username=_usr).order_by('-site__siteClickNum') if 'usr' in request.COOKIES else Favorite.objects.filter(host=_host).order_by('-site__siteClickNum')
-    favsite = []
-    for siteSet in favSetList:
-        siteDict = model_to_dict(siteSet.site)
-        siteDict['like'] = getLikeFlag(request, siteSet.site_id, True)
-        siteDict['unlike'] = getLikeFlag(request, siteSet.site_id, False)
-        siteDict['fav'] = getFavFlag(request, siteSet.site_id)
-        favsite.append(siteDict)
-    return favsite
+    return sitePerfectInfo(request, favSetList, 1)
+
+
+def getProofSite(request):
+    proofSetList = Site.objects.all().exclude(siteProofNum=0).order_by('-siteProofNum')
+    return sitePerfectInfo(request, proofSetList, 0)
 
 
 def getLastestSite(request):
-    return Site.objects.all().exclude(classify__in=[37, 27, 18, 6]).order_by('-siteDateTime')[:8]
+    lastSetList = Site.objects.all().exclude(classify__in=[37, 27, 18, 6]).order_by('-siteDateTime')[:8]
+    return sitePerfectInfo(request, lastSetList, 0)
 
 
 def gethottestSite(request):
-    return Site.objects.all().exclude(classify__in=[27, 18, 6]).order_by('-siteClickNum')[:8]
+    hotSetList = Site.objects.all().exclude(classify__in=[27, 18, 6]).order_by('-siteClickNum')[:8]
+    return sitePerfectInfo(request, hotSetList, 0)
 
 
 def fav(request):
-    reDict = {'nav': getNav(request), 'favsite': getFavSite(request), 'lastest': getLastestSite(request), 'hottest': gethottestSite(request), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'favsite': getFavSite(request), 'proofsite': getProofSite(request), 'lastest': getLastestSite(request), 'hottest': gethottestSite(request), 'usr': getUsr(request)}
     return render_to_response('freebtc123/fav.html', reDict)
 
 
@@ -210,6 +226,9 @@ def proof(request, siteid):
     if _proof == '':
         print 'Just get Proofs!!!'
     else:
+        s = Site.objects.get(id=siteid)
+        s.siteProofNum = s.siteProofNum + 1
+        s.save()
         Proof.objects.create(site_id=siteid, proofContent=_proof)
     return render_to_response('freebtc123/evaluate.html', getEvaluateDict(request, siteid))
 

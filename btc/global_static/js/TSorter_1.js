@@ -100,7 +100,7 @@ function TSorter(){
 				break;
 			case "sPingLun":
 			    get = function(index){
-					return parseInt(getCell(index).childNodes[6].innerHTML, 10);
+					return parseInt(getCell(index).childNodes[8].innerHTML, 10);
 				};
 				break;
 			case "sPingJia":

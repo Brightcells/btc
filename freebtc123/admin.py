@@ -17,7 +17,7 @@ class ClassifyAdmin(admin.ModelAdmin):
 
 
 class SiteAdmin(admin.ModelAdmin):
-    list_display = ('siteName', 'siteDescription', 'siteUrl', 'siteClickNum', 'siteEvaluateNum', 'siteLikeNum', 'siteUnlikeNum', 'siteFavNum', 'siteDateTime', 'classify')
+    list_display = ('siteName', 'siteDescription', 'siteUrl', 'siteUrlNoRefer', 'siteClickNum', 'siteEvaluateNum', 'siteProofNum', 'siteLikeNum', 'siteUnlikeNum', 'siteFavNum', 'siteDateTime', 'classify')
     search_fields = ('siteName', 'siteDescription', 'siteUrl', 'classify__csyName')
     list_filter = ('siteDateTime', 'classify')
     date_hierarchy = 'siteDateTime'
