@@ -54,6 +54,16 @@ def getFavFlag(request, siteid):
         return Favorite.objects.filter(host=getIP(request), site__id=siteid).count() != 0
 
 
+def getEvaNum(request, siteid):
+    '''
+        @function: get the num of site's evaluate
+        @paras:
+            sited - the site.pk, unique identification the site
+        @returns: num int
+    '''
+    return Evaluate.objects.filter(site__id=siteid).count()
+
+
 def getProofNum(request, siteid):
     '''
         @function: get the num of site's proof
@@ -72,6 +82,7 @@ def sitePerfectInfo(request, siteSetList, flag):
         siteDict['like'] = getLikeFlag(request, siteid, True)
         siteDict['unlike'] = getLikeFlag(request, siteid, False)
         siteDict['fav'] = getFavFlag(request, siteid)
+        siteDict['siteEvaNum'] = getEvaNum(request, siteid)
         siteDict['siteProofNum'] = getProofNum(request, siteid)
         site.append(siteDict)
     return site
