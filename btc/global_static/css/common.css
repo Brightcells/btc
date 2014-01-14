@@ -47,6 +47,14 @@ body {
 }
 
 /* - 
+    Style of span's indentation
+   - */
+.description span, .alert-danger span {
+	display: block;
+	text-indent: 2em;
+}
+
+/* - 
     Style of back top
    - */
 .backtop {
@@ -187,6 +195,9 @@ body {
 	margin-bottom: 0;
 }
 
+/* - 
+    Style for coinurl's ads
+   - */
 .ads {
 	padding-top: 5px;
 	background-color: #fcf8e3;
@@ -195,6 +206,9 @@ body {
 	border-radius: 4px;
 }
 
+/* - 
+    Style for more link in fav.html
+   - */
 .more {
 	font-size: 16px;
 }
