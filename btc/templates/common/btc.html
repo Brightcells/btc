@@ -82,18 +82,25 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="bodyer fixed">
+		<div class="container">
+			<div class="ads wallet">
+				<p class="pull-right">
+					<input onFocus="if(this.value=='登录之后，这里显示您的比特币钱包地址'){this.value='';this.style.color='#000'}" 
+						onBlur="if(this.value==''){this.value='登录之后，这里显示您的比特币钱包地址';this.style.color='#D1D1D1'}" 
+						type="text" name="wallet" id="wallet" 
+						value="{% if wallet %}{{ wallet }}{% else %}登录之后，这里显示您的比特币钱包地址{% endif %}" />
+					<button id="copy_input" class="copy"><font>复制</font></button>
+				</p>
+			</div>
+		</div>
+	</div>
 	
 	<div class="bodyer">
 		{% block bodyer %}
 			<div class="container">
 				<div class="ads">
-					<p class="pull-right">
-						<input onFocus="if(this.value=='登录之后，这里显示您的比特币钱包地址'){this.value='';this.style.color='#000'}" 
-							onBlur="if(this.value==''){this.value='登录之后，这里显示您的比特币钱包地址';this.style.color='#D1D1D1'}" 
-							type="text" name="wallet" id="wallet" 
-							value="{% if wallet %}{{ wallet }}{% else %}登录之后，这里显示您的比特币钱包地址{% endif %}" />
-						<button id="copy_input" class="copy"><font>复制</font></button>
-					</p>
 					<p><iframe scrolling="no" style="border: 0; width: 468px; height: 60px;" src="//coinurl.com/get.php?id=21862"></iframe></p>
 				</div>
 				
