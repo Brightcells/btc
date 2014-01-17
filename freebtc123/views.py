@@ -27,6 +27,20 @@ import hashlib
 from utils.utils import getNav, getUsr, getIP, getUsrHost, getErrorCode
 
 
+def getWallet(request):
+    '''
+        @function: get wallet if user in cookies, and if not exists, set wallet None
+        @paras:
+        @returns: wallet string
+    '''
+    if 'usr' in request.COOKIES:
+        walletid = model_to_dict(UserInfo.objects.get(username=request.COOKIES['usr']))['wallet']
+        wallet = model_to_dict(Wallet.objects.get(id=walletid))['walletUrl']
+    else:
+        wallet = None
+    return wallet
+
+
 def getLikeFlag(request, siteid, _flag):
     '''
         @function: get the flag of whether usr and ip liked the site, and usr first
@@ -128,7 +142,7 @@ def gethottestSite(request):
 
 
 def fav(request):
-    reDict = {'nav': getNav(request), 'favsite': getFavSite(request), 'proofsite': getProofSite(request), 'lastest': getLastestSite(request), 'hottest': gethottestSite(request), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'favsite': getFavSite(request), 'proofsite': getProofSite(request), 'lastest': getLastestSite(request), 'hottest': gethottestSite(request), 'usr': getUsr(request), 'wallet': getWallet(request)}
     return render_to_response('freebtc123/fav.html', reDict)
 
 
@@ -162,22 +176,22 @@ def btcreaper(request, csyid=-1):
 
 
 def freebtc(request):
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'freebtc', 0), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'freebtc', 0), 'usr': getUsr(request), 'wallet': getWallet(request)}
     return render_to_response('freebtc123/freebtc.html', reDict)
 
 
 def altcoin(request):
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'altcoin', 0), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'altcoin', 0), 'usr': getUsr(request), 'wallet': getWallet(request)}
     return render_to_response('freebtc123/altcoin.html', reDict)
 
 
 def btcforum(request):
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'btcforum', 0), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'btcforum', 0), 'usr': getUsr(request), 'wallet': getWallet(request)}
     return render_to_response('freebtc123/btcforum.html', reDict)
 
 
 def btcwiki(request):
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'btcwiki', 1), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'btcwiki', 1), 'usr': getUsr(request), 'wallet': getWallet(request)}
     return render_to_response('freebtc123/btcwiki.html', reDict)
 
 
@@ -190,7 +204,7 @@ def submitsite(request):
     else:
         csySet = Classify.objects.get(nav__navName='submitsite')
         Site.objects.create(siteName=_name, siteDescription=_description, siteUrl=_url, classify_id=csySet.id)
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'submitsite', 1), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'submitsite', 1), 'usr': getUsr(request), 'wallet': getWallet(request)}
     return render_to_response('freebtc123/submitsite.html', reDict)
 
 
@@ -216,7 +230,7 @@ def getEvaluateDict(request, siteid):
     siteDict['fav'] = getFavFlag(request, siteid)
     eva = Evaluate.objects.filter(site__id=siteid).order_by('-evaDateTime')
     proof = Proof.objects.filter(site__id=siteid).order_by('-proofDateTime')
-    reDict = {'nav': getNav(request), 'siteid': siteid, 'site': siteDict, 'eva': eva, 'proof': proof}
+    reDict = {'nav': getNav(request), 'siteid': siteid, 'site': siteDict, 'eva': eva, 'proof': proof, 'usr': getUsr(request), 'wallet': getWallet(request)}
     return reDict
 
 
@@ -333,5 +347,5 @@ def logout(request):
 
 
 def about(request):
-    reDict = {'nav': getNav(request), 'usr': getUsr(request)}
+    reDict = {'nav': getNav(request), 'usr': getUsr(request), 'wallet': getWallet(request)}
     return render_to_response('freebtc123/about.html', reDict)

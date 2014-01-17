@@ -212,3 +212,38 @@ body {
 .more {
 	font-size: 16px;
 }
+
+/* - 
+    Style for bitcoin address and copy button
+   - */
+.ads .pull-right input {
+	width: 270px;
+	margin: 17px 0 8px;
+	color: #D1D1D1;
+	text-align: center;
+}
+
+.ads .pull-right button {
+	height: 30px;
+	color: #D1D1D1;
+	margin: 17px 5px 8px;
+}
+
+.ads .pull-right button font{
+	color: black;
+}
+
+/* - 
+    Style for copy success's tips
+   - */
+.msg {
+	margin: 17px 0 8px 5px;
+	color: green;
+	border: 1px solid #3c3;
+	background: url(../img/checkmark.png) no-repeat 1px 5px;
+	padding: 3px 6px 3px 20px;
+}
+
+.msg font{
+	color: black;
+}
