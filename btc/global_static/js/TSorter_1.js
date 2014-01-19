@@ -98,6 +98,17 @@ function TSorter(){
 					return getCell(index).firstChild.firstChild.firstChild.firstChild.nodeValue;
 				};
 				break;
+			case "sIntervalTime":
+				get = function(index){
+					return parseInt(getCell(index).firstChild.firstChild.firstChild.nodeValue, 10);
+				};
+				break;
+			case "sLastVisitTime":
+				get = function(index){
+					dateStr = getCell(index).firstChild.firstChild.firstChild.nodeValue;
+					return (new Date(Date.parse(dateStr.replace(/-/g,"/")))).getTime();
+				};
+				break;
 			case "sPingLun":
 			    get = function(index){
 					return parseInt(getCell(index).childNodes[8].innerHTML, 10);

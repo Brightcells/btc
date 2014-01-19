@@ -41,6 +41,20 @@ def getWallet(request):
     return wallet
 
 
+def getLastVisitTime(request, siteid):
+    '''
+        @function: get the last time of whether usr and ip visit the site, and usr first
+        @paras:
+            siteid - the site.pk, unique identification the site
+        @returns: True or False boolean
+    '''
+    if 'usr' in request.COOKIES:
+        visitSetList = Visit.objects.filter(user__username=request.COOKIES['usr'], site__id=siteid)[:1]
+    else:
+        visitSetList = Visit.objects.filter(host=getIP(request), site__id=siteid)[:1]
+    return visitSetList.values('visitTime')[0]['visitTime'] if visitSetList.count() !=0 else None
+
+
 def getLikeFlag(request, siteid, _flag):
     '''
         @function: get the flag of whether usr and ip liked the site, and usr first
@@ -88,16 +102,23 @@ def getProofNum(request, siteid):
     return Proof.objects.filter(site__id=siteid).count()
 
 
+
+def siteDictAdd(request, siteid, siteDict):
+    siteDict['lastvisittime'] = getLastVisitTime(request, siteid)
+    siteDict['like'] = getLikeFlag(request, siteid, True)
+    siteDict['unlike'] = getLikeFlag(request, siteid, False)
+    siteDict['fav'] = getFavFlag(request, siteid)
+    siteDict['siteEvaNum'] = getEvaNum(request, siteid)
+    siteDict['siteProofNum'] = getProofNum(request, siteid)
+    return siteDict
+
+
 def sitePerfectInfo(request, siteSetList, flag):
     site = []
     for siteSet in siteSetList:
         siteid = siteSet.id if 0 == flag else siteSet.site_id
         siteDict = model_to_dict(siteSet) if 0 == flag else model_to_dict(siteSet.site)
-        siteDict['like'] = getLikeFlag(request, siteid, True)
-        siteDict['unlike'] = getLikeFlag(request, siteid, False)
-        siteDict['fav'] = getFavFlag(request, siteid)
-        siteDict['siteEvaNum'] = getEvaNum(request, siteid)
-        siteDict['siteProofNum'] = getProofNum(request, siteid)
+        siteDict = siteDictAdd(request, siteid, siteDict)
         site.append(siteDict)
     return site
 
@@ -225,9 +246,7 @@ def visit(request):
 def getEvaluateDict(request, siteid):
     site = Site.objects.get(id=siteid)
     siteDict = model_to_dict(site)
-    siteDict['like'] = getLikeFlag(request, siteid, True)
-    siteDict['unlike'] = getLikeFlag(request, siteid, False)
-    siteDict['fav'] = getFavFlag(request, siteid)
+    siteDict = siteDictAdd(request, siteid, siteDict)
     eva = Evaluate.objects.filter(site__id=siteid).order_by('-evaDateTime')
     proof = Proof.objects.filter(site__id=siteid).order_by('-proofDateTime')
     reDict = {'nav': getNav(request), 'siteid': siteid, 'site': siteDict, 'eva': eva, 'proof': proof, 'usr': getUsr(request), 'wallet': getWallet(request)}

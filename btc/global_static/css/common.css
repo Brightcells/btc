@@ -49,7 +49,7 @@ body {
 /* - 
     Style of span's indentation
    - */
-.description span, .alert-danger span {
+.description span, .alert-danger span, .evaluate span{
 	display: block;
 	text-indent: 2em;
 }
