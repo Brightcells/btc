@@ -48,6 +48,10 @@ class Site(models.Model):
     siteFavNum = models.IntegerField(_(u'sitefavnum'), blank=True, null=True, default=0)
     siteDateTime = models.DateTimeField(_(u'sitedatetime'), blank=True, null=True,  auto_now_add=True)
     classify = models.ForeignKey(Classify, verbose_name=_(u'classify'), blank=True, null=True)
+    interval = models.IntegerField(_(u'interval'), blank=True, null=True, default=0)
+    display = models.IntegerField(_(u'display'), blank=True, null=True, default=0)
+    flag1 = models.IntegerField(_(u'flag1'), blank=True, null=True, default=0)
+    flag2 = models.IntegerField(_(u'flag2'), blank=True, null=True, default=0)
 
     class Meta:
         db_table = u'site'
