@@ -49,9 +49,9 @@ def getLastVisitTime(request, siteid):
         @returns: True or False boolean
     '''
     if 'usr' in request.COOKIES:
-        visitSetList = Visit.objects.filter(user__username=request.COOKIES['usr'], site__id=siteid)[:1]
+        visitSetList = Visit.objects.filter(user__username=request.COOKIES['usr'], site__id=siteid).order_by('-visitTime')[:1]
     else:
-        visitSetList = Visit.objects.filter(host=getIP(request), site__id=siteid)[:1]
+        visitSetList = Visit.objects.filter(host=getIP(request), site__id=siteid).order_by('-visitTime')[:1]
     return visitSetList.values('visitTime')[0]['visitTime'] if visitSetList.count() !=0 else None
 
 
