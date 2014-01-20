@@ -135,7 +135,7 @@ def getCsySite(request, _nav, _rank):
     csysite = []
     for csySet in csySetList:
         csyDict = model_to_dict(csySet)
-        siteSetList = csySet.site_set.filter().order_by('-siteDateTime') if 1 == _rank else csySet.site_set.filter().order_by('-siteClickNum')
+        siteSetList = csySet.site_set.filter(display=0).order_by('-siteDateTime') if 1 == _rank else csySet.site_set.filter(display=0).order_by('-siteClickNum')
         csyDict['siteSet'] = sitePerfectInfo(request, siteSetList, 0)
         csysite.append(csyDict)
     return csysite
@@ -143,22 +143,22 @@ def getCsySite(request, _nav, _rank):
 
 def getFavSite(request):
     _usr, _host = getUsrHost(request)
-    favSetList = Favorite.objects.filter(user__username=_usr).order_by('-site__siteClickNum') if 'usr' in request.COOKIES else Favorite.objects.filter(host=_host).order_by('-site__siteClickNum')
+    favSetList = Favorite.objects.filter(user__username=_usr, site__display=0).order_by('-site__siteClickNum') if 'usr' in request.COOKIES else Favorite.objects.filter(host=_host, site__display=0).order_by('-site__siteClickNum')
     return sitePerfectInfo(request, favSetList, 1)
 
 
 def getProofSite(request):
-    proofSetList = Site.objects.all().exclude(siteProofNum=0).order_by('-siteProofNum')
+    proofSetList = Site.objects.filter(display=0).exclude(siteProofNum=0).order_by('-siteProofNum')
     return sitePerfectInfo(request, proofSetList, 0)
 
 
 def getLastestSite(request):
-    lastSetList = Site.objects.all().exclude(classify__in=[37, 27, 18, 6]).order_by('-siteDateTime')[:8]
+    lastSetList = Site.objects.filter(display=0).exclude(classify__in=[37, 27, 18, 6]).order_by('-siteDateTime')[:8]
     return sitePerfectInfo(request, lastSetList, 0)
 
 
 def gethottestSite(request):
-    hotSetList = Site.objects.all().exclude(classify__in=[27, 18, 6]).order_by('-siteClickNum')[:8]
+    hotSetList = Site.objects.filter(display=0).exclude(classify__in=[27, 18, 6]).order_by('-siteClickNum')[:8]
     return sitePerfectInfo(request, hotSetList, 0)
 
 
@@ -168,7 +168,7 @@ def fav(request):
 
 
 def getNumSite(request, num):
-    qs = Site.objects.all().filter(classify__nav__navName='freebtc').exclude(classify__in=[36, 30, 27, 6, 5])
+    qs = Site.objects.filter(classify__nav__navName='freebtc', display=0).exclude(classify__in=[36, 30, 27, 6, 5])
     try:
         return qs[num], num+1
     except:
@@ -176,7 +176,7 @@ def getNumSite(request, num):
 
 
 def getCsyNumSite(request, num, csyid):
-    qs = Site.objects.all().filter(classify_id=csyid)
+    qs = Site.objects.filter(classify_id=csyid, display=0)
     try:
         return qs[num], num+1
     except:
