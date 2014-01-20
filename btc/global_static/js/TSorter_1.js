@@ -105,7 +105,12 @@ function TSorter(){
 				break;
 			case "sLastVisitTime":
 				get = function(index){
-					dateStr = getCell(index).firstChild.firstChild.firstChild.nodeValue;
+				    var dateStr = "1970-01-01 00:00:00";
+					try{
+    					dateStr = getCell(index).firstChild.firstChild.firstChild.nodeValue;
+					} catch(err) {
+						
+					}
 					return (new Date(Date.parse(dateStr.replace(/-/g,"/")))).getTime();
 				};
 				break;
