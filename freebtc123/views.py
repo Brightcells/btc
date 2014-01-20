@@ -17,6 +17,7 @@ from django.utils import simplejson
 from django.core import serializers
 from django.utils.encoding import smart_str
 from django.forms.models import model_to_dict
+from django.utils import timezone
 
 import re
 import json
@@ -52,7 +53,15 @@ def getLastVisitTime(request, siteid):
         visitSetList = Visit.objects.filter(user__username=request.COOKIES['usr'], site__id=siteid).order_by('-visitTime')[:1]
     else:
         visitSetList = Visit.objects.filter(host=getIP(request), site__id=siteid).order_by('-visitTime')[:1]
-    return visitSetList.values('visitTime')[0]['visitTime'] if visitSetList.count() !=0 else None
+
+    if visitSetList.count() == 0:
+        return None, 0
+    else:
+        lvt = visitSetList.values('visitTime')[0]['visitTime']
+        interval = Site.objects.get(id=siteid).interval
+        lt = interval - (timezone.now() - lvt).seconds/60
+        lt = lt if lt >= 0 else 0
+        return lvt, lt
 
 
 def getLikeFlag(request, siteid, _flag):
@@ -104,7 +113,7 @@ def getProofNum(request, siteid):
 
 
 def siteDictAdd(request, siteid, siteDict):
-    siteDict['lastvisittime'] = getLastVisitTime(request, siteid)
+    siteDict['lastvisittime'], siteDict['lefttime'] = getLastVisitTime(request, siteid)
     siteDict['like'] = getLikeFlag(request, siteid, True)
     siteDict['unlike'] = getLikeFlag(request, siteid, False)
     siteDict['fav'] = getFavFlag(request, siteid)
