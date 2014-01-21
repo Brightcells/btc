@@ -58,6 +58,13 @@ function browserCheck() {
 	return Sys;
 }
 
+/**
+ * @description control the back topimg's display
+ * 
+ * @param
+ * 
+ * @return
+ */
 window.onscroll = function () {
     var scrHeight = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
     if (scrHeight >= 250) {
@@ -71,6 +78,14 @@ function backtop() {
     scroll(0, 0);
 };
 
+
+/**
+ * @description add link for url when string contains url
+ * 
+ * @param
+ * 
+ * @return {String} replaced string
+ */
 /*
 	ref: http://www.zhangxinxu.com/wordpress/2010/04/javascript%E5%AE%9E%E7%8E%B0http%E5%9C%B0%E5%9D%80%E8%87%AA%E5%8A%A8%E6%A3%80%E6%B5%8B%E5%B9%B6%E6%B7%BB%E5%8A%A0url%E9%93%BE%E6%8E%A5/
 */
@@ -83,14 +98,32 @@ String.prototype.httpHtml = function(){
 	$(function () {
 		var $window = $(window);
 
-    // Disable certain links in docs
+		// Disable certain links in docs
 		$("section [href^=#]").click(function (e) {
 			e.preventDefault();
 		});
 
-    // side bar
+		// side bar
 		$(".bs-docs-sidenav").affix({offset:{top:function () {
 			return $window.width() <= 980 ? 290 : 210;
 		}, bottom:270}});
 	});
 }(window.jQuery);
+
+/**
+ * @description alter the site's left time, one minute the num minus one
+ * 
+ * @param
+ * 
+ * @return
+ */
+function alterLeftTime(){
+	$(".limit .red").each(function(){
+	    var newLeftTime = parseInt($(this).html())-1;
+		if (newLeftTime >= 0) {
+			$(this).html(parseInt($(this).html())-1);
+		} else {
+			// do nothing
+		}
+	});
+}

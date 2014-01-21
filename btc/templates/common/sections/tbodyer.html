@@ -5,7 +5,7 @@
 	<td><div class="limit"><span title="{{ site.siteDescription|safe }}">{{ site.siteDescription|safe }}</span></div></td>
 	<td><div class="limit"><span><a id="{{ site.id }}" href="javascript:void(0)" target="_blank" onclick="visit('{% url 'freebtc123:visit' %}', this.id, this.title);return false;" title="{{ site.siteUrl }}">{{ site.siteUrl }}</a><span></div></td>
 	<td><div class="limit"><span><a id="{{ site.id }}" href="javascript:void(0)" target="_blank" onclick="visit('{% url 'freebtc123:visit' %}', this.id, this.title);return false;" title="{{ site.siteUrlNoRefer }}">{{ site.siteUrlNoRefer }}</a><span></div></td>
-	<td><div class="limit"><span style="color:red">{{ site.lefttime }}</span>/<span>{{ site.interval }}</span></div></td>
+	<td><div class="limit"><span class="red">{{ site.lefttime }}</span>/<span>{{ site.interval }}</span></div></td>
 	<td><div class="limit"><span title="{{ site.lastvisittime|date:'Y-m-d H:i:s' }}">{{ site.lastvisittime|date:'Y-m-d H:i:s' }}</span></div></td>
 	<td>
 		<a href="{% url 'freebtc123:evaluate' site.id %}" target="_blank"><i class="icon-eye-open"></i></a></br>

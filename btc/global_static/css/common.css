@@ -261,3 +261,10 @@ body {
 	position: fixed;
 	width: 100%;
 }
+
+/* - 
+    Style for left time
+   - */
+.red {
+	color: red;
+}
