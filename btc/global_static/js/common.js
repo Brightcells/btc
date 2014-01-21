@@ -1,5 +1,8 @@
 function visit(_url, sid, url){
     //window.open(url);
+	leftTimeObj = $(".limit ." + sid + ".red");
+	leftTimeObj.html($(".limit ." + sid + ".red").next().html());
+
 	$.ajax({
 		type: "post",
 		url: _url,
