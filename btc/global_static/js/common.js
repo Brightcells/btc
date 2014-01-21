@@ -1,5 +1,5 @@
 function visit(_url, sid, url){
-    window.open(url);
+    //window.open(url);
 	$.ajax({
 		type: "post",
 		url: _url,
@@ -8,7 +8,6 @@ function visit(_url, sid, url){
             // do nothing no matter what server response
 		}
 	});
-	event.preventDefault();
 }
 
 function myLikeFavAjax(_iObj, _spanObj, _url, _data){
