@@ -128,4 +128,5 @@ function alterLeftTime(){
 			// do nothing
 		}
 	});
+	$(".alert").addClass("hidden");
 }
