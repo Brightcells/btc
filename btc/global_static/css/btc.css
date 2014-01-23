@@ -260,6 +260,7 @@ body {
 .fixed {
 	position: fixed;
 	width: 100%;
+	top: 35px;
 }
 
 /* - 
@@ -267,4 +268,8 @@ body {
    - */
 .red {
 	color: red;
+}
+
+.margintop {
+	margin-top: 40px;
 }
