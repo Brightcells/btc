@@ -91,6 +91,15 @@ def getRef(request):
     return request.COOKIES['ref'] if 'ref' in request.COOKIES else 'freebtc123:fav'
 
 
+def getSiteid(request):
+    '''
+        @function: get site from cookies, and if not exists, set siteid 22
+        @paras:
+        @returns: siteid int
+    '''
+    return int(request.COOKIES['siteid']) if 'siteid' in request.COOKIES else 22
+
+
 def getNav(request):
     '''
         @function: get all nav from table Nav
@@ -152,7 +161,7 @@ def get_referer_view(request, default='freebtc123:fav'):
         return default
 
     # remove the protocol and split the url at the slashes
-    referer = re.sub('^https?:\/\/', '', referer).split('/')
+    referer = re.sub('^https?:\/\/', '', referer.strip('/')).split('/')
     #if referer[0] != request.META.get('SERVER_NAME'):
     #    return default
 
@@ -161,6 +170,9 @@ def get_referer_view(request, default='freebtc123:fav'):
 
     if referer[1] in ['', 'index', 'home']:
         return default
+
+    if referer[1] in ['evaluate', ]:
+        return u'freebtc123:evaluate'
 
     # add the slash at the relative path's view and finished
     if 2 == len(referer):

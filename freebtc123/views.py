@@ -271,7 +271,9 @@ def evaluate(request, siteid):
         s.siteEvaluateNum = s.siteEvaluateNum + 1
         s.save()
         Evaluate.objects.create(site_id=siteid, evaContent=_content)
-    return render_to_response('freebtc123/evaluate.html', getEvaluateDict(request, siteid))
+    response = render_to_response('freebtc123/evaluate.html', getEvaluateDict(request, siteid))
+    response.set_cookie('siteid', siteid)
+    return response
 
 
 def proof(request, siteid):

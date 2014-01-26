@@ -24,7 +24,7 @@ import time
 import random
 import hashlib
 
-from utils.utils import getNav, getRef, getErrorCode, usercheck, pwd2hash, get_referer_view, delCookie
+from utils.utils import getNav, getRef, getSiteid, getErrorCode, usercheck, pwd2hash, get_referer_view, delCookie
 
 
 def login(request):
@@ -43,7 +43,9 @@ def login(request):
             return render_to_response('accounts/login.html', reDict)
         else:
             if userInfoList[0].password == pwd2hash(_pwd):
-                response = HttpResponseRedirect(reverse(getRef(request)))
+                referer = getRef(request)
+                _kwargs = {'siteid': getSiteid(request)} if u'freebtc123:evaluate' == referer else {}
+                response = HttpResponseRedirect(reverse(referer, kwargs=_kwargs))
                 delCookie(request, response, 'ref')
                 response.set_cookie('usr', smart_str(_usr))
                 return response
@@ -70,13 +72,17 @@ def signup(request):
         else:
             w = Wallet.objects.create(walletUrl=_wallet)
             u = UserInfo.objects.create(username=_usr, password=pwd2hash(_pwd), email=_email, wallet=w)
-            response = HttpResponseRedirect(reverse(getRef(request)))
+            referer = getRef(request)
+            _kwargs = {'siteid': getSiteid(request)} if u'freebtc123:evaluate' == referer else {}
+            response = HttpResponseRedirect(reverse(getRef(request), kwargs=_kwargs))
             delCookie(request, response, 'ref')
             response.set_cookie('usr', smart_str(_usr))
             return response
 
 
 def logout(request):
-    response = HttpResponseRedirect(reverse(get_referer_view(request)))
+    referer = get_referer_view(request)
+    _kwargs = {'siteid': getSiteid(request)} if u'freebtc123:evaluate' == referer else {}
+    response = HttpResponseRedirect(reverse(referer, kwargs=_kwargs))
     delCookie(request, response, 'usr')
     return response
