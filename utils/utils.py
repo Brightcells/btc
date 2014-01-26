@@ -162,8 +162,9 @@ def get_referer_view(request, default='freebtc123:fav'):
 
     # remove the protocol and split the url at the slashes
     referer = re.sub('^https?:\/\/', '', referer.strip('/')).split('/')
-    #if referer[0] != request.META.get('SERVER_NAME'):
-    #    return default
+
+    if 1 == len(referer):
+        return default
 
     if referer[1] in ['accounts', ]:
         return getRef(request)
@@ -175,10 +176,7 @@ def get_referer_view(request, default='freebtc123:fav'):
         return u'freebtc123:evaluate'
 
     # add the slash at the relative path's view and finished
-    if 2 == len(referer):
-        referer = u'freebtc123:' + u':'.join(referer[1:])
-    else:
-        referer = u':'.join(referer[1:])
+    referer = u'freebtc123:' + u':'.join(referer[1:]) if 2 == len(referer) else u':'.join(referer[1:])
 
     return referer
 
