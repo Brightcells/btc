@@ -100,30 +100,33 @@
 	<div class="bodyer margintop">
 		{% block bodyer %}
 			<div class="container">
-				<div class="ads">
-				    <p class="pull-right"><iframe scrolling="no" style="border: 0; width: 234px; height: 60px;" src="//coinurl.com/get.php?id=21865"></iframe></p>
-					<p><iframe scrolling="no" style="border: 0; width: 468px; height: 60px;" src="//coinurl.com/get.php?id=21862"></iframe></p>
-				</div>
+				<div class="row block margint50">
+					<div class="span12 margint50">
+						<div class="ads">
+							<p class="pull-right"><iframe scrolling="no" style="border: 0; width: 234px; height: 60px;" src="//coinurl.com/get.php?id=21865"></iframe></p>
+							<p><iframe scrolling="no" style="border: 0; width: 468px; height: 60px;" src="//coinurl.com/get.php?id=21862"></iframe></p>
+						</div>
 				
-				<div class="alert alert-danger">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<b>风险提示</b>：</br>
-					<span>1、比特币的交易有<b>极高的风险</b>，它没有像中国股市那样的<b>涨跌停限制</b>，同时交易是<b>24小时开放</b>的。比特币由于筹码较少，价格<b>易受到庄家控制</b>，有可能出现一天价格涨几倍的情况，同时也可能出现<b>一天内价格跌去一半</b>的情况！<b>入市须谨慎，一定注意控制好风险！</b></span>
-					<span>2、选择交易平台一定要慎重，谨防交易平台<b>关站携款跑路</b>，造成您钱、币损失！<b>跑路案例：BTC888.NET</b></span>
-					<span>3、大家一定要妥善保管好<b>钱包、交易平台</b>帐户信息，不要轻易告诉其他人，以免丢失钱、币！</span>
-				</div>
+						<div class="alert alert-danger">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<b>风险提示</b>：</br>
+							<span>1、比特币的交易有<b>极高的风险</b>，它没有像中国股市那样的<b>涨跌停限制</b>，同时交易是<b>24小时开放</b>的。比特币由于筹码较少，价格<b>易受到庄家控制</b>，有可能出现一天价格涨几倍的情况，同时也可能出现<b>一天内价格跌去一半</b>的情况！<b>入市须谨慎，一定注意控制好风险！</b></span>
+							<span>2、选择交易平台一定要慎重，谨防交易平台<b>关站携款跑路</b>，造成您钱、币损失！<b>跑路案例：BTC888.NET</b></span>
+							<span>3、大家一定要妥善保管好<b>钱包、交易平台</b>帐户信息，不要轻易告诉其他人，以免丢失钱、币！</span>
+						</div>
 		
-				{% block alert %}
-				{% endblock %}
+						{% block alert %}
+						{% endblock %}
+					</div>
+				</div>
 		
 				{% block befcon %}
 				{% endblock %}
 		
 				{% block content %}
 					{% for cs in csysite %}
-						<div class="row table-responsive">
+						<div class="row table-responsive block">
 							<div class="span12">
-								<a name="unpaid"></a>
 								<div>
 									<h2><p class="pull-right"><a href="{% url 'freebtc123:btcreaper' cs.id %}" target="_blank">Reaper</a></p></h2>
 									<h2><p>{{ cs.csyName|safe }}</p></h2>
@@ -155,67 +158,89 @@
 	
 	<div class="footer">
 		<div class="container">
-			<hr>
-			<div class="ads">
-				<p class="pull-right"><iframe scrolling="no" style="border: 0; width: 468px; height: 60px;" src="//coinurl.com/get.php?id=21870"></iframe></p>
-				<p><iframe scrolling="no" style="border: 0; width: 234px; height: 60px;" src="//coinurl.com/get.php?id=21873"></iframe></p>
-			</div>
-			<hr>
-			<div class="pflink">
-				<div class="row-fluid">
-					<ul>
-						<li><a href="http://www.huanle95.com/" target="_blank"><img border="0" src="{% static 'img/huanle95.png' %}" class="img-polaroid" alt="购物返利网站：欢乐95" title="购物返利网站：欢乐95"></a></li>
-					</ul>
+			<div class="row block">
+				<div class="span12 margintads">
+					<div class="ads">
+						<p class="pull-right"><iframe scrolling="no" style="border: 0; width: 468px; height: 60px;" src="//coinurl.com/get.php?id=21870"></iframe></p>
+						<p><iframe scrolling="no" style="border: 0; width: 234px; height: 60px;" src="//coinurl.com/get.php?id=21873"></iframe></p>
+					</div>
 				</div>
 			</div>
-			<div class="wflink">
-				<div class="row-fluid">
-					<ul>
-						<li><a href="http://freebtc123.com/" target="_blank" title="FreeBTC123 - 免费获取比特币网址导航">FreeBTC123</a></li>
-						<li><a href="http://herebtc.com/" target="_blank" title="HereBTC - 免费获取比特币网址导航">HereBTC</a></li>
-						<li><a href="http://www.bitcoinvester.com/" target="_blank" title="BitcoinVester - 免费获取比特币网址导航">BitcoinVester</a></li>
-						<li><a href="http://freebtc.qiniudn.com/" target="_blank" title="FreeBTC.QiNiu - 免费获取比特币网址导航">FreeBTC.QiNiu</a></li>
-					</ul>
+			
+			<div class="row block">
+				<div class="span12 margintads">
+					<div class="text-center">
+						<div class="row-fluid text-center">
+							<h4>友情链接</h4>
+						</div>
+					</div>
+					<div class="pflink">
+						<div class="row-fluid text-center">
+							<ul>
+								<li><a href="http://www.huanle95.com/" target="_blank"><img border="0" src="{% static 'img/huanle95.png' %}" class="img-polaroid" alt="购物返利网站：欢乐95" title="购物返利网站：欢乐95"></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="wflink">
+						<div class="row-fluid text-center">
+							<ul>
+								<li><a href="http://www.btcbbb.com/forum.php" target="_blank" title="比特币（Bitcoin）论坛BTCBBB.COM是中文比特币交流社区，你可以了解比特币入门、比特币挖矿、比特币技术方面的相关知识。论坛还提供担保交易及比特币商店的相关业务。">比特币交流论坛</a></li>
+							</ul>
+						</div>
+						<div class="row-fluid text-center">
+							<ul>
+								<li><a href="http://freebtc123.com/" target="_blank" title="FreeBTC123 - 免费获取比特币网址导航">FreeBTC123</a></li>
+								<li><a href="http://herebtc.com/" target="_blank" title="HereBTC - 免费获取比特币网址导航">HereBTC</a></li>
+								<li><a href="http://www.bitcoinvester.com/" target="_blank" title="BitcoinVester - 免费获取比特币网址导航">BitcoinVester</a></li>
+								<li><a href="http://freebtc.qiniudn.com/" target="_blank" title="FreeBTC.QiNiu - 免费获取比特币网址导航">FreeBTC.QiNiu</a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
-			<hr>
+
 			<a id="backtop" class="backtop" href="javascript:backtop();"></a>
-			<div class="row-fluid">
-				<div class="span4">
-					<p><a href="{% url 'freebtc123:about' %}" target="_blank">关于FreeBTC</a></p>
-					<p>
-						<a href="https://github.com/Brightcells/btc" target="_blank" title="网站Github源码地址"><img border="0" src="{% static 'img/github.jpg' %}" class="img-polaroid icon" alt="网站Github源码地址" title="网站Github源码地址"></a>
-						<a href="http://weibo.com/u/3880423895" target="_blank" title="BrightCells微博"><img border="0" src="{% static 'img/weibo.ico' %}" class="img-polaroid icon" alt="BrightCells微博" title="BrightCells微博"></a>
-						<a href="http://shang.qq.com/wpa/qunwpa?idkey=918cb7851be09cbe5906d95986dd126940a8de39ec8e74aff07a685cad2c58ce" target="_blank"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" class="img-polaroid iconlong" alt="FreeBTC123免费比特币讨论群44407854" title="FreeBTC123免费比特币讨论群44407854"></a>
-					</p>
-					<p>&copy; FreeBTC123 2013</p>
-					<p>Powered by <a href="http://www.brightcells.com/" target="_blank" title="BrightCells团队官网">BrightCells</a> !</p>
-				</div>
-				<div class="span4 borderlr text-center">
-					<span id="bitcoin-chan-widget_160x225" lang="zh" home="cny"><a href="http://www.bitcoin-chan.com/">(C)Bitcoin-chan Project</a> <a href="http://satoshinakamoto.jp/bitcoin-chan-widget.php">比特币娘小部件</a></span>
-					<script type="text/javascript" src="http://satoshinakamoto.jp/js/bitcoin-chan-widget_160x225.js"></script>
-				</div>
-				<div class="span4">
-					<p class="pull-right text-center">
-						<img src="https://blockchain.info//Resources/buttons/donate_64.png"><br>
-						<span>13Y4K9Lkrd9rCxHnF8b3axUKbjtA3ZWF1d</span><br>
-						<img src="https://blockchain.info/qr?data=13Y4K9Lkrd9rCxHnF8b3axUKbjtA3ZWF1d&size=200" alt="接收捐赠钱包地址二维码" title="接收捐赠钱包地址二维码"><br>
-						<script src="http://coinwidget.com/widget/coin.js"></script>
-						<script>
-						    CoinWidgetCom.go({
-							    wallet_address: "13Y4K9Lkrd9rCxHnF8b3axUKbjtA3ZWF1d"
-							   	, currency: "bitcoin"
-								, counter: "count"
-								, alignment: "bl"
-								, qrcode: true
-								, auto_show: true
-								, lbl_button: "Donate"
-								, lbl_address: "My Bitcoin Address:"
-								, lbl_count: "donations"
-								, lbl_amount: "BTC"
-							});
-						</script>
-					</p>
+	
+			<div class="row block">
+				<div class="span12 margintads">
+					<div class="row-fluid">
+						<div class="span4">
+							<p><a href="{% url 'freebtc123:about' %}" target="_blank">关于FreeBTC</a></p>
+							<p>
+								<a href="https://github.com/Brightcells/btc" target="_blank" title="网站Github源码地址"><img border="0" src="{% static 'img/github.jpg' %}" class="img-polaroid icon" alt="网站Github源码地址" title="网站Github源码地址"></a>
+								<a href="http://weibo.com/u/3880423895" target="_blank" title="BrightCells微博"><img border="0" src="{% static 'img/weibo.ico' %}" class="img-polaroid icon" alt="BrightCells微博" title="BrightCells微博"></a>
+								<a href="http://shang.qq.com/wpa/qunwpa?idkey=918cb7851be09cbe5906d95986dd126940a8de39ec8e74aff07a685cad2c58ce" target="_blank"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" class="img-polaroid iconlong" alt="FreeBTC123免费比特币讨论群44407854" title="FreeBTC123免费比特币讨论群44407854"></a>
+							</p>
+							<p>&copy; FreeBTC123 2013</p>
+							<p>Powered by <a href="http://www.brightcells.com/" target="_blank" title="BrightCells团队官网">BrightCells</a> !</p>
+						</div>
+						<div class="span4 borderlr text-center">
+							<span id="bitcoin-chan-widget_160x225" lang="zh" home="cny"><a href="http://www.bitcoin-chan.com/">(C)Bitcoin-chan Project</a> <a href="http://satoshinakamoto.jp/bitcoin-chan-widget.php">比特币娘小部件</a></span>
+							<script type="text/javascript" src="http://satoshinakamoto.jp/js/bitcoin-chan-widget_160x225.js"></script>
+						</div>
+						<div class="span4">
+							<p class="pull-right text-center">
+								<img src="https://blockchain.info//Resources/buttons/donate_64.png"><br>
+								<span>13Y4K9Lkrd9rCxHnF8b3axUKbjtA3ZWF1d</span><br>
+								<img src="https://blockchain.info/qr?data=13Y4K9Lkrd9rCxHnF8b3axUKbjtA3ZWF1d&size=200" alt="接收捐赠钱包地址二维码" title="接收捐赠钱包地址二维码"><br>
+								<script src="http://coinwidget.com/widget/coin.js"></script>
+								<script>
+									CoinWidgetCom.go({
+										wallet_address: "13Y4K9Lkrd9rCxHnF8b3axUKbjtA3ZWF1d"
+										, currency: "bitcoin"
+										, counter: "count"
+										, alignment: "bl"
+										, qrcode: true
+										, auto_show: true
+										, lbl_button: "Donate"
+										, lbl_address: "My Bitcoin Address:"
+										, lbl_count: "donations"
+										, lbl_amount: "BTC"
+									});
+								</script>
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -270,8 +295,8 @@
 			}); 
 		}); 
 		
-		var res = ["{% static 'img/background.png' %}",];
-		// _bg(0, res, 10000);
+		var res = ["{% static 'img/background.jpg' %}",];
+		_bg(0, res, 10000);
 		
 		function init(){
 			$("table").each(function(){

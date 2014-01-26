@@ -39,6 +39,19 @@ body {
 }
 
 /* - 
+    Style for block which make content display block
+   - */
+.block {
+	background: #FFF;
+	border-radius: 5px;
+	margin-right: -30px;
+	margin-bottom: 30px;
+	filter:alpha(opacity=90); /*IE滤镜，透明度50%*/
+	-moz-opacity:0.9; /*Firefox私有，透明度50%*/
+	opacity:0.9; /*其他，透明度50%*/
+}
+
+/* - 
     Style of description
    - */
 .description {
@@ -124,6 +137,9 @@ body {
 	width: 550px;
 }
 
+/* - 
+    Style for paddings && margins
+   - */
 .nopaddinglr {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
@@ -141,6 +157,32 @@ body {
 	border-left: 1px solid #eee !important;
 	border-right: 1px solid #eee !important;
 }
+
+.margintop {
+	margin-top: 40px;
+}
+
+.row.block.margint50 {
+	margin-top: -50px;
+}
+
+.span12.margint50 {
+	margin-top: 50px;
+}
+
+.span12.margint20 {
+	margin-top: 20px;
+}
+
+.span12.margintads {
+	margin-top: 10px;
+}
+
+.span12.margintb {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
 
 /* - 
     Style for input textarea button
@@ -221,7 +263,6 @@ body {
 	margin: 17px 0 8px;
 	color: #D1D1D1;
 	text-align: center;
-	z-index:999999;
 }
 
 .ads .pull-right button {
@@ -261,6 +302,7 @@ body {
 	position: fixed;
 	width: 100%;
 	top: 35px;
+	z-index:10;
 }
 
 /* - 
@@ -268,8 +310,4 @@ body {
    - */
 .red {
 	color: red;
-}
-
-.margintop {
-	margin-top: 40px;
 }

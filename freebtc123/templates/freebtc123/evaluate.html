@@ -12,8 +12,8 @@
 
 {% block content %}
 	<div class="container">
-		<div class="row-fluid">
-			<div class="span12">
+		<div class="row block">
+			<div class="span12 margint20">
 				<table id="table{{ cs.id }}" class="table table-bordered table-striped table-hover table-condensed table-layout sortable">
 					<thead>
 						{% include 'common/sections/theader.html' %}
@@ -28,10 +28,9 @@
 	
 	{% if proof %}
 		<div class="container">
-			<div class="row-fluid">
-				<div class="span12">
-					<a name="unpaid"></a>
-					<div class="hero-unit">
+			<div class="row block">
+				<div class="span12 margintb">
+					<div class="hero-unit nopaddinglr nomarginb">
 						{% for p in proof %}
 							<div class="evaluate">
 								<span class="content">{{ p.proofContent }}</span>
@@ -46,10 +45,9 @@
 	
 	{% if eva %}
 		<div class="container">
-			<div class="row-fluid">
-				<div class="span12">
-					<a name="unpaid"></a>
-					<div class="hero-unit">
+			<div class="row block">
+				<div class="span12 margintb">
+					<div class="hero-unit nopaddinglr nomarginb">
 						{% for e in eva %}
 							<div class="evaluate">
 								{{ e.evaDateTime|date:"Y-m-d H:i:s" }}</br>
@@ -64,14 +62,13 @@
 	{% endif %}
 	
 	<div class="container">
-		<div class="row-fluid">
-			<div class="span12">
-				<a name="unpaid"></a>
-				<div class="hero-unit nopaddinglr">
+		<div class="row block">
+			<div class="span12 margintb">
+				<div class="hero-unit nopaddinglr nomarginb">
 					<div class="divCenter">
 						<form class="form-horizontal nomarginb" action="{% url 'freebtc123:proof' siteid %}" method='post'>
-						    <div class="control-group">
-							    <label class="control-label" for="inputProofContent"><b>BTC收入转账记录：</b></label>
+							<div class="control-group">
+								<label class="control-label" for="inputProofContent"><b>转账记录：</b></label>
 								<div class="controls">
 									<textarea id="inputProofContent" name="proof" cols="50" rows="2" onscroll="this.rows++;" placeholder="BTC收入转账记录"></textarea>
 								</div>
@@ -87,14 +84,13 @@
 	</div>
 	
 	<div class="container">
-		<div class="row-fluid">
-			<div class="span12">
-				<a name="unpaid"></a>
-				<div class="hero-unit nopaddinglr">
+		<div class="row block">
+			<div class="span12 margintb">
+				<div class="hero-unit nopaddinglr nomarginb">
 					<div class="divCenter">
 						<form class="form-horizontal nomarginb" action="{% url 'freebtc123:evaluate' siteid %}" method='post'>
-						    <div class="control-group">
-							    <label class="control-label" for="inputEvaluateContent"><b>评论内容：</b></label>
+							<div class="control-group">
+								<label class="control-label" for="inputEvaluateContent"><b>评论内容：</b></label>
 								<div class="controls">
 									<textarea id="inputEvaluateContent" name="content" cols="50" rows="2" onscroll="this.rows++;" placeholder="评论内容"></textarea>
 								</div>
