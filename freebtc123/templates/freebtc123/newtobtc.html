@@ -1,0 +1,167 @@
+{% extends "common/btc.html" %}
+{% load staticfiles %}
+
+{% block css %}
+	<link href="{% static 'css/about.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+	<title>FreeBTC123 - 免费获取比特币网址导航介绍及使用指南</title>
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row block">
+			<div class="span3 bs-docs-sidebar">
+				<ul class="nav nav-list bs-docs-sidenav">
+					<li>
+						<a href="#whatisbtc"><i class="icon-chevron-right"></i>什么是比特币？</a>
+					</li>
+					<li>
+						<a href="#btchistory"><i class="icon-chevron-right"></i>比特币历史</a>
+					</li>
+					<li>
+						<a href="#btcsrc"><i class="icon-chevron-right"></i>比特币源码</a>
+					</li>
+					<li>
+						<a href="#btcwiki"><i class="icon-chevron-right"></i>比特币Wiki百科</a>
+					</li>
+					<li>
+						<a href="#btcwallet"><i class="icon-chevron-right"></i>比特币钱包</a>
+					</li>
+					<li>
+						<a href="#btctrade"><i class="icon-chevron-right"></i>比特币交易</a>
+					</li>
+					<li>
+						<a href="#btcmine"><i class="icon-chevron-right"></i>比特币挖矿</a>
+					</li>
+					<li>
+						<a href="#freebtc"><i class="icon-chevron-right"></i>免费领取比特币站点</a>
+					</li>
+					<li>
+						<a href="#newtobtc"><i class="icon-chevron-right"></i>各站点新手指南汇总</a>
+					</li>
+					<li>
+						<a href="#whatisalt"><i class="icon-chevron-right"></i>什么是山寨币？</a>
+					</li>
+				</ul>
+			</div>
+			<div class="span9">
+				<section id="whatisbtc">
+					<div class="page-header">
+						<h1>
+						什么是比特币？
+						</h1>
+					</div>
+					<blockquote><br>
+						<strong>
+							<p>比特币?(BitCoin)是一种P2P形式的虚拟货币。点对点的传输意味着一个去中心化的支付系统。比特币不依靠特定货币机构发行，它通过特定算法的大量计算产生，比特币经济使用整个P2P网络中众多节点构成的分布式数据库来确认并记录所有的交易行为。P2P的去中心化特性与算法本身可以确保无法通过大量制造比特币来人为操控币值。基于密码学的设计可以使比特币只能被真实的拥有者转移或支付。这同样确保了货币所有权与流通交易的匿名性。</p><br>
+							<p>比特币是一种网络虚拟货币，跟腾讯公司的Q币类似，你可以使用比特币购买一些虚拟的物品，比如网络游戏当中的衣服、帽子、装备等，只要有人接受，你也可以使用比特币购买现实生活当中的物品。</p><br>
+							<p>比特币与其他虚拟货币最大的不同，是其总数量是非常有限的，具有极强的稀缺性。该货币系统在前4年内只有不超过1050万个，之后的总数量将被永久限制在2100万个之内。还有一点是，你可以用电脑生产比特币。</p><br>
+						</strong>
+					</blockquote>
+				</section>
+
+				<section id="btchistory">
+					<div class="page-header">
+						<h1>
+							比特币历史
+						</h1>
+					</div>
+					<blockquote><br>
+						<p>比特币的诞生2008年11月1日，一个自称中本聪（Satoshi Nakamoto）的人在一个隐秘的密码学评论组上贴出了一篇研讨陈述，陈述论述了他对电子货币的新设想——比特币就此面世！评论组的老鸟们从未听说过他，有关他的信息也屈指可数，还都隐晦不明乃至自相矛盾。网上简介显现他在日本寓居，他的电子邮箱地址来自德国的一个免费站点，全能的google上也没有他姓名的任何关联信息，明显，“中本聪”是个化名。不过即便中本可能已经成为谜团，他的发明让一个困扰密码学十年的难题“灰飞烟灭”。自互联网诞生以来，电子货币因其便利和难以追寻性，并能脱离政府和银行的监管，而成为一个热门论题。上世纪90年代，一个名为“密码朋克”的密码破译组织就致力于创立电子货币，但付出的努力没收到任何成效。同样在90年代早期，密码破译者大卫·乔姆创立了一个匿名体系——“电子现金”，也失利了，有些原因是依赖于政府和信用卡公司的现有基础设施。之后各种电子货币尝试者不断涌现——比特金（bit gold），RPOW，b钱（b-money）……，但无一破例的失利了。设计电子货币面对的挑战之一是重复付出疑问。假使电子货币仅仅只是信息，摆脱了纸张和金属有形化的限制之处，那该怎样阻碍咱们像仿制文本一样，轻易地复制粘贴，想怎样花就怎样花呢。传统处理方案是运用中心票据交换所，一切买卖汇总成实时总账，这样，若是有人刚用掉一个电子货币，他就不能再重复运用了。实时总账让骗子无机可乘，但它还需要有信誉的第三方机构进行管理。比特币用揭露散布总账摆脱了第三方机构的制约，中本聪称之为“区域链”。用户乐于奉献出CPU的运算能力，运转一个特别的软件来做一名“挖矿工”，这会构成一个网络共同来保持“区域链”。这个过程中，他们也会生成新货币。买卖也在这个网络上延伸，运转这个软件的电脑争相破解不可逆暗码难题，这些难题包含好几个买卖数据。第一个处理难题的“矿工”会得到50比特币奖赏，相关买卖区域加入链条。跟着“矿工”数量的添加，每个迷题的艰难程度也随之进步，这使每个买卖区的比特币生产率保持约在10分钟一枚。此外，每到达21万个区域，奖赏就折半，从50比特币减到25,再从25到12.5，一向继续下去。这样到2140年，比特币将到达预订的2100万枚上限。中本聪的论文于2008年发表，当时政府和银行办理经济的才干遭到各方质疑，信誉降入谷底。美国政府向华尔街和底特律汽车公司注入大笔资金，美联储推出“量化宽松”方针，本质上即是大量印美钞影响经济，金价上涨。比特币不需求政治和金融（即是它们搞垮了经济）确保——只根据中本聪的奇妙算法。比特币的揭露总账看起来不只使诈骗者无处藏身，还靠业已决定的发行量而使比特币供给处在可控范围内，这确保了像无限印钱的中心银行和魏玛共和国似的通胀悲惨剧，不会在比特币身上演出。</p><br>
+					</blockquote>
+				</section>
+				
+				<section id="btcsrc">
+					<div class="page-header">
+						<h1>
+							比特币源码
+						</h1>
+					</div>
+					<blockquote><br>
+					    <p>比特币源码Github地址：<a href="https://github.com/bitcoin/bitcoin" target="_blank">https://github.com/bitcoin/bitcoin</a></p><br>
+					</blockquote>
+				</section>
+
+				<section id="btcwiki">
+					<div class="page-header">
+						<h1>
+							比特币Wiki百科
+						</h1>
+					</div>
+					<blockquote><br>
+						<p>比特币中文维基：<a href="https://zh-cn.bitcoin.it/wiki/%E9%A6%96%E9%A1%B5" target="_blank">https://zh-cn.bitcoin.it/wiki/%E9%A6%96%E9%A1%B5</a></p><br>
+						<p>比特币百度百科：<a href="http://hm.baidu.com.cn/view/3943880.htm" target="_blank">http://hm.baidu.com.cn/view/3943880.htm</a></p><br>
+					</blockquote>
+				</section>
+
+				<section id="btcwallet">
+					<div class="page-header">
+						<h1>
+							比特币钱包
+						</h1>
+					</div>
+					<blockquote><br>
+						
+					</blockquote>
+				</section>
+				
+				<section id="btctrade">
+					<div class="page-header">
+						<h1>
+							比特币交易
+						</h1>
+					</div>
+					<blockquote><br>
+						
+					</blockquote>
+				</section>
+
+				<section id="btcmine">
+					<div class="page-header">
+						<h1>
+							比特币挖矿
+						</h1>
+					</div>
+					<blockquote><br>
+						
+					</blockquote>
+				</section>
+
+				<section id="freebtc">
+					<div class="page-header">
+						<h1>
+							免费领取比特币站点
+						</h1>
+					</div>
+					<blockquote><br>
+
+					</blockquote>
+				</section>
+
+				<section id="newtobtc">
+					<div class="page-header">
+						<h1>
+							各站点新手指南汇总
+						</h1>
+					</div>
+					<blockquote><br>
+						
+					</blockquote>
+				</section>
+				
+				<section id="whatisalt">
+					<div class="page-header">
+						<h1>
+						什么是山寨币？
+						</h1>
+					</div>
+					<blockquote><br>
+						
+					</blockquote>
+				</section>
+			</div>
+		</div>
+	</div>
+{% endblock %}

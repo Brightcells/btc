@@ -1,0 +1,127 @@
+/* - 
+    common.css is must header before bootstrap-responsive(.min).css
+	otherwise navbar will display error when browser half-screen
+   - */
+body {
+	padding-top: 60px;
+	padding-bottom: 20px;
+	font: normal 14px/1.5 Tahoma,Helvetica,arial,sans-serif
+}
+
+/* - 
+    Alignment of bootstrap's table content
+    .hvcenter - 水平/垂直 居中
+	.hcenter - 水平居中
+	.vcenter - 垂直居中
+   - */
+.hvcenter, th, td {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.hcenter {
+    text-align: center !important;
+}
+
+.vcenter {
+    vertical-align: middle !important;
+}
+
+/* - 
+    force break long word/url etc
+	to make it not overflow container
+	ref: http://www.cnblogs.com/2050/archive/2012/08/10/2632256.html
+   - */
+.table-layout {
+    table-layout: fixed;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+/* - 
+    Style of description
+   - */
+.description {
+    padding: 8px 35px 8px 14px;
+	border-top: 3px double #000;
+}
+
+/* - 
+    Style of span's indentation
+   - */
+.description span, .alert-danger span, .evaluate span{
+	display: block;
+	text-indent: 2em;
+}
+
+/* - 
+    Style of back top
+   - */
+.backtop {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	display: none;
+	width: 49px;
+	height: 35px;
+	text-decoration: none;
+	opacity: 0.5;
+	background: url(//style.neoease.org/img/paled/sprite.png?v=010514) no-repeat 0 -424px;
+}
+
+/* - 
+    Style to make div center
+   - */
+.divCenter {
+	margin: 0 auto;
+	width: 550px;
+}
+
+.nopaddinglr {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.nopaddingb {
+	padding-bottom: 0 !important;
+}
+
+.nomarginb {
+	margin-bottom: 0 !important;
+}
+
+.borderlr {
+	border-left: 1px solid #eee !important;
+	border-right: 1px solid #eee !important;
+}
+
+/* - 
+    Style for input textarea button
+   - */
+.control-group input, .control-group textarea {
+	width: 80%;
+}
+
+.control-group .btn {
+	width: 85%;
+}
+
+/* - 
+    Style for friend link
+   - */
+.refer ul, .refer li, .refer ul, .refer li {
+	float: left;
+	list-style-type: none;
+	margin: 0 8px 3px 0;
+}
+
+/* - 
+    Style for coinurl's ads
+   - */
+.ads {
+	padding-top: 5px;
+	background-color: #fcf8e3;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}

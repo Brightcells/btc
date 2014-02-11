@@ -271,7 +271,17 @@ body {
 	margin: 17px 5px 8px;
 }
 
-.ads .pull-right button font{
+.ads .pull-right button font {
+	color: black;
+}
+
+.ads .pull-left button {
+	height: 30px;
+	margin: 17px 0px 8px;
+	color: #D1D1D1;
+}
+
+.ads .pull-left button font {
 	color: black;
 }
 

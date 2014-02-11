@@ -1,0 +1,40 @@
+{% extends "common/freebtc.html" %}
+
+{% block title %}
+	<title>FreeBTC - 免费获取比特币</title>
+{% endblock %}
+
+{% block wac %}
+	<a name="unpaid"></a>
+	<div class="text-center">您的广告</div>
+	<hr>
+	<div class="text-center">
+		<span>{{ wallet }}</span>
+		<hr>
+		{% if tips %}
+			{% if success %}
+				<span>验证成功，免费比特币已经添加到您的帐户~~</span>
+			{% else %}
+				<span>验证失败，请重新提交验证，辛苦了， 亲~~</span>
+			{% endif %}
+			<hr>
+		{% endif %}
+		<form class="form-horizontal nomarginb" action="{% url 'freebtc:verify' %}" method='post'>                                    
+			<div class="control-group text-center">
+				<center>
+					<script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LfWhe0SAAAAAPnt6Hwq49Yu-ejMpzf1qzOmFaF6"></script>
+					<noscript>
+						<iframe src="http://www.google.com/recaptcha/api/noscript?k=6LfWhe0SAAAAAPnt6Hwq49Yu-ejMpzf1qzOmFaF6"height="300" width="500" frameborder="0"></iframe><br>
+						<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+						<input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+					</noscript>
+				</center>
+			</div>
+			<div class="control-group text-center">
+				<button type="submit" class="btn">提交验证您不是机器人</button>
+			</div>
+		</form>
+	</div>
+	<hr>
+	<div class="text-center">您的广告</div>
+{% endblock %}

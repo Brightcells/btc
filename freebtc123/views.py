@@ -379,3 +379,8 @@ def logout(request):
 def about(request):
     reDict = {'nav': getNav(request), 'usr': getUsr(request), 'wallet': getWallet(request)}
     return render_to_response('freebtc123/about.html', reDict)
+
+
+def newtobtc(request):
+    reDict = {'nav': getNav(request), 'usr': getUsr(request), 'wallet': getWallet(request)}
+    return render_to_response('freebtc123/newtobtc.html', reDict)

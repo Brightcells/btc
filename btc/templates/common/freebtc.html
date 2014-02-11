@@ -1,0 +1,196 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	{% block title %}
+	{% endblock %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="比特币，BTC，Bitcoin，疯狂比特币，山寨币，AltCoin，莱特币，LTC、阿侬币，ANC、质数币，XPM、安全币，SRC、比特股，PTS、瑞波币，XRP，免费比特币，FreeBTC，Free Bitcoin，免费领取比特币，免费获得比特币，免费获取比特币，免费送比特币，免费拿比特币，免费得比特币，比特币导航，比特币网址导航，免费比特币导航，免费比特币网址导航，山寨币导航，山寨币网址导航，比特币论坛网址导航">
+	<meta name="description" content="FreeBTC123 - 挖矿获取比特币，现在俨然已成为装备竞赛的时代；没有高性能矿机，挖不倒比特币，而又想搞那么一点比特币玩玩，怎么办？免费获取比特币网址导航为您带来各种可以免费获取比特币的网站，希望对您的比特币之旅有所助益。免费获取比特币网址导航网站希望你不用耗费时间精力寻找，只要收藏本站就不用担心错过某些慷慨的网站，这是本站努力的方向。这里提供不断更新的可以免费获得比特币的网站的索引。本站的另一个目的就是推广比特币这一具有改变世界潜力的新兴事物。当然，本站还囊括了山寨币网址导航、比特币论坛网址导航，借此希望全方位的让您的比特币之旅更方便快捷。">
+	<meta name="author" content="Qimin Huang -- qiminis0801#gmail.com">
+
+	<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+	
+	<!-- Le styles -->
+	<link href="{% static 'css/freebtc.css' %}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap-responsive.min.css' %}" rel="stylesheet">
+	{% block css %}
+	{% endblock %}
+	
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "//hm.baidu.com/hm.js?274c8b6d6fc7792b8535960f32552b2d";
+			var s = document.getElementsByTagName("script")[0]; 
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+</head>
+
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+			    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+				<a class="brand" href="{% url 'freebtc123:fav' %}"><font color="#cccccc">Free</font><font
+					color="#eeeeee">BTC</font></a>
+				<div class="nav-collapse collapse">
+				    <ul class="nav" id="main-menu-left">
+						<li><a rel="tooltip" href="javascript:void(0)" title="freebtc">比特币查询</a></li>
+						<li><a rel="tooltip" href="javascript:void(0)" title="freebtc">比特币提现</a></li>
+						<li><a rel="tooltip" href="javascript:void(0)" title="freebtc">关于本站</a></li>
+			        </ul>
+					<ul class="nav pull-right">			
+                    </ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	
+	<div class="bodyer margintop">
+		{% block bodyer %}
+			<div class="container">
+				<div class="ads">
+				    <p class="pull-right"><iframe scrolling="no" style="border: 0; width: 234px; height: 60px;" src="//coinurl.com/get.php?id=21865"></iframe></p>
+					<p><iframe scrolling="no" style="border: 0; width: 468px; height: 60px;" src="//coinurl.com/get.php?id=21862"></iframe></p>
+				</div>
+		
+				{% block alert %}
+				{% endblock %}
+		
+				{% block befcon %}
+				{% endblock %}
+		
+				{% block content %}
+					<div class="row-fluid">
+						<div class="span6">
+							<a name="unpaid"></a>
+							<div class="text-center">
+							    <h3>比特币新手？</h3>
+								<span>观看《什么是比特币 中文字幕版》了解，点击"<a href="{% url 'freebtc123:newtobtc' %}" target="_blank">比特币新手导航</a>"了解更多</span>
+								<hr>
+								<!-- <iframe width="100%" height="300" src="http://www.youtube.com/embed/bA7K4_QfcP4" frameborder="0" allowfullscreen=""></iframe> -->
+								<iframe height=300 width="100%" src="http://player.youku.com/embed/XNDI5ODM5NjI4" frameborder=0 allowfullscreen></iframe>
+							</div>
+						</div>
+						<div class="span6">
+							<a name="unpaid"></a>
+							<div class="text-center">
+							    <h3>关于本站</h3>
+								<span>本站是一个免费领取比特币的网站，输入您的比特币钱包地址，然后进行验证码验证即可。</span>
+							</div>
+							<hr>
+							<div class="text-center refer">
+								<h3>免费领取更多</h3>
+								<ul>
+									<li><a href="http://freebitco.in/?r=35516" target="_blank" title="test">FreeBitco.in</a></li><li> | </li>
+									<li><a href="https://coinad.com/?r=FXJSJZUOCMSRNJS" target="_blank">CoinAd.com</a></li><li> | </li>
+									<li><a href="http://mmoclub.com/?id=106369" target="_blank">MmoClub.com</a></li><li> | </li>
+									<li><a href="http://bitcoinfaucet.tk/?ref=13Y4K9Lkrd9rCxHnF8b3axUKbjtA3ZWF1d" target="_blank">BitcoinFaucet.tk</a></li><li> | </li>
+									<li><a href="http://btcclicks.com/?r=3a6fe08a" target="_blank">BTCClicks.com</a></li><li> | </li>
+									<li><a href="http://dailybitcoins.org/index.php?aff=c1d43a1b8cfa81c6b26fa036e328af0b" target="_blank">DailyBitcoins.org</a></li><li> | </li>
+									<li><a href="http://www.bitvisitor.com/?ref=13Y4K9Lkrd9rCxHnF8b3axUKbjtA3ZWF1d" target="_blank">BitVisitor.com</a></li><li> | </li>
+									<li><a href="http://www.huanle95.com/intro?r=3001" target="_blank">欢乐95.com</a></li><li> | </li>
+									<li><a href="http://www.dailyfreebitcoin.com/?id=195643" target="_blank">DailyFreeBitcoin.com</a></li><li> | </li>
+									<li><a href="http://freebtc123.com/freebtc" target="_blank">FreeBTC123.com</a></li><li> | </li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="row-fluid">
+						<div class="span4">
+							<a name="unpaid"></a>	
+							<div class="text-center">您的广告</div>
+							<hr>
+							<div class="text-center">您的广告</div>
+							<hr>
+							<div class="text-center">您的广告</div>
+							<hr>
+							<div class="text-center">您的广告</div>
+							<hr>
+							<div class="text-center">您的广告</div>
+						</div>
+						<div class="span4">
+						    {% block wac %}
+								<a name="unpaid"></a>
+								<div class="text-center">您的广告</div>
+								<hr>
+								<div class="text-center">
+									<form class="form-horizontal nomarginb" action="{% url 'freebtc:captcha' %}" method='post'>                                    
+										<div class="control-group text-center">
+											<input type="text" id="wallet" name="wallet" placeholder="请输入您的比特币钱包地址">  
+										</div>
+										<div class="control-group text-center">
+											<button type="submit" class="btn">免费领取比特币</button>
+										</div>
+									</form>
+								</div>
+								<hr>
+								<div class="text-center">您的广告</div>
+							{% endblock %}
+						</div>
+						<div class="span4">
+							<a name="unpaid"></a>
+							<div class="text-center">您的广告</div>
+							<hr>
+							<div class="text-center">您的广告</div>
+							<hr>
+							<div class="text-center">您的广告</div>
+							<hr>
+							<div class="text-center">您的广告</div>
+							<hr>
+							<div class="text-center">您的广告</div>
+						</div>
+					</div>
+					<hr>
+				{% endblock %}
+		
+				{% block aftcon %}
+				{% endblock %}
+				
+				<div class="ads">
+                    <p class="pull-right"><iframe scrolling="no" style="border: 0; width: 468px; height: 60px;" src="//coinurl.com/get.php?id=21870"></iframe></p>
+                    <p><iframe scrolling="no" style="border: 0; width: 234px; height: 60px;" src="//coinurl.com/get.php?id=21873"></iframe></p>
+                </div>
+			</div>
+			<!-- /container -->
+		{% endblock %}
+	</div>
+	
+	<div class="footer">
+		<div class="container">
+		</div>
+		<!-- /container -->
+	</div>
+
+	<!-- Begin BShare -->
+	<a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#uuid=&amp;style=4&amp;fs=4&amp;bgcolor=Grey"></script>
+	<!-- End BShare -->
+	
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
+	<script>
+	</script>
+	
+	{% block script %}
+	{% endblock %}
+</body>
+</html>

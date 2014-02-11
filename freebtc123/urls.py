@@ -28,4 +28,5 @@ urlpatterns = patterns('freebtc123.views',
     url(r'^logout$', 'logout', name='logout'),
 
     url(r'^about$', 'about', name='about'),
+    url(r'^newtobtc$', 'newtobtc', name='newtobtc'),
 )
