@@ -59,7 +59,7 @@ def getLastVisitTime(request, siteid):
     else:
         lvt = visitSetList.values('visitTime')[0]['visitTime']
         interval = Site.objects.get(id=siteid).interval
-        lt = interval - (timezone.now() - lvt).seconds/60
+        lt = interval - int((timezone.now() - lvt).total_seconds())/60
         lt = lt if lt >= 0 else 0
         return lvt, lt
 
@@ -109,7 +109,6 @@ def getProofNum(request, siteid):
         @returns: num int
     '''
     return Proof.objects.filter(site__id=siteid).count()
-
 
 
 def siteDictAdd(request, siteid, siteDict):
