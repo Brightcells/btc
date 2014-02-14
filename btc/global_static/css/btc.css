@@ -321,3 +321,17 @@ body {
 .red {
 	color: red;
 }
+
+/* - 
+    Style of control background
+   - */
+.controlbg {
+	position: fixed;
+	left: 20px;
+	bottom: 20px;
+	width: 49px;
+	height: 35px;
+	text-decoration: none;
+	opacity: 0.5;
+	background-color: red;
+}
