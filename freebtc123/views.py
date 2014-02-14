@@ -59,7 +59,12 @@ def getLastVisitTime(request, siteid):
     else:
         lvt = visitSetList.values('visitTime')[0]['visitTime']
         interval = Site.objects.get(id=siteid).interval
-        lt = interval - int((timezone.now() - lvt).total_seconds())/60
+        #lt = interval - int((timezone.now() - lvt).total_seconds())/60
+        # refer: http://docs.python.org/2/library/datetime.html#datetime.timedelta.total_seconds
+        # total_seconds is New in version 2.7.
+        # so we can use 'td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10**6' which equals to total_seconds
+        td = (timezone.now() - lvt)
+        lt = interval - int((td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10**6)/60
         lt = lt if lt >= 0 else 0
         return lvt, lt
 
