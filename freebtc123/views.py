@@ -175,6 +175,11 @@ def gethottestSite(request):
     return sitePerfectInfo(request, hotSetList, 0)
 
 
+def getDustBin(request):
+    dustbinSetList = Site.objects.filter(display=1)
+    return sitePerfectInfo(request, dustbinSetList, 0)
+
+
 def fav(request):
     reDict = {'nav': getNav(request), 'favsite': getFavSite(request), 'proofsite': getProofSite(request), 'lastest': getLastestSite(request), 'hottest': gethottestSite(request), 'usr': getUsr(request), 'wallet': getWallet(request)}
     return render_to_response('freebtc123/fav.html', reDict)
@@ -240,6 +245,11 @@ def submitsite(request):
         Site.objects.create(siteName=_name, siteDescription=_description, siteUrl=_url, classify_id=csySet.id)
     reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'submitsite', 1), 'usr': getUsr(request), 'wallet': getWallet(request)}
     return render_to_response('freebtc123/submitsite.html', reDict)
+
+
+def dustbin(request):
+    reDict = {'nav': getNav(request), 'dustbin': getDustBin(request)}
+    return render_to_response('freebtc123/dustbin.html', reDict)
 
 
 def visit(request):

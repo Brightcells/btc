@@ -1,0 +1,37 @@
+{% extends "common/btc.html" %}
+
+{% block title %}
+	<title>FreeBTC123 - 免费获取比特币网址导航</title>
+{% endblock %}
+
+{% block alert %}
+	<div class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		1、网站一般会设定一个提取BTC的最小值，所以BTC到达您的BTC钱包可能需要若干时间；</br>
+		2、一些网站可能无法连接，请按F5多次尝试刷新；</br>
+		3、现在的帐号系统服务于收藏页面，后续推出其他帐号相关联服务；</br>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="row table-responsive block">
+		<div class="span12">
+			<div class="text-center">
+				<h2><p>运营不畅站点&nbsp;<a href="{% url 'freebtc123:freebtc' %}" class="more">运行正常站点</a></p></h2>
+			</div>
+			<div class="description">
+				<span>该分类下展示的是一些已经停止运营的免费领取比特币的站点，或者一些已经干涸的免费领取比特币的站点，或者一些只让看广告不给币的骗子站点。</span>
+			</div>
+			<table id="table1" class="table table-bordered table-striped table-hover table-condensed table-layout sortable">
+				<thead>
+					{% include 'common/sections/theader.html' %}
+				<thead>
+				<tbody>
+					{% for site in dustbin %}
+						{% include 'common/sections/tbodyer.html' %}
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}
