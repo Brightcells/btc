@@ -59,7 +59,12 @@ def getLastVisitTime(request, siteid):
     else:
         lvt = visitSetList.values('visitTime')[0]['visitTime']
         interval = Site.objects.get(id=siteid).interval
-        lt = interval - (timezone.now() - lvt).seconds/60
+        #lt = interval - int((timezone.now() - lvt).total_seconds())/60
+        # refer: http://docs.python.org/2/library/datetime.html#datetime.timedelta.total_seconds
+        # total_seconds is New in version 2.7.
+        # so we can use 'td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10**6' which equals to total_seconds
+        td = (timezone.now() - lvt)
+        lt = interval - int((td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10**6)/60
         lt = lt if lt >= 0 else 0
         return lvt, lt
 
@@ -109,7 +114,6 @@ def getProofNum(request, siteid):
         @returns: num int
     '''
     return Proof.objects.filter(site__id=siteid).count()
-
 
 
 def siteDictAdd(request, siteid, siteDict):
@@ -169,6 +173,11 @@ def getLastestSite(request):
 def gethottestSite(request):
     hotSetList = Site.objects.filter(display=0).exclude(classify__in=[27, 18, 6]).order_by('-siteClickNum')[:8]
     return sitePerfectInfo(request, hotSetList, 0)
+
+
+def getDustBin(request):
+    dustbinSetList = Site.objects.filter(display=1)
+    return sitePerfectInfo(request, dustbinSetList, 0)
 
 
 def fav(request):
@@ -236,6 +245,11 @@ def submitsite(request):
         Site.objects.create(siteName=_name, siteDescription=_description, siteUrl=_url, classify_id=csySet.id)
     reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'submitsite', 1), 'usr': getUsr(request), 'wallet': getWallet(request)}
     return render_to_response('freebtc123/submitsite.html', reDict)
+
+
+def dustbin(request):
+    reDict = {'nav': getNav(request), 'dustbin': getDustBin(request)}
+    return render_to_response('freebtc123/dustbin.html', reDict)
 
 
 def visit(request):
