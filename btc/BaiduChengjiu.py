@@ -16,7 +16,7 @@ import requests
 
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
-SQLITE_PATH = os.path.join(PROJECT_DIR, 'btc.db3')
+SQLITE_PATH = os.path.join(PROJECT_DIR, 'baiduchengjiu.db3')
 
 
 def getScoreGrade(u):

@@ -29,6 +29,20 @@ from utils.utils import getNav, getRef, getSiteid, getErrorCode, usercheck, pwd2
 
 
 def scores(request):
-    scores = Scores.objects.filter().order_by('-score')[:100]
+    scores = Scores.objects.using('baiduchengjiu').filter().order_by('-score')[:100]
     reDict = {'nav': getNav(request), 'scores': scores}
     return render_to_response('baiduchengjiu/scores.html', reDict)
+
+
+def cjadmin(request):
+    reDict = {'nav': getNav(request)}
+    if request.method == 'GET':
+        pass
+    else:
+        _uid = request.POST.get('usr', '')
+        if 1 == Scores.objects.using('baiduchengjiu').filter(uid=_uid).count():
+            reDict['exists'] = True
+        else:
+            s = Scores(uid=_uid)
+            s.save(using='baiduchengjiu')
+    return render_to_response('baiduchengjiu/cjadmin.html', reDict)
