@@ -10,6 +10,7 @@ urlpatterns = patterns('baiduchengjiu.views',
     url(r'^home$', 'scores', name='scores'),
     url(r'^scores$', 'scores', name='scores'),
     url(r'^scores/(?P<p>\d+)/$', 'scores', name='scores'),
+    url(r'^cjadmin$', 'cjadmin', name='cjadmin'),
 
     url(r'^getrank$', 'getrank', name='getrank'),
 )
