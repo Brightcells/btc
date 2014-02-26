@@ -1,0 +1,23 @@
+<div class="pagination pagination-centered">
+    <ul>
+		{% ifequal prev -1 %}
+			<li class="active"><a>上一页</a></li>
+		{% else %}
+			<li><a href="{% url 'baiduchengjiu:scores' prev%}">上一页</a></li>
+		{% endifequal %}
+		
+		{% for i in showlist %}
+			{% ifequal i cur %}
+			    <li class="active"><a>{{ i }}</a></li>
+			{% else %}
+				<li><a href="{% url 'baiduchengjiu:scores' i %}">{{ i }}</a></li>
+			{% endifequal %}
+		{% endfor %}
+		
+		{% ifequal next -1 %}
+			<li class="active"><a>下一页</a></li>
+		{% else %}
+			<li><a href="{% url 'baiduchengjiu:scores' next %}">下一页</a></li>
+		{% endifequal %}
+    </ul>
+</div>

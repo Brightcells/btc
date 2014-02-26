@@ -29,9 +29,47 @@ import hashlib
 from utils.utils import getNav, getRef, getSiteid, getErrorCode, usercheck, pwd2hash, get_referer_view, delCookie
 
 
-def scores(request):
-    scores = Scores.objects.using('baiduchengjiu').filter().order_by('-score')[:100]
-    reDict = {'nav': getNav(request), 'scores': scores}
+def getpnsl(p, maxp):
+    '''
+        @function: get prev, next, showlist
+        @paras:
+            √ p - current page
+            √ maxp - max page
+        @returns: (prev, next, showlist) tuple
+    '''
+    prev = p-1 if maxp != 1 and p != 1 else -1
+    next = p+1 if maxp != 1 and p != maxp else -1
+    if p-2 >= 1 and p+3 <= maxp+1:
+        start = p-2
+        end = p+3
+    elif p-2 < 1:
+        start = 1
+        end = 6 if 6 <= maxp+1 else maxp+1
+    elif p+3 > maxp+1:
+        start = maxp-4 if maxp-4>1 else 1
+        end = maxp+1
+    showlist = range(start, end)
+    return prev, next, showlist
+
+
+def addRank(scores, _from):
+    data = []
+    for s in scores:
+        temp = model_to_dict(s)
+        temp['rank'] = _from
+        data.append(temp)
+        _from += 1
+    return data
+
+
+def scores(request, p=1):
+    _p = int(p)
+    _from = (_p-1)*100
+    _to = _p*100
+    _maxp = (Scores.objects.using('baiduchengjiu').all().count() + 100 - 1) / 100
+    prev, next, showlist = getpnsl(_p, _maxp)
+    scores = Scores.objects.using('baiduchengjiu').filter().order_by('-score')[_from: _to]
+    reDict = {'nav': getNav(request), 'scores': addRank(scores, _from+1), 'prev': prev, 'cur': _p, 'next': next, 'showlist': showlist}
     return render_to_response('baiduchengjiu/scores.html', reDict)
 
 

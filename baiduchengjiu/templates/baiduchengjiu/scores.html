@@ -171,6 +171,7 @@
 	</div>
 	
 	<div class="container">
+	    {% include 'page.html' %}
 		<div class="row table-responsive score">
 			<div class="span12">
 				<table class="table table-bordered table-hover table-condensed table-layout">
@@ -185,7 +186,7 @@
 					<tbody>
 						{% for s in scores %}
 						    <tr>
-							    <td>{{ forloop.counter }}</td>
+							    <td>{{ s.rank }}</td>
 							    <td>
 									<table class="table ttable table-layout">  
 										<td width="50%" class="border-td align-rg">
@@ -204,6 +205,7 @@
 				</table>
 			</div>
 		</div>
+		{% include 'page.html' %}
 	</div>
 
 	<!-- Begin BShare -->
