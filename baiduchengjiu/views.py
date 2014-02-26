@@ -25,6 +25,7 @@ import json
 import time
 import random
 import hashlib
+import requests
 
 from utils.utils import getNav, getRef, getSiteid, getErrorCode, usercheck, pwd2hash, get_referer_view, delCookie
 
@@ -73,6 +74,16 @@ def scores(request, p=1):
     return render_to_response('baiduchengjiu/scores.html', reDict)
 
 
+def getScoreGrade(u):
+    re = requests.get('http://www.baidu.com/p/'+u+'?from=ur')
+    _img = re.text.split('class=portrait-img src=\\x22')[1].split('?')[0].replace('\\', '')
+    uDataUrl = re.text.split('urprincessindex')[1].split("');")[0]
+    re = requests.get('http://www.baidu.com/ur/show/urprincessindex' + uDataUrl)
+    _grade = re.text.split('{"curLevel":+"')[1].split('"')[0]
+    _score = re.text.split('"curSco":+"')[1].split('"')[0]
+    return _img, int(_score), int(_grade)
+
+
 def cjadmin(request):
     reDict = {'nav': getNav(request)}
     if request.method == 'GET':
@@ -82,7 +93,11 @@ def cjadmin(request):
         if 1 == Scores.objects.using('baiduchengjiu').filter(uid=_uid).count():
             reDict['exists'] = True
         else:
-            s = Scores(uid=_uid)
+            try:
+                _img, _score, _grade = getScoreGrade(_uid)
+                s = Scores(uid=_uid, img=_img, score=_score, grade=_grade)
+            except:
+                s = Scores(uid=_uid)
             s.save(using='baiduchengjiu')
     return render_to_response('baiduchengjiu/cjadmin.html', reDict)
 
