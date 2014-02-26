@@ -1,0 +1,26 @@
+{% extends "common/freebtc.html" %}
+
+{% block title %}
+	<title>FreeBTC - 免费获取比特币</title>
+{% endblock %}
+
+{% block wac %}
+	<a name="unpaid"></a>
+	<div class="text-center">您的广告</div>
+	<hr>
+	<div class="text-center">
+		<form class="form-horizontal nomarginb" action="{% url 'freebtc:verify' %}" method='post'>                                    
+			<script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LfWhe0SAAAAAPnt6Hwq49Yu-ejMpzf1qzOmFaF6"></script>
+			<noscript>
+				<iframe src="http://www.google.com/recaptcha/api/noscript?k=6LfWhe0SAAAAAPnt6Hwq49Yu-ejMpzf1qzOmFaF6"height="300" width="500" frameborder="0"></iframe><br>
+				<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+				<input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+			</noscript>
+			<div class="control-group text-center">
+				<button type="submit" class="btn">提交确认您不是机器人</button>
+			</div>
+		</form>
+	</div>
+	<hr>
+	<div class="text-center">您的广告</div>
+{% endblock %}

@@ -20,6 +20,7 @@ from django.utils.encoding import smart_str
 from django.forms.models import model_to_dict
 
 import re
+import sys
 import json
 import time
 import random
@@ -46,3 +47,15 @@ def cjadmin(request):
             s = Scores(uid=_uid)
             s.save(using='baiduchengjiu')
     return render_to_response('baiduchengjiu/cjadmin.html', reDict)
+
+
+def getrank(request):
+    _bdname = request.POST.get('bdname', '')
+    try:
+        uinfo = model_to_dict(Scores.objects.using('baiduchengjiu').get(uid=_bdname))
+        rank = Scores.objects.using('baiduchengjiu').filter(score__gt=uinfo['score']).count()
+        return HttpResponse(json.dumps({'code': '200', 'msg': uinfo, 'rank': rank}))
+    except:
+        info=sys.exc_info()
+        #print info[0],":",info[1]
+        return HttpResponse(json.dumps({'code': '404', 'msg': str(info[1])}))

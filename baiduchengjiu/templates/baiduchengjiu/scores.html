@@ -52,6 +52,35 @@
 			height: 25px;
 			padding: 0 20px;
 		}
+		.fleft {
+			float: left;
+		}
+		.ttable {
+			margin-bottom: 0;
+		}
+		.border-td {
+			border-left: 0!important;
+		}
+		.align-rg {
+			text-align: right!important;
+			padding: 0!important;
+		}
+		.align-lf {
+			text-align: left!important;
+			padding:0!important;
+		}
+		.query {
+			padding-top: 0;
+			margin-top: 45px;
+			background-color: #fcf8e3;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+			z-index: 999999;
+		}
+		.margintop {
+			margin-top: -20px;
+		}
 	</style>
 </head>
 
@@ -101,11 +130,50 @@
 		</div>
 	</div>
 	
-	<div class="container">
+	<div class="bodyer fixed">
+		<div class="container">
+			<div class="query">
+				<p class="pull-right">
+					<input onFocus="if(this.value=='输入姓名查询成就排名'){this.value='';this.style.color='#000'}" 
+						onBlur="if(this.value==''){this.value='输入姓名查询成就排名';this.style.color='#D1D1D1'}"
+						oninput="OnInput(event)" onpropertychange="OnPropChanged(event)"
+						type="text" name="bdname" id="bdname" value="输入姓名查询成就排名" />
+				</p>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container margintop">
 		<div class="text-center"><h3>百度成就排行榜</h3><h5>非官方</h5></div>
+		<div class="row table-responsive score hide" id="_query">
+			<div class="span12">
+				<table class="table table-bordered table-hover table-condensed table-layout">
+					<tbody>
+						<tr>
+							<td width="15%" id="_rank"></td>
+							<td width="35%">
+								<table class="table ttable table-layout">  
+									<td width="50%" class="border-td align-rg">
+										<a href="http://www.baidu.com/p/{{ s.uid }}?from=ur" target="_blank" id="_img_href"><img src="{{ s.img }}" class="img-bd" id="_img"></a>
+									</td>
+									<td width="50%" class="border-td align-lf">
+										<a href="http://www.baidu.com/p/{{ s.uid }}?from=ur" target="_blank" id="_uid_href">{{ s.uid }}</a>
+									</td>
+								</table>
+							</td>
+							<td width="25%" id="_score"></td>
+							<td width="25%" id="_grade"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
 		<div class="row table-responsive score">
 			<div class="span12">
-				<table id="table{{ cs.id }}" class="table table-bordered table-hover table-condensed table-layout sortable">
+				<table class="table table-bordered table-hover table-condensed table-layout">
 					<thead>
 						<tr>
 							<th width="15%">排名</th>
@@ -119,9 +187,14 @@
 						    <tr>
 							    <td>{{ forloop.counter }}</td>
 							    <td>
-								    <a href="http://www.baidu.com/p/{{ s.uid }}?from=ur" target="_blank">
-									    <img src="{{ s.img }}" class="img-bd">{{ s.uid }}
-									</a>
+									<table class="table ttable table-layout">  
+										<td width="50%" class="border-td align-rg">
+											<a href="http://www.baidu.com/p/{{ s.uid }}?from=ur" target="_blank"><img src="{{ s.img }}" class="img-bd"></a>
+										</td>
+										<td width="50%" class="border-td align-lf">
+											<a href="http://www.baidu.com/p/{{ s.uid }}?from=ur" target="_blank">{{ s.uid }}</a>
+										</td>
+									</table>
 								</td>
 							    <td>{{ s.score }}</td>
 							    <td>{{ s.grade }}</td>
@@ -131,7 +204,6 @@
 				</table>
 			</div>
 		</div>
-		<!-- /container -->
 	</div>
 
 	<!-- Begin BShare -->
@@ -147,6 +219,47 @@
 	<script>
 		var res = ["{% static 'img/background.jpg' %}",];
 		_bg(0, res, 10000);
+		
+		// Firefox, Google Chrome, Opera, Safari, Internet Explorer from version 9
+        function OnInput(event) {
+            //console.log("The new content: " + event.target.value);
+			getRank(event.target.value);
+        }
+		// Internet Explorer
+        function OnPropChanged(event) {
+            if (event.propertyName.toLowerCase () == "value") {
+               //console.log("The new content: " + event.srcElement.value);
+			   getRank(event.srcElement.value);
+            }
+        }
+		
+		function getRank(bdname) {
+			$.ajax({
+				type: "post",
+				url: "{% url 'baiduchengjiu:getrank' %}",
+				data: {'bdname': bdname},
+				dataType: 'json',
+				success: function(json){
+					num = json['code'];
+					if(num in {'200': '',}){
+						//console.log("Success: " + json['msg']['uid']);
+						//console.log("Success: " + json['msg']['img']);
+						//console.log("Success: " + json['msg']['score']);
+						//console.log("Success: " + json['msg']['grade']);
+						$("#_rank").html(json['rank']);
+						$('#_img_href').attr('href', 'http://www.baidu.com/p/'+json['msg']['uid']+'?from=ur');
+						$('#_img').attr('src', json['msg']['img']);
+						$('#_uid_href').attr('href', 'http://www.baidu.com/p/'+json['msg']['uid']+'?from=ur');
+						$('#_uid_href').html(json['msg']['uid']);
+						$("#_score").html(json['msg']['score']);
+						$("#_grade").html(json['msg']['grade']);
+						$("#_query").removeClass("hide");
+					}else{
+						console.log("Failure: " + json['msg']);
+					}
+				}
+			});
+		}
 	</script>
 </body>
 </html>
