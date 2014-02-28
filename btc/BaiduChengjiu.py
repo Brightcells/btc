@@ -33,9 +33,9 @@ def _connect():
     """
        ##  连接数据库、设置游标
     """
-    cx = sqlite3.connect(SQLITE_PATH)   # Connect SQLite Database File 
+    cx = sqlite3.connect(SQLITE_PATH)   # Connect SQLite Database File
     #print cx
-    #cx.text_factory = str 
+    #cx.text_factory = str
     cur = cx.cursor()   # Set a youbiao
     #print cur
     return cx, cur
@@ -45,10 +45,9 @@ def _close(cx, cur):
     """
        ##  将更新写进数据库， 关闭数据库连接
     """
-    cx.commit() ### 将更新从内存写入文件数据库， http://docs.python.org/release/2.6/library/sqlite3.html， 要学会看文档啊...
+    cx.commit()  # 将更新从内存写入文件数据库， http://docs.python.org/release/2.6/library/sqlite3.html， 要学会看文档啊...
     cur.close()
     cx.close()
-
 
 
 def _update(num_list):
@@ -90,7 +89,7 @@ while flag:
     num += 1
     if _to >= all_user_num:
         flag = False
-        
+
 '''
 cx.text_factory = lambda x: unicode(x, "utf-8", "ignore")
 cur.execute("INSERT INTO Events values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?, ?, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?, ?, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (row_list, u'1340964359740', 1, 1, 0, 1, unicode(CourseInfoList[1],"gbk"), unicode(CourseInfoList[5],"gbk"), None, None, None, 0, 1, int((RemindTimeStamp)*1000), int((RemindTimeStamp+90*60)*1000), u'Asia/Shanghai', None, 0, 0, 0, 1, 0, None, None, None, None, None, None, None, None, int((RemindTimeStamp+90*60)*1000), 1, 0, 1, 1, u'Phone', 0, None, None, None, None, None, None, None, None, None, None, None))
