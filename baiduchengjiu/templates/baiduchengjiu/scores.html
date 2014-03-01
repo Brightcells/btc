@@ -81,6 +81,12 @@
 		.margintop {
 			margin-top: -20px;
 		}
+		.margintopp {
+			margin-top: 80px;
+		}
+		.bg {
+			background-color: red;
+		}
 	</style>
 </head>
 
@@ -141,36 +147,38 @@
 				</p>
 			</div>
 		</div>
-	</div>
-	
-	<div class="container margintop">
-		<div class="text-center"><h3>百度成就排行榜</h3><h5>非官方</h5></div>
-		<div class="row table-responsive score hide" id="_query">
-			<div class="span12">
-				<table class="table table-bordered table-hover table-condensed table-layout">
-					<tbody>
-						<tr>
-							<td width="15%" id="_rank"></td>
-							<td width="35%">
-								<table class="table ttable table-layout">  
-									<td width="50%" class="border-td align-rg">
-										<a href="http://www.baidu.com/p/{{ s.uid }}?from=ur" target="_blank" id="_img_href"><img src="{{ s.img }}" class="img-bd" id="_img"></a>
-									</td>
-									<td width="50%" class="border-td align-lf">
-										<a href="http://www.baidu.com/p/{{ s.uid }}?from=ur" target="_blank" id="_uid_href">{{ s.uid }}</a>
-									</td>
-								</table>
-							</td>
-							<td width="25%" id="_score"></td>
-							<td width="25%" id="_grade"></td>
-						</tr>
-					</tbody>
-				</table>
+		<div class="container">
+			<div class="row table-responsive score hide bg" id="_query">
+				<div class="span12">
+					<table class="table table-bordered table-hover table-condensed table-layout">
+						<tbody>
+							<tr>
+								<td width="15%" id="_rank"></td>
+								<td width="35%">
+									<table class="table ttable table-layout">  
+										<td width="50%" class="border-td align-rg">
+											<a href="http://www.baidu.com/p/{{ s.uid }}?from=ur" target="_blank" id="_img_href"><img src="{{ s.img }}" class="img-bd" id="_img"></a>
+										</td>
+										<td width="50%" class="border-td align-lf">
+											<a href="http://www.baidu.com/p/{{ s.uid }}?from=ur" target="_blank" id="_uid_href">{{ s.uid }}</a>
+										</td>
+									</table>
+								</td>
+								<td width="25%" id="_score"></td>
+								<td width="25%" id="_grade"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
 	
-	<div class="container">
+	<div class="container margintop">
+		<div class="text-center"><h3>百度成就排行榜</h3><h5>非官方</h5></div>
+	</div>
+	
+	<div id="ranktable" class="container">
 	    {% include 'page.html' %}
 		<div class="row table-responsive score">
 			<div class="span12">
@@ -256,6 +264,7 @@
 						$("#_score").html(json['msg']['score']);
 						$("#_grade").html(json['msg']['grade']);
 						$("#_query").removeClass("hide");
+						$("#ranktable").addClass("margintopp");
 					}else{
 						console.log("Failure: " + json['msg']);
 					}
