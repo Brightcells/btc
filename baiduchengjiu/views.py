@@ -106,7 +106,7 @@ def getrank(request):
     _bdname = request.POST.get('bdname', '')
     try:
         uinfo = model_to_dict(Scores.objects.using('baiduchengjiu').get(uid=_bdname))
-        rank = Scores.objects.using('baiduchengjiu').filter(score__gt=uinfo['score']).count()
+        rank = Scores.objects.using('baiduchengjiu').filter(score__gt=uinfo['score']).count() + 1
         return HttpResponse(json.dumps({'code': '200', 'msg': uinfo, 'rank': rank}))
     except:
         info=sys.exc_info()
