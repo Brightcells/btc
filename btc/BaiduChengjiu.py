@@ -21,12 +21,12 @@ SQLITE_PATH = os.path.join(PROJECT_DIR, 'baiduchengjiu.db3')
 
 def getScoreGrade(u):
     re = requests.get('http://www.baidu.com/p/'+u+'?from=ur')
-    _img = re.text.split('class=portrait-img src=\\x22')[1].split('?')[0].replace('\\', '')
+    #_img = re.text.split('class=portrait-img src=\\x22')[1].split('?')[0].replace('\\', '')
     uDataUrl = re.text.split('urprincessindex')[1].split("');")[0]
     re = requests.get('http://www.baidu.com/ur/show/urprincessindex' + uDataUrl)
     _grade = re.text.split('{"curLevel":+"')[1].split('"')[0]
     _score = re.text.split('"curSco":+"')[1].split('"')[0]
-    return _img, int(_score), int(_grade)
+    return int(_score), int(_grade)
 
 
 def _connect():
@@ -55,22 +55,12 @@ def _update(num_list):
     for _id in num_list:
         try:
             _uid = cur.execute(iSQL, (_id, )).fetchone()[1]
-            _img, _score, _grade = getScoreGrade(_uid)
-            print _id, _uid, _score, _grade, _img
-
-            cur.execute('update scores set img=?, score=?, grade=? where uid = ?', (_img, _score, _grade, _uid))
+            _score, _grade = getScoreGrade(_uid)
+            #print _id, _uid, _score, _grade, _img
+            cur.execute('update scores set score=?, grade=? where uid = ?', (_score, _grade, _uid))
         except:
             pass
     _close(cx, cur)
-
-
-'''
-iSQL = 'create table scores (id integer primary key , uid varchar(255) unique, score integer, grade integer)'
-try:
-    cur.execute(iSQL)
-except:
-    pass
-'''
 
 
 iSQL = 'select count(*) from scores'
@@ -83,14 +73,10 @@ iSQL = 'select * from scores where id = ?'
 flag = True
 num = 0
 while flag:
-    _from = num*10+1
-    _to = (num+1)*10+1
+    _from = num*50+1
+    _to = (num+1)*50+1
+    print '>>> Now Begin %d' % (_from)
     _update(range(_from, _to))
     num += 1
     if _to >= all_user_num:
         flag = False
-
-'''
-cx.text_factory = lambda x: unicode(x, "utf-8", "ignore")
-cur.execute("INSERT INTO Events values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?, ?, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?, ?, ? , ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (row_list, u'1340964359740', 1, 1, 0, 1, unicode(CourseInfoList[1],"gbk"), unicode(CourseInfoList[5],"gbk"), None, None, None, 0, 1, int((RemindTimeStamp)*1000), int((RemindTimeStamp+90*60)*1000), u'Asia/Shanghai', None, 0, 0, 0, 1, 0, None, None, None, None, None, None, None, None, int((RemindTimeStamp+90*60)*1000), 1, 0, 1, 1, u'Phone', 0, None, None, None, None, None, None, None, None, None, None, None))
-'''
