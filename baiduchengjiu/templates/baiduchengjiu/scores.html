@@ -90,6 +90,18 @@
 		.bg_white {
 			background-color: white;
 		}
+		.left_side_div {
+			position: fixed;
+			_position: absolute;
+			left: 0;
+			top: 300px;
+			height: 90px;
+			z-index: 1998;
+		}
+		.left_side_div img {
+			width: 32px;
+			height: 32px;
+		}
 	</style>
 </head>
 
@@ -189,9 +201,10 @@
 					<thead>
 						<tr>
 							<th width="15%">排名</th>
-							<th width="35%">姓名</th>
+							<th width="25%">姓名</th>
 							<th width="25%">积分</th>
 							<th width="25%">等级</th>
+							<th width="*%">操作</th>
 						</tr>
 					<thead>
 					<tbody>
@@ -210,6 +223,7 @@
 								</td>
 							    <td>{{ s.score }}</td>
 							    <td>{{ s.grade }}</td>
+								<td><a href="{% url 'baiduchengjiu:update' s.uid|urlencode %}">更新</a></td>
 							</tr>
 						{% endfor %}
 					</tbody>
@@ -217,6 +231,14 @@
 			</div>
 		</div>
 		{% include 'page.html' %}
+	</div>
+	
+	<div id="left_side_div" class="left_side_div text-center">
+		<a href="{% url 'baiduchengjiu:cjadmin' %}" target="_blank">
+			<img src="{% static 'img/clicktocjamdin.jpg' %}" alt="点击我去提交您的用户名" title="点击我去提交您的用户名">
+			<p style="color: red;">没有您</p>
+			<p style="color: red;">？</p>
+		</a>
 	</div>
 
 	<!-- Begin BShare -->

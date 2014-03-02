@@ -74,6 +74,15 @@ def scores(request, p=1):
     return render_to_response('baiduchengjiu/scores.html', reDict)
 
 
+def update(request, _uid):
+    _img, _score, _grade = getScoreGrade(_uid)
+    s = Scores.objects.using('baiduchengjiu').get(uid=_uid)
+    s.score = _score
+    s.grade = _grade
+    s.save()
+    return HttpResponseRedirect(reverse('baiduchengjiu:scores'))
+
+
 def getScoreGrade(u):
     re = requests.get('http://www.baidu.com/p/'+u+'?from=ur')
     _img = re.text.split('class=portrait-img src=\\x22')[1].split('?')[0].replace('\\', '')
