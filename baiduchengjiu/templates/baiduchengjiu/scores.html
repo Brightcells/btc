@@ -102,6 +102,10 @@
 			width: 32px;
 			height: 32px;
 		}
+		.qun {
+			border: 1px solid #000;
+			padding: 11px;
+		}
 	</style>
 </head>
 
@@ -169,18 +173,19 @@
 						<tbody>
 							<tr>
 								<td width="15%" id="_rank"></td>
-								<td width="35%">
+								<td width="25%">
 									<table class="table ttable table-layout">  
 										<td width="50%" class="border-td align-rg">
-											<a href="http://www.baidu.com/p/{{ s.uid }}?from=ur" target="_blank" id="_img_href"><img src="{{ s.img }}" class="img-bd" id="_img"></a>
+											<a href="" target="_blank" id="_img_href"><img src="" class="img-bd" id="_img"></a>
 										</td>
 										<td width="50%" class="border-td align-lf">
-											<a href="http://www.baidu.com/p/{{ s.uid }}?from=ur" target="_blank" id="_uid_href">{{ s.uid }}</a>
+											<a href="" target="_blank" id="_uid_href"></a>
 										</td>
 									</table>
 								</td>
 								<td width="25%" id="_score"></td>
 								<td width="25%" id="_grade"></td>
+								<td width="*%"><a href="" id="_update">更新</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -223,7 +228,7 @@
 								</td>
 							    <td>{{ s.score }}</td>
 							    <td>{{ s.grade }}</td>
-								<td><a href="{% url 'baiduchengjiu:update' s.uid|urlencode %}">更新</a></td>
+								<td><a href="{% url 'baiduchengjiu:update' s.uid %}">更新</a></td>
 							</tr>
 						{% endfor %}
 					</tbody>
@@ -239,6 +244,24 @@
 			<p style="color: red;">没有您</p>
 			<p style="color: red;">？</p>
 		</a>
+	</div>
+	
+	<div id="footer" class="footer">
+		<div class="container">
+			<div class="row block">
+			    </br>
+				<div class="span12 text-center">
+					<img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" class="img-polaroid iconlong" alt="百度成就精英BOSS团: 7430246</" title="百度成就精英BOSS团: 7430246</"></a>
+					<b class="qun">百度成就精英BOSS团: 7430246</b>
+				</div>
+				<div class="span12 margintads">
+					<div class="ads">
+						<p class="pull-right"><iframe scrolling="no" style="border: 0; width: 468px; height: 60px;" src="//coinurl.com/get.php?id=21870"></iframe></p>
+						<p><iframe scrolling="no" style="border: 0; width: 234px; height: 60px;" src="//coinurl.com/get.php?id=21873"></iframe></p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<!-- Begin BShare -->
@@ -290,6 +313,7 @@
 						$("#_grade").html(json['msg']['grade']);
 						$("#_query").removeClass("hide");
 						$("#ranktable").addClass("margintopp");
+						$('#_update').attr('href', "{% url 'baiduchengjiu:update' 19900106 %}".replace(/19900106/, json['msg']['uid']));
 					}else{
 						console.log("Failure: " + json['msg']);
 					}
