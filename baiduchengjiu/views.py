@@ -75,11 +75,14 @@ def scores(request, p=1):
 
 
 def update(request, _uid):
-    _img, _score, _grade = getScoreGrade(_uid)
-    s = Scores.objects.using('baiduchengjiu').get(uid=_uid)
-    s.score = _score
-    s.grade = _grade
-    s.save()
+    try:
+        _img, _score, _grade = getScoreGrade(_uid)
+        s = Scores.objects.using('baiduchengjiu').get(uid=_uid)
+        s.score = _score
+        s.grade = _grade
+        s.save()
+    except:
+        print sys.exc_info()[1]
     return HttpResponseRedirect(reverse('baiduchengjiu:scores'))
 
 
