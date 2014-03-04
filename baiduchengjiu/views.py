@@ -30,6 +30,9 @@ import requests
 from utils.utils import getNav, getRef, getSiteid, getErrorCode, usercheck, pwd2hash, get_referer_view, delCookie
 
 
+TIME_OUT = 8
+
+
 def getpnsl(p, maxp):
     '''
         @function: get prev, next, showlist
@@ -87,10 +90,10 @@ def update(request, _uid):
 
 
 def getScoreGrade(u):
-    re = requests.get('http://www.baidu.com/p/'+u+'?from=ur')
+    re = requests.get('http://www.baidu.com/p/'+u+'?from=ur', timeout=TIME_OUT)
     _img = re.text.split('class=portrait-img src=\\x22')[1].split('?')[0].replace('\\', '')
     uDataUrl = re.text.split('urprincessindex')[1].split("');")[0]
-    re = requests.get('http://www.baidu.com/ur/show/urprincessindex' + uDataUrl)
+    re = requests.get('http://www.baidu.com/ur/show/urprincessindex' + uDataUrl, timeout=TIME_OUT)
     _grade = re.text.split('{"curLevel":+"')[1].split('"')[0]
     _score = re.text.split('"curSco":+"')[1].split('"')[0]
     return _img, int(_score), int(_grade)
