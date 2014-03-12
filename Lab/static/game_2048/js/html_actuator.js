@@ -114,7 +114,7 @@ HTMLActuator.prototype.message = function (won) {
   $.ajax({
 	type: "post",
 	url: "/Lab/game-2048-score",
-	data: {_flag: "game-won", _score: this.score},
+	data: {_flag: type, _score: this.score},
 	dataType: "json",
 	success: function(json){
         console.log('>>> '+json['msg']);

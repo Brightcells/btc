@@ -31,17 +31,99 @@ import requests
 from utils.utils import *
 
 
+def getpnsl(p, maxp):
+    '''
+        @function: get prev, next, showlist
+        @paras:
+            √ p - current page
+            √ maxp - max page
+        @returns: (prev, next, showlist) tuple
+    '''
+    prev = p-1 if maxp != 1 and p != 1 else -1
+    next = p+1 if maxp != 1 and p != maxp else -1
+    if p-2 >= 1 and p+3 <= maxp+1:
+        start = p-2
+        end = p+3
+    elif p-2 < 1:
+        start = 1
+        end = 6 if 6 <= maxp+1 else maxp+1
+    elif p+3 > maxp+1:
+        start = maxp-4 if maxp-4>1 else 1
+        end = maxp+1
+    showlist = range(start, end)
+    return prev, next, showlist
+
+
 def getScores(request):
-    scoreSetList = Game2048.objects.all()[:20]
+    scoreSetList = Game2048.objects.all().order_by('-create_time')[:10]
     # sometimes same, deal with
+    scores = []
     for scoreSet in scoreSetList:
-        pass
-    return scoreSetList
+        scoreDict = model_to_dict(scoreSet)
+        hl = scoreDict['host'].split('.')
+        if scoreSet.user:
+            scoreDict['usr'] = scoreSet.user.username
+        scoreDict['host'] = '%s.***.***.%s' %(hl[0], hl[-1])
+        scoreDict['create_time'] = scoreSet.create_time
+        scores.append(scoreDict)
+    return scores
+
+
+def getBestScore(request):
+    _usr, _host = getUsrHost(request)
+    uiSet = UserInfo.objects.filter(username=_usr)
+    try:
+        if uiSet.count():
+            return Game2048.objects.filter(user=ui[0]).order_by('-score').values('score')[0]['score']
+        else:
+            return Game2048.objects.filter(host=_host).order_by('-score').values('score')[0]['score']
+    except:
+        return 0
 
 
 def game_2048(request):
-    reDict = {'scores': getScores(request)}
+    reDict = {'usr': getUsr(request), 'scores': getScores(request), 'best': getBestScore(request)}
     return render_to_response('Lab/game-2048.html', reDict)
+
+
+def game_2048_left(request):
+    reDict = {'usr': getUsr(request), 'scores': getScores(request), 'best': getBestScore(request)}
+    return render_to_response('Lab/game-2048-left.html', reDict)
+
+
+def game_2048_right(request):
+    reDict = {'usr': getUsr(request), 'scores': getScores(request), 'best': getBestScore(request)}
+    return render_to_response('Lab/game-2048-right.html', reDict)
+
+
+def game_2048_pk(request):
+    return render_to_response('Lab/game-2048-pk.html')
+
+
+def addRank(scores, _from):
+    data = []
+    for s in scores:
+        temp = model_to_dict(s)
+        temp['rank'] = _from
+        hl = temp['host'].split('.')
+        if s.user:
+            temp['user'] = s.user.username
+        temp['host'] = '%s.***.***.%s' %(hl[0], hl[-1])
+        temp['create_time'] = s.create_time
+        data.append(temp)
+        _from += 1
+    return data
+
+
+def game_2048_rank(request, p=1):
+    _p = int(p)
+    _from = (_p-1)*100
+    _to = _p*100
+    _maxp = (Game2048.objects.all().count() + 100 - 1) / 100
+    prev, next, showlist = getpnsl(_p, _maxp)
+    scores = Game2048.objects.filter().order_by('-create_time')[_from: _to]
+    reDict = {'nav': getNav(request), 'usr': getUsr(request), 'scores': addRank(scores, _from+1), 'prev': prev, 'cur': _p, 'next': next, 'showlist': showlist}
+    return render_to_response('Lab/game-2048-rank.html', reDict)
 
 
 def game_2048_score(request):
