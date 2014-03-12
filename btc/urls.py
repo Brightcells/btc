@@ -22,4 +22,5 @@ urlpatterns += patterns('',
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^freebtc/', include('freebtc.urls', namespace='freebtc')),
     url(r'^baiduchengjiu/', include('baiduchengjiu.urls', namespace='baiduchengjiu')),
+    url(r'^Lab/', include('Lab.urls', namespace='Lab')),
 )

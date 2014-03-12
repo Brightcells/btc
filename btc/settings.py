@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     'freebtc123',
     'freebtc',
     'baiduchengjiu',
+    'Lab',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

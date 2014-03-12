@@ -64,6 +64,24 @@ def getUsr(request):
     return request.COOKIES['usr'] if 'usr' in request.COOKIES else None
 
 
+def getUI(usr):
+    '''
+        @function: get usr object from UserInfo table
+        @paras:
+        @returns: usr string
+    '''
+    return UserInfo.objects.get(username=usr) if usr else None
+
+
+def getUsrUI(request):
+    '''
+        @function: get usr and object together
+        @paras:
+        @returns: (usr, ui) tuple
+    '''
+    return usr, getUI(getUsr(request)) if usr else usr, None
+
+
 def getIP(request):
     '''
         @function: get current ip for the desktop which visit from

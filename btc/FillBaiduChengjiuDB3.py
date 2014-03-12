@@ -51,23 +51,25 @@ def _close(cx, cur):
     cx.close()
 
 
-for i in xrange(1, MAX_PAGE_NUM):
-    rgurl = 'http://tieba.baidu.com/bawu2/platform/listMemberInfo?word=%B0%D9%B6%C8%B3%C9%BE%CD&pn='+str(i)
-    print 'RequestGetUrl: ',  rgurl
+for pn in xrange(MAX_PAGE_NUM, 1, -1):
+    rgurl = 'http://tieba.baidu.com/bawu2/platform/listMemberInfo?word=%B0%D9%B6%C8%B3%C9%BE%CD&pn='+str(pn)
+    print '>>> RequestGetUrl: ',  rgurl
     re = requests.get(rgurl)
     members = re.text.split('</a><span class="forum_level')[:-1]
 
     cx, cur = _connect()
     for m in members:
         mem = m.split('>')[-1]
-        print 'MemberInfo: ', mem,
+        print '>>> MemberInfo: ', mem,
         try:
             _img, _score, _grade = getScoreGrade(mem)
             print _score, _grade, _img
             if cur.execute('select count(*) from scores where uid =?', (mem, )).fetchone()[0] > 0:
-                print 'ErrorInfo: ', mem, 'has already exists!'
+                print '>>> ErrorInfo: ', mem, 'has already exists!'
             else:
                 cur.execute('insert into scores (uid, img, score, grade) values (?, ?, ?, ?)', (mem, _img, _score, _grade))
         except:
-            print 'ErrorInfo: ', 'Insert ', mem, 'Into Table Scores Error'
+            print '>>> ErrorInfo: ', 'Insert ', mem, 'Into Table Scores Error'
+        print
+        print
     _close(cx, cur)
