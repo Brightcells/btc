@@ -81,23 +81,27 @@ def getBestScore(request):
         return 0
 
 
+def home(request):
+    return render_to_response('Lab/lab.html')
+
+
 def game_2048(request):
     reDict = {'usr': getUsr(request), 'scores': getScores(request), 'best': getBestScore(request)}
-    return render_to_response('Lab/game-2048.html', reDict)
+    return render_to_response('Lab/game-2048/game-2048.html', reDict)
 
 
 def game_2048_left(request):
     reDict = {'usr': getUsr(request), 'scores': getScores(request), 'best': getBestScore(request)}
-    return render_to_response('Lab/game-2048-left.html', reDict)
+    return render_to_response('Lab/game-2048/game-2048-left.html', reDict)
 
 
 def game_2048_right(request):
     reDict = {'usr': getUsr(request), 'scores': getScores(request), 'best': getBestScore(request)}
-    return render_to_response('Lab/game-2048-right.html', reDict)
+    return render_to_response('Lab/game-2048/game-2048-right.html', reDict)
 
 
 def game_2048_pk(request):
-    return render_to_response('Lab/game-2048-pk.html')
+    return render_to_response('Lab/game-2048/game-2048-pk.html')
 
 
 def addRank(scores, _from):
@@ -121,9 +125,20 @@ def game_2048_rank(request, p=1):
     _to = _p*100
     _maxp = (Game2048.objects.all().count() + 100 - 1) / 100
     prev, next, showlist = getpnsl(_p, _maxp)
+    scores = Game2048.objects.filter().order_by('-score')[_from: _to]
+    reDict = {'nav': getNav(request), 'usr': getUsr(request), 'scores': addRank(scores, _from+1), 'prev': prev, 'cur': _p, 'next': next, 'showlist': showlist}
+    return render_to_response('Lab/game-2048/game-2048-rank.html', reDict)
+
+
+def game_2048_history(request, p=1):
+    _p = int(p)
+    _from = (_p-1)*100
+    _to = _p*100
+    _maxp = (Game2048.objects.all().count() + 100 - 1) / 100
+    prev, next, showlist = getpnsl(_p, _maxp)
     scores = Game2048.objects.filter().order_by('-create_time')[_from: _to]
     reDict = {'nav': getNav(request), 'usr': getUsr(request), 'scores': addRank(scores, _from+1), 'prev': prev, 'cur': _p, 'next': next, 'showlist': showlist}
-    return render_to_response('Lab/game-2048-rank.html', reDict)
+    return render_to_response('Lab/game-2048/game-2048-history.html', reDict)
 
 
 def game_2048_score(request):

@@ -1,0 +1,320 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	{% block title %}
+	{% endblock %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="比特币，BTC，Bitcoin，疯狂比特币，山寨币，AltCoin，莱特币，LTC、阿侬币，ANC、质数币，XPM、安全币，SRC、比特股，PTS、瑞波币，XRP，免费比特币，FreeBTC，Free Bitcoin，免费领取比特币，免费获得比特币，免费获取比特币，免费送比特币，免费拿比特币，免费得比特币，比特币导航，比特币网址导航，免费比特币导航，免费比特币网址导航，山寨币导航，山寨币网址导航，比特币论坛网址导航">
+	<meta name="description" content="FreeBTC123 - 挖矿获取比特币，现在俨然已成为装备竞赛的时代；没有高性能矿机，挖不倒比特币，而又想搞那么一点比特币玩玩，怎么办？免费获取比特币网址导航为您带来各种可以免费获取比特币的网站，希望对您的比特币之旅有所助益。免费获取比特币网址导航网站希望你不用耗费时间精力寻找，只要收藏本站就不用担心错过某些慷慨的网站，这是本站努力的方向。这里提供不断更新的可以免费获得比特币的网站的索引。本站的另一个目的就是推广比特币这一具有改变世界潜力的新兴事物。当然，本站还囊括了山寨币网址导航、比特币论坛网址导航，借此希望全方位的让您的比特币之旅更方便快捷。">
+	<meta name="author" content="Qimin Huang -- qiminis0801#gmail.com">
+
+	<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+	
+	<!-- Le styles -->
+	<link href="{% static 'css/btc.css' %}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap-responsive.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/pam.css' %}" rel="stylesheet">
+	{% block css %}
+	{% endblock %}
+	
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "//hm.baidu.com/hm.js?274c8b6d6fc7792b8535960f32552b2d";
+			var s = document.getElementsByTagName("script")[0]; 
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+	
+	<style type="text/css">
+	    .score {
+			background: #FFF;
+			border-radius: 5px;
+			margin-right: -30px;
+			margin-bottom: 30px;
+			padding: 20px 15px 0 0;
+			filter: alpha(opacity=90);
+			-moz-opacity: 0.9;
+			opacity: 0.9;
+		}
+		.img-bd {
+			width: 25px;
+			height: 25px;
+			padding: 0 20px;
+		}
+		.fleft {
+			float: left;
+		}
+		.ttable {
+			margin-bottom: 0;
+		}
+		.border-td {
+			border-left: 0!important;
+		}
+		.align-rg {
+			text-align: right!important;
+			padding: 0!important;
+		}
+		.align-lf {
+			text-align: left!important;
+			padding:0!important;
+		}
+		.query {
+			padding-top: 0;
+			margin-top: 45px;
+			background-color: #fcf8e3;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+			z-index: 999999;
+		}
+		.margintop {
+			margin-top: -20px;
+		}
+		.margintopp {
+			margin-top: 80px;
+		}
+		.bg_red {
+			background-color: red;
+		}
+		.bg_white {
+			background-color: white;
+		}
+		.left_side_div {
+			position: fixed;
+			_position: absolute;
+			left: 0;
+			top: 300px;
+			height: 90px;
+			z-index: 1998;
+		}
+		.left_side_div img {
+			width: 32px;
+			height: 32px;
+		}
+		.qun {
+			border: 1px solid #000;
+			padding: 11px;
+		}
+	</style>
+</head>
+
+<body data-spy="scroll" data-target=".bs-docs-sidebar">
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+			    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+				<a class="brand" href="{% url 'freebtc123:fav' %}"><font color="#cccccc">Free</font><font
+					color="#eeeeee">BTC</font><font color="gray">123</font></a>
+				<div class="nav-collapse collapse">
+				    <ul class="nav" id="main-menu-left">
+					    <!-- http://stackoverflow.com/questions/3057318/passing-variable-urlname-to-url-tag-in-django-template -->
+						{% for n in nav %}
+							<li><a rel="tooltip" href="{% url 'freebtc123:'|add:n.navName %}" title="freebtc">{{ n.navTitle}}</a></li>
+						{% endfor %}
+			        </ul>
+					<ul class="nav pull-right">
+                        {% if usr %}					
+                            <li>
+                                <a>{{ usr }}</a>
+                            </li>
+							<li class="dropdown">
+							    <a data-toggle="dropdown" class="dropdown-toggle"><strong class="caret"></strong></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="{% url 'accounts:logout' %}">退出</a>
+                                    </li>
+                                </ul>
+							</li>
+                        {% else %}
+						    <li>
+                                <a href="{% url 'accounts:login' %}" id="login">登录</a>
+                            </li>
+                        {% endif %}						
+                    </ul>
+					<form class="navbar-form pull-right form-inline" action="http://www.google.com.hk/search" target="_blank">
+						<input id="kw" class="span2" type="text" name="q" placeholder="Google It">
+					</form>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	
+	<div class="bodyer fixed">
+		<div class="container">
+			<div class="query">
+				<p class="pull-right">
+					<input onFocus="if(this.value=='输入姓名查询成绩排名'){this.value='';this.style.color='#000'}" 
+						onBlur="if(this.value==''){this.value='输入姓名查询成绩排名';this.style.color='#D1D1D1'}"
+						oninput="OnInput(event)" onpropertychange="OnPropChanged(event)"
+						type="text" name="bdname" id="bdname" value="输入姓名查询成绩排名" />
+				</p>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row table-responsive score hide bg_red" id="_query">
+				<div class="span12">
+					<table class="table table-bordered table-hover table-condensed table-layout bg_white">
+						<tbody>
+							<tr>
+								<td width="15%" id="_rank"></td>
+								<td width="25%">
+									<table class="table ttable table-layout">  
+										<td width="50%" class="border-td align-rg">
+											<a href="" target="_blank" id="_img_href"><img src="" class="img-bd" id="_img"></a>
+										</td>
+										<td width="50%" class="border-td align-lf">
+											<a href="" target="_blank" id="_uid_href"></a>
+										</td>
+									</table>
+								</td>
+								<td width="25%" id="_score"></td>
+								<td width="25%" id="_grade"></td>
+								<td width="*%"><a href="" id="_update">更新</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container margintop">
+		<div class="text-center"><h3>2048排行榜</h3></div>
+	</div>
+	
+	<div id="ranktable" class="container">
+	    {% include 'game-2048-page.html' %}
+		<div class="row table-responsive score">
+			<div class="span12">
+				<table class="table table-bordered table-hover table-condensed table-layout">
+					<thead>
+						<tr>
+						    <th width="10%" abbr="sName">次序</th>
+							<th width="25%" abbr="sName">用户</th>
+							<th width="15%" abbr="sName">状态</th>
+							<th width="15%" abbr="sName">得分</th>
+							<th width="*%" abbr="sName">时间</th>
+						</tr>
+					<thead>
+					<tbody>
+						{% for score in scores %}
+						<tr>
+						    <td><div><span>{{ score.rank }}</span></div></td>
+							<td>
+								<div>
+									{% if score.user %}
+										<span>{{ score.user }}</span>
+									{% else %}
+										<span>{{ score.host }}</span>
+									{% endif %}
+								</div>
+							</td>
+							<td>
+								<div>
+									{% if score.flag %}
+										<span>成功</span>
+									{% else %}
+										<span>失败</span>
+									{% endif %}
+								</div>
+							</td>
+							<td><div><span>{{ score.score }}</span></div></td>
+							<td><div><span>{{ score.create_time|date:"Y-m-d H:i:s" }}</span></div></td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		{% include 'game-2048-page.html' %}
+	</div>
+	
+	<div id="footer" class="footer">
+		<div class="container">
+			<div class="row block">
+			    </br>
+				<div class="span12 margintads">
+					<div class="ads">
+						<p class="pull-right"><iframe scrolling="no" style="border: 0; width: 468px; height: 60px;" src="//coinurl.com/get.php?id=21870"></iframe></p>
+						<p><iframe scrolling="no" style="border: 0; width: 234px; height: 60px;" src="//coinurl.com/get.php?id=21873"></iframe></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Begin BShare -->
+	<a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#uuid=&amp;style=4&amp;fs=4&amp;bgcolor=Grey"></script>
+	<!-- End BShare -->
+	
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/pam.js' %}" type="text/javascript"></script> 
+	<script>
+		var res = ["{% static 'img/background.jpg' %}",];
+		_bg(0, res, 10000);
+		
+		// Firefox, Google Chrome, Opera, Safari, Internet Explorer from version 9
+        function OnInput(event) {
+            //console.log("The new content: " + event.target.value);
+			getRank(event.target.value);
+        }
+		// Internet Explorer
+        function OnPropChanged(event) {
+            if (event.propertyName.toLowerCase () == "value") {
+               //console.log("The new content: " + event.srcElement.value);
+			   getRank(event.srcElement.value);
+            }
+        }
+		
+		function getRank(bdname) {
+			$.ajax({
+				type: "post",
+				url: "{% url 'baiduchengjiu:getrank' %}",
+				data: {'bdname': bdname},
+				dataType: 'json',
+				success: function(json){
+					num = json['code'];
+					if(num in {'200': '',}){
+						//console.log("Success: " + json['msg']['uid']);
+						//console.log("Success: " + json['msg']['img']);
+						//console.log("Success: " + json['msg']['score']);
+						//console.log("Success: " + json['msg']['grade']);
+						$("#_rank").html(json['rank']);
+						$('#_img_href').attr('href', 'http://www.baidu.com/p/'+json['msg']['uid']+'?from=ur');
+						$('#_img').attr('src', json['msg']['img']);
+						$('#_uid_href').attr('href', 'http://www.baidu.com/p/'+json['msg']['uid']+'?from=ur');
+						$('#_uid_href').html(json['msg']['uid']);
+						$("#_score").html(json['msg']['score']);
+						$("#_grade").html(json['msg']['grade']);
+						$("#_query").removeClass("hide");
+						$("#ranktable").addClass("margintopp");
+						$('#_update').attr('href', "{% url 'baiduchengjiu:update' 19900106 %}".replace(/19900106/, json['msg']['uid']));
+					}else{
+						console.log("Failure: " + json['msg']);
+					}
+				}
+			});
+		}
+	</script>
+</body>
+</html>

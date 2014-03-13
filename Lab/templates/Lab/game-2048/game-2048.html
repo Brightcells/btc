@@ -29,8 +29,18 @@
 				float: right;
 			}
 		</style>
+		
+		<script>
+			var _hmt = _hmt || [];
+			(function() {
+				var hm = document.createElement("script");
+				hm.src = "//hm.baidu.com/hm.js?274c8b6d6fc7792b8535960f32552b2d";
+				var s = document.getElementsByTagName("script")[0]; 
+				s.parentNode.insertBefore(hm, s);
+			})();
+		</script>
 	</head>
-	<body onfocus="myFunction()">
+	<body>
 		<div class="container">
 			<div class="heading">
 				<h1 class="title">2048</h1>
@@ -100,6 +110,11 @@
 			</p>
 	
 			<hr>
+			
+			<p class="pull-right">
+				<a href="{% url 'Lab:game-2048-history' %}">游戏成绩记录</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a href="{% url 'Lab:game-2048-rank' %}">游戏排行榜</a>
+			</p>
 	
 			<table class="table table-bordered table-striped table-hover table-condensed table-layout">
 				<thead>
@@ -116,7 +131,7 @@
 							<td>
 								<div>
 									{% if score.user %}
-										<span>{{ score.user.username }}</span>
+										<span>{{ score.usr }}</span>
 									{% else %}
 										<span>{{ score.host }}</span>
 									{% endif %}
@@ -154,7 +169,7 @@
 				自动运行基于 Matt Overlan 的 <a href="https://github.com/j201/2048-ai" target="_blank">AI</a>。
 			</p>
 			<p>
-				HQM 在 ov3y 的 <a href="http://ov3y.github.io/2048-AI/" target="_blank">2048-AI</a>的基础上，添加了排行榜，分享到人人、微博等功能。
+				HQM 在 ov3y 的 <a href="http://ov3y.github.io/2048-AI/" target="_blank">2048-AI</a>的基础上，添加了评论、分享、排行榜...
 			</p>
 			
 			<hr>
@@ -199,11 +214,6 @@
 
 			ga("create", "UA-42620757-2", "gabrielecirulli.github.io");
 			ga("send", "pageview");
-			
-			function myFunction() {
-				var t = setTimeout("alert('right')",5000); 
-				window.parent.frames["frameleft"].focus();
-			}
 		</script>
 	</body>
 </html>
