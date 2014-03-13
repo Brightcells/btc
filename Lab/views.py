@@ -74,7 +74,7 @@ def getBestScore(request):
     uiSet = UserInfo.objects.filter(username=_usr)
     try:
         if uiSet.count():
-            return Game2048.objects.filter(user=ui[0]).order_by('-score').values('score')[0]['score']
+            return Game2048.objects.filter(user=uiSet[0]).order_by('-score').values('score')[0]['score']
         else:
             return Game2048.objects.filter(host=_host).order_by('-score').values('score')[0]['score']
     except:
