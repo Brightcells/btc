@@ -7,7 +7,7 @@ from Lab.models import *
 
 
 class Game2048Admin(admin.ModelAdmin):
-    list_display = ('user', 'host', 'flag', 'score', 'create_time', 'modify_time')
+    list_display = ('user', 'host', 'flag', 'score', 'videotape', 'create_time', 'modify_time')
     search_fields = ('user', 'host', 'flag', 'score')
     list_filter = ('user', )
 

@@ -1,3 +1,14 @@
+/** 
+ * @fileOverview  
+ * @author 
+ * @date 
+ * @e-mail 
+ * @github 
+ * @version 
+ * @change log
+ *     modified by HQM - ajax post game result && score to server to save
+ */
+
 function HTMLActuator() {
   this.tileContainer    = document.getElementsByClassName("tile-container")[0];
   this.scoreContainer   = document.getElementsByClassName("score-container")[0];
@@ -9,6 +20,7 @@ function HTMLActuator() {
 
 HTMLActuator.prototype.actuate = function (grid, metadata) {
   var self = this;
+  //alert(grid);
 
   window.requestAnimationFrame(function () {
     self.clearContainer(self.tileContainer);
@@ -25,6 +37,17 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
 
     if (metadata.over) self.message(false); // You lose
     if (metadata.won) self.message(true); // You win!
+	
+	// ajax post grid to server to save as videotape
+	//$.ajax({
+	//	type: "post",
+	//	url: "/Lab/game-2048-videotape",
+	//	data: {_grid: grid},
+	//	dataType: "json",
+	//	success: function(json){
+	//		console.log('>>> '+json['msg']);
+	//	}
+	//});
   });
 };
 

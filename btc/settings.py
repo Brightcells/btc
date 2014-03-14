@@ -175,3 +175,6 @@ LOGGING = {
         },
     }
 }
+
+GAME2048_VIDEOTAPE_ROOT = 'E:\\GitHub\\btc\\btc\\videotape\\game-2048\\'
+GAME2048_VIDEOTAPE_URL = '/game2048/videotape/'

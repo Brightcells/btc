@@ -18,4 +18,6 @@ urlpatterns = patterns('Lab.views',
     url(r'^game-2048-rank/(?P<p>\d+)/$', 'game_2048_rank', name='game-2048-rank'),
     url(r'^game-2048-history$', 'game_2048_history', name='game-2048-history'),
     url(r'^game-2048-history/(?P<p>\d+)/$', 'game_2048_history', name='game-2048-history'),
+    url(r'^game-2048-videotape$', 'game_2048_videotape', name='game-2048-videotape'),
+    url(r'^game-2048-palyback/(?P<sid>\d+)/$', 'game_2048_palyback', name='game-2048-palyback'),
 )

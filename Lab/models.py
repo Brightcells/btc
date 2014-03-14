@@ -11,6 +11,7 @@ class Game2048(models.Model):
     host = models.GenericIPAddressField(_('host'), max_length=20, blank=True, null=True)
     flag = models.BooleanField(_('flag'), default=True)
     score = models.IntegerField(_(u'score'), blank=True, null=True, default=0)
+    videotape = models.CharField(_(u'videotape'), max_length=255, blank=True, null=True)
     create_time = models.DateTimeField(_(u'createtime'), auto_now_add=True, editable=True)
     modify_time = models.DateTimeField(_(u'modifytime'), auto_now=True, editable=True)
 

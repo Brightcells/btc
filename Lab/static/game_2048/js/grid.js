@@ -326,6 +326,24 @@ Grid.prototype.toString = function() {
   return string;
 }
 
+Grid.prototype.toGrid = function(g) {
+  gl = g.split(" ");
+  k = 0
+  for (var i=0; i<4; i++) {
+    for (var j=0; j<4; j++) {
+	  if (gl[k] == "_") {
+	    if (this.cells[j][i]) {
+			this.cells[j][i] = null;
+		}
+	  } else {
+	    tile = new Tile({ x: j, y: i }, gl[k]);
+		this.insertTile(tile);
+      }
+	  k++;
+    }
+  }
+}
+
 // counts the number of isolated groups. 
 Grid.prototype.islands = function() {
   var self = this;

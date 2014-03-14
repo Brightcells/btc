@@ -205,11 +205,12 @@
 				<table class="table table-bordered table-hover table-condensed table-layout">
 					<thead>
 						<tr>
-						    <th width="10%" abbr="sName">次序</th>
-							<th width="25%" abbr="sName">用户</th>
-							<th width="15%" abbr="sName">状态</th>
-							<th width="15%" abbr="sName">得分</th>
-							<th width="*%" abbr="sName">时间</th>
+						    <th width="15%">用户</th>
+							<th width="15%">状态</th>
+							<th width="15%">得分</th>
+							<th width="*%">时间</th>
+							<th width="10%">日志</th>
+							<th width="10%">操作</th>
 						</tr>
 					<thead>
 					<tbody>
@@ -236,6 +237,8 @@
 							</td>
 							<td><div><span>{{ score.score }}</span></div></td>
 							<td><div><span>{{ score.create_time|date:"Y-m-d H:i:s" }}</span></div></td>
+							<td><div><a href="{{ score.videotape }}">下载</a></div></td>
+							<td><div><span>回放</span></div></td>
 						</tr>
 						{% endfor %}
 					</tbody>

@@ -10,23 +10,48 @@
  *                     - ajax post grid to server to save as videotape
  */
 
-function GameManager(size, InputManager, Actuator) {
+ 
+ function sleep(seconds) {
+    this.date = Math.round(new Date().getTime()/1000);
+    while(1) {
+        if(Math.round(new Date().getTime()/1000) - this.date >= seconds) break;
+    }
+    return true;
+}
+
+ 
+function GameManager(size, InputManager, Actuator, grids) {
   this.size         = size; // Size of the grid
-  this.inputManager = new InputManager;
+  //this.inputManager = new InputManager;
   this.actuator     = new Actuator;
 
-  this.running      = false;
-
-  this.inputManager.on("move", this.move.bind(this));
+  //this.running      = false;
+  
+  this.setup();
+  
+  glen = grids.length;
+  
+  num = 0;
+  obj = this
+  var i = setInterval(function() {
+	obj.grid.toGrid(grids[num]);
+	obj.actuate(-1);
+	num++;
+    if (num > glen)
+        clearInterval(i);
+  }, 2000);
+  
+  
+  /* this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
 
   this.inputManager.on('think', function() {
     var best = this.ai.getBest();
     this.actuator.showHint(best.move);
-  }.bind(this));
+  }.bind(this)); */
 
 
-  this.inputManager.on('run', function() {
+  /* this.inputManager.on('run', function() {
     if (this.running) {
       this.running = false;
       this.actuator.setRunButton('自动');
@@ -35,9 +60,9 @@ function GameManager(size, InputManager, Actuator) {
       this.run()
       this.actuator.setRunButton('停止');
     }
-  }.bind(this));
+  }.bind(this)); */
 
-  this.setup();
+  //this.setup();
 }
 
 // Restart the game
@@ -49,42 +74,43 @@ GameManager.prototype.restart = function () {
 // Set up the game
 GameManager.prototype.setup = function () {
   this.grid         = new Grid(this.size);
-  this.grid.addStartTiles();
+  //this.grid.addStartTiles();
 
-  this.ai           = new AI(this.grid);
+  //this.ai           = new AI(this.grid);
 
   this.score        = 0;
   this.over         = false;
   this.won          = false;
 
   // Update the actuator
-  this.actuate(0);
+  //this.actuate(0);
 };
 
 
 // Sends the updated grid to the actuator
 GameManager.prototype.actuate = function (flag) {
-  //alert(this.grid);
-  
-  gridString = this.grid.toString();
-  //alert(gridString);
-  
   this.actuator.actuate(this.grid, {
     score: this.score,
     over:  this.over,
     won:   this.won
   });
-  
-  // ajax post grid to server to save as videotape
-  $.ajax({
-	type: "post",
-	url: "/Lab/game-2048-videotape",
-	data: {_grid: gridString, _flag: flag},
-	dataType: "json",
-	success: function(json){
-		console.log('>>> '+json['msg']);
-	}
-  });
+
+  if (-1 == flag) {
+    // do nothing
+  } else {
+	gridString = this.grid.toString();
+	
+	// ajax post grid to server to save as videotape
+	$.ajax({
+		type: "post",
+		url: "/Lab/game-2048-videotape",
+		data: {_grid: gridString, _flag: flag},
+		dataType: "json",
+		success: function(json){
+			console.log('>>> '+json['msg']);
+		}
+	});  
+  }
 };
 
 // makes a given move and updates state
