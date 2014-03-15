@@ -3,3 +3,6 @@
 *.swp
 *.sqlite3
 *.db3
+settings.py
+btc/videotape/
+git

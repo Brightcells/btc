@@ -196,7 +196,6 @@ def game_2048_videotape(request):
         if '1' == _flag and not os.path.exists(videoTapeLogName):
             return HttpResponse(json.dumps({'code': '202', 'msg': 'Repeated submission!'}))
         
-        print _grid
         with open(videoTapeLogName, 'a+') as f:
             f.write(_grid)
         return HttpResponse(json.dumps({'code': '200', 'msg': 'Save videotape success!'}))
