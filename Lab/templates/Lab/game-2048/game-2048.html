@@ -123,7 +123,6 @@
 						<th width="15%">状态</th>
 						<th width="15%">得分</th>
 						<th width="*%">时间</th>
-						<th width="10%">日志</th>
 						<th width="10%">操作</th>
 					</tr>	
 				</thead>
@@ -150,7 +149,6 @@
 							</td>
 							<td><div><span>{{ score.score }}</span></div></td>
 							<td><div><span>{{ score.create_time|date:"Y-m-d H:i:s" }}</span></div></td>
-							<td><div><a href="{{ score.videotape }}">下载</a></div></td>
 							<td><div><a href="{% url 'Lab:game-2048-palyback' score.id %}" target="_blank">回放</span></div></td>
 						</tr>
 					{% endfor %}

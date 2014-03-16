@@ -34,9 +34,7 @@ Grid.prototype.randomAvailableCell = function () {
   var cells = this.availableCells();
 
   if (cells.length) {
-    temp = Math.floor(Math.random() * cells.length);
-	//alert(temp);
-    return cells[temp];
+    return cells[Math.floor(Math.random() * cells.length)];
   }
 };
 
@@ -122,17 +120,17 @@ Grid.prototype.addStartTiles = function () {
 // Adds a tile in a random position
 Grid.prototype.addRandomTile = function () {
   if (this.cellsAvailable()) {
-    var value = Math.random() < 0.9 ? 2 : 4;
-    //var value = Math.random() < 0.9 ? 256 : 512;
-    var tile = new Tile(this.randomAvailableCell(), value);
-	//var tile = new Tile({x: 3, y: 2}, 2);
+    _xyvalue = _videotape.substr(0, 3);
+	_videotape = _videotape.substr(3);
 	
-	//var tile = new Tile({x: 1, y: 0}, 2);
-	//alert(tile.x);
-	//alert(tile.y);
-	//alert(tile.value);
-	videotape = videotape + tile.x + tile.y + tile.value;
-	//alert(videotape);
+    //var value = Math.random() < 0.9 ? 2 : 4;
+    //var value = Math.random() < 0.9 ? 256 : 512;
+    //var tile = new Tile(this.randomAvailableCell(), value);
+	
+	_x = parseInt(_xyvalue.charAt(0));
+	_y = parseInt(_xyvalue.charAt(1));
+	_value = parseInt(_xyvalue.charAt(2));
+	var tile = new Tile({x: _x, y: _y}, _value);
 
     this.insertTile(tile);
   }

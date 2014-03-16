@@ -64,31 +64,17 @@ GameManager.prototype.setup = function () {
 
 // Sends the updated grid to the actuator
 GameManager.prototype.actuate = function (flag) {
-  //alert(this.grid);
-  
-  gridString = this.grid.toString();
-  //alert(gridString);
-  
   this.actuator.actuate(this.grid, {
     score: this.score,
     over:  this.over,
     won:   this.won
   });
-  
-  // ajax post grid to server to save as videotape
-  $.ajax({
-	type: "post",
-	url: "/Lab/game-2048-videotape",
-	data: {_grid: gridString, _flag: flag},
-	dataType: "json",
-	success: function(json){
-		console.log('>>> '+json['msg']);
-	}
-  });
 };
 
 // makes a given move and updates state
 GameManager.prototype.move = function(direction) {
+  videotape += direction;
+  
   var result = this.grid.move(direction);
   this.score += result.score;
 

@@ -152,6 +152,7 @@ def game_2048_score(request):
     try:
         _flag = request.POST.get('_flag', '')
         _score = request.POST.get('_score', '')
+        _videotape = request.POST.get('_videotape', '')
         _usr, _host = getUsrHost(request)
         ui = getUI(_usr)
         try:
@@ -159,19 +160,21 @@ def game_2048_score(request):
             if int((td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10**6) < 3:
                 pass
             else:
-                videoTapeLog = getVideoTapeLogName(request)
-                videoTapeLogNamePre = _root+videoTapeLog+'.log'
-                if os.path.exists(videoTapeLogNamePre):
-                    videoTapeLogName = videoTapeLog+'-'+str(time.time())+'.log'
-                    os.rename(videoTapeLogNamePre, _root+videoTapeLogName)
-                    g = Game2048.objects.create(user=ui, host=_host, flag=('game-won' == _flag), score=_score, videotape=_url+videoTapeLogName)
+                #videoTapeLog = getVideoTapeLogName(request)
+                #videoTapeLogNamePre = _root+videoTapeLog+'.log'
+                #if os.path.exists(videoTapeLogNamePre):
+                #    videoTapeLogName = videoTapeLog+'-'+str(time.time())+'.log'
+                #    os.rename(videoTapeLogNamePre, _root+videoTapeLogName)
+                #    g = Game2048.objects.create(user=ui, host=_host, flag=('game-won' == _flag), score=_score, videotape=_url+videoTapeLogName)
+                g = Game2048.objects.create(user=ui, host=_host, flag=('game-won' == _flag), score=_score, videotape=_videotape)
         except:
-            videoTapeLog = getVideoTapeLogName(request)
-            videoTapeLogNamePre = _root+videoTapeLog+'.log'
-            if os.path.exists(videoTapeLogNamePre):
-                videoTapeLogName = videoTapeLog+'-'+str(time.time())+'.log'
-                os.rename(videoTapeLogNamePre, _root+videoTapeLogName)
-                g = Game2048.objects.create(user=ui, host=_host, flag=('game-won' == _flag), score=_score, videotape=_url+videoTapeLogName)
+            #videoTapeLog = getVideoTapeLogName(request)
+            #videoTapeLogNamePre = _root+videoTapeLog+'.log'
+            #if os.path.exists(videoTapeLogNamePre):
+            #    videoTapeLogName = videoTapeLog+'-'+str(time.time())+'.log'
+            #    os.rename(videoTapeLogNamePre, _root+videoTapeLogName)
+            #    g = Game2048.objects.create(user=ui, host=_host, flag=('game-won' == _flag), score=_score, videotape=_url+videoTapeLogName)
+            g = Game2048.objects.create(user=ui, host=_host, flag=('game-won' == _flag), score=_score, videotape=_videotape)
         return HttpResponse(json.dumps({'code': '200', 'msg': 'Record score success!'}))
     except:
         info = sys.exc_info()
@@ -213,6 +216,11 @@ def getGrids(request, sid):
     return [' '.join(grids[i:i+4]) for i in xrange(len(grids)) if not i%4]
 
 
+def getVideotape(request, sid):
+    return model_to_dict(Game2048.objects.get(id=sid))['videotape']
+
+
 def game_2048_palyback(request, sid):
-    reDict = {'usr': getUsr(request), 'scores': getScores(request), 'best': getBestScore(request), 'grids': getGrids(request, sid)}
+    #reDict = {'usr': getUsr(request), 'scores': getScores(request), 'best': getBestScore(request), 'grids': getGrids(request, sid)}
+    reDict = {'usr': getUsr(request), 'scores': getScores(request), 'best': getBestScore(request), 'videotape': getVideotape(request, sid)}
     return render_to_response('Lab/game-2048/game-2048-playback.html', reDict)
