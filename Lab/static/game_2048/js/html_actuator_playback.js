@@ -121,17 +121,6 @@ HTMLActuator.prototype.message = function (won) {
   var message = won ? "You win!" : "Game over!"
 
   // if (ga) ga("send", "event", "game", "end", type, this.score);
-  
-  // ajax post game result && score to server to save
-  $.ajax({
-	type: "post",
-	url: "/Lab/game-2048-score",
-	data: {_flag: type, _score: this.score, _videotape: videotape},
-	dataType: "json",
-	success: function(json){
-        console.log('>>> '+json['msg']);
-	}
-  });
 
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
