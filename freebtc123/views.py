@@ -244,7 +244,7 @@ def submitsite(request):
 
     robots = False
     if _url == '':
-        print 'error'
+        pass
     else:
         _recaptcha_challenge_field = request.POST.get('recaptcha_challenge_field', '')
         _recaptcha_response_field = request.POST.get('recaptcha_response_field', '')
