@@ -13,6 +13,7 @@
 			<div class="span12 margintb">
 				<div class="hero-unit nopaddinglr nomarginb">
 					<div class="divCenter">
+					    {% ifequal robots True %}<div class="text-center"><span>机器爬虫你好， 机器爬虫再见</span></div></br>{% endifequal %}
 						<form class="form-horizontal" action="{% url 'freebtc123:submitsite' %}" method='post'>
 							<div class="control-group">
 								<label class="control-label" for="inputSiteName"><b>网站名称：</b></label>
@@ -31,6 +32,16 @@
 								<div class="controls">
 									<input type="text" id="inputSiteUrl" name="url" placeholder="网站网址">
 								</div>
+							</div>
+							<div class="control-group">
+								<center>
+									<script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LfWhe0SAAAAAPnt6Hwq49Yu-ejMpzf1qzOmFaF6"></script>
+									<noscript>
+										<iframe src="http://www.google.com/recaptcha/api/noscript?k=6LfWhe0SAAAAAPnt6Hwq49Yu-ejMpzf1qzOmFaF6"height="300" width="500" frameborder="0"></iframe><br>
+										<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+										<input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+									</noscript>
+								</center>
 							</div>
 							<div class="control-group text-center">
 									<button type="submit" class="btn">提交</button>

@@ -24,6 +24,7 @@ import json
 import time
 import random
 import hashlib
+import requests
 
 from utils.utils import getNav, getUsr, getIP, getUsrHost, getErrorCode
 
@@ -235,15 +236,28 @@ def btcwiki(request):
 
 
 def submitsite(request):
+    verify_url = 'http://www.google.com/recaptcha/api/verify'
+
     _name = request.POST.get('name', '')
     _description = request.POST.get('description', '')
     _url = request.POST.get('url', '')
+
+    robots = False
     if _url == '':
         print 'error'
     else:
-        csySet = Classify.objects.get(nav__navName='submitsite')
-        Site.objects.create(siteName=_name, siteDescription=_description, siteUrl=_url, classify_id=csySet.id)
-    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'submitsite', 1), 'usr': getUsr(request), 'wallet': getWallet(request)}
+        _recaptcha_challenge_field = request.POST.get('recaptcha_challenge_field', '')
+        _recaptcha_response_field = request.POST.get('recaptcha_response_field', '')
+        data = {'privatekey': '6LfWhe0SAAAAAEkkiS0DD2w0u2xWA1gxpvFGt7YP', 'remoteip':getIP(request), 'challenge': _recaptcha_challenge_field, 'response': _recaptcha_response_field}
+        re = requests.post(verify_url, data)
+
+        if u'true' in re.text:
+            csySet = Classify.objects.get(nav__navName='submitsite')
+            Site.objects.create(siteName=_name, siteDescription=_description, siteUrl=_url, classify_id=csySet.id)
+        else:
+            robots = True
+
+    reDict = {'nav': getNav(request), 'csysite': getCsySite(request, 'submitsite', 1), 'usr': getUsr(request), 'wallet': getWallet(request), 'robots': robots}
     return render_to_response('freebtc123/submitsite.html', reDict)
 
 
