@@ -5,7 +5,7 @@
 		{% else %}
 			<li><a href="{% url 'Lab:game-2048-rank' prev%}">上一页</a></li>
 		{% endifequal %}
-		
+
 		{% for i in showlist %}
 			{% ifequal i cur %}
 			    <li class="active"><a>{{ i }}</a></li>
@@ -13,7 +13,7 @@
 				<li><a href="{% url 'Lab:game-2048-rank' i %}">{{ i }}</a></li>
 			{% endifequal %}
 		{% endfor %}
-		
+
 		{% ifequal next -1 %}
 			<li class="active"><a>下一页</a></li>
 		{% else %}

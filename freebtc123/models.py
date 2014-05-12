@@ -48,7 +48,7 @@ class Site(models.Model):
     siteLikeNum = models.IntegerField(_(u'sitelikenum'), blank=True, null=True, default=0)
     siteUnlikeNum = models.IntegerField(_(u'siteunlikenum'), blank=True, null=True, default=0)
     siteFavNum = models.IntegerField(_(u'sitefavnum'), blank=True, null=True, default=0)
-    siteDateTime = models.DateTimeField(_(u'sitedatetime'), blank=True, null=True,  auto_now_add=True)
+    siteDateTime = models.DateTimeField(_(u'sitedatetime'), blank=True, null=True, auto_now_add=True)
     classify = models.ForeignKey(Classify, verbose_name=_(u'classify'), blank=True, null=True)
     interval = models.IntegerField(_(u'interval'), blank=True, null=True, default=0)
     display = models.IntegerField(_(u'display'), blank=True, null=True, default=0)
@@ -67,7 +67,7 @@ class Site(models.Model):
 class Evaluate(models.Model):
     site = models.ForeignKey(Site, verbose_name=_(u'site'), blank=True, null=True)
     evaContent = models.TextField(_(u'eavcontent'), blank=True, null=True)
-    evaDateTime = models.DateTimeField(_(u'evadatetime'), blank=True, null=True,  auto_now_add=True)
+    evaDateTime = models.DateTimeField(_(u'evadatetime'), blank=True, null=True, auto_now_add=True)
 
     class Meta:
         db_table = u'evaluate'
@@ -81,7 +81,7 @@ class Evaluate(models.Model):
 class Proof(models.Model):
     site = models.ForeignKey(Site, verbose_name=_(u'site'), blank=True, null=True)
     proofContent = models.TextField(_(u'proofcontent'), blank=True, null=True)
-    proofDateTime = models.DateTimeField(_(u'proofdatetime'), blank=True, null=True,  auto_now_add=True)
+    proofDateTime = models.DateTimeField(_(u'proofdatetime'), blank=True, null=True, auto_now_add=True)
 
     class Meta:
         db_table = u'proof'
@@ -98,7 +98,7 @@ class Like(models.Model):
     wallet = models.ForeignKey(Wallet, verbose_name=_(u'wallet'), blank=True, null=True)
     host = models.GenericIPAddressField(_('host'), max_length=20, blank=True, null=True)
     flag = models.BooleanField(_('flag'), default=True)
-    likeTime = models.DateTimeField(_(u'liketime'), blank=True, null=True,  auto_now_add=True)
+    likeTime = models.DateTimeField(_(u'liketime'), blank=True, null=True, auto_now_add=True)
 
     class Meta:
         db_table = u'like'
@@ -114,7 +114,7 @@ class Favorite(models.Model):
     user = models.ForeignKey(UserInfo, verbose_name=_(u'user'), blank=True, null=True)
     wallet = models.ForeignKey(Wallet, verbose_name=_(u'wallet'), blank=True, null=True)
     host = models.GenericIPAddressField(_('host'), max_length=20, blank=True, null=True)
-    favoriteTime = models.DateTimeField(_(u'favoritetime'), blank=True, null=True,  auto_now_add=True)
+    favoriteTime = models.DateTimeField(_(u'favoritetime'), blank=True, null=True, auto_now_add=True)
 
     class Meta:
         db_table = u'favorite'
@@ -130,7 +130,7 @@ class Visit(models.Model):
     user = models.ForeignKey(UserInfo, verbose_name=_(u'user'), blank=True, null=True)
     wallet = models.ForeignKey(Wallet, verbose_name=_(u'wallet'), blank=True, null=True)
     host = models.GenericIPAddressField(_('host'), max_length=20, blank=True, null=True)
-    visitTime = models.DateTimeField(_(u'visittime'), blank=True, null=True,  auto_now_add=True)
+    visitTime = models.DateTimeField(_(u'visittime'), blank=True, null=True, auto_now_add=True)
 
     class Meta:
         db_table = u'visit'
@@ -147,7 +147,7 @@ class Log(models.Model):
     wallet = models.ForeignKey(Wallet, verbose_name=_(u'wallet'), blank=True, null=True)
     host = models.GenericIPAddressField(_('host'), max_length=20, blank=True, null=True)
     descr = models.TextField(_('description'), blank=True, null=True)
-    logTime = models.DateTimeField(_(u'logtime'), blank=True, null=True,  auto_now_add=True)
+    logTime = models.DateTimeField(_(u'logtime'), blank=True, null=True, auto_now_add=True)
 
     class Meta:
         db_table = u'log'

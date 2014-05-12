@@ -21,7 +21,7 @@ SQLITE_PATH = os.path.join(PROJECT_DIR, 'baiduchengjiu.db3')
 
 
 def getScoreGrade(u):
-    re = requests.get('http://www.baidu.com/p/'+u+'?from=ur')
+    re = requests.get('http://www.baidu.com/p/' + u + '?from=ur')
     _img = re.text.split('class=portrait-img src=\\x22')[1].split('?')[0].replace('\\', '')
     uDataUrl = re.text.split('urprincessindex')[1].split("');")[0]
     re = requests.get('http://www.baidu.com/ur/show/urprincessindex' + uDataUrl)
@@ -35,10 +35,10 @@ def _connect():
        ##  连接数据库、设置游标
     """
     cx = sqlite3.connect(SQLITE_PATH)   # Connect SQLite Database File
-    #print cx
-    #cx.text_factory = str
+    # print cx
+    # cx.text_factory = str
     cur = cx.cursor()   # Set a youbiao
-    #print cur
+    # print cur
     return cx, cur
 
 
@@ -52,8 +52,8 @@ def _close(cx, cur):
 
 
 for pn in xrange(MAX_PAGE_NUM, 1, -1):
-    rgurl = 'http://tieba.baidu.com/bawu2/platform/listMemberInfo?word=%B0%D9%B6%C8%B3%C9%BE%CD&pn='+str(pn)
-    print '>>> RequestGetUrl: ',  rgurl
+    rgurl = 'http://tieba.baidu.com/bawu2/platform/listMemberInfo?word=%B0%D9%B6%C8%B3%C9%BE%CD&pn=' + str(pn)
+    print '>>> RequestGetUrl: ', rgurl
     re = requests.get(rgurl)
     members = re.text.split('</a><span class="forum_level')[:-1]
 

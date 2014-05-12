@@ -46,7 +46,7 @@ def verify(request):
     _wallet = request.COOKIES['wa']
     _recaptcha_challenge_field = request.POST.get('recaptcha_challenge_field', '')
     _recaptcha_response_field = request.POST.get('recaptcha_response_field', '')
-    data = {'privatekey': '6LfWhe0SAAAAAEkkiS0DD2w0u2xWA1gxpvFGt7YP', 'remoteip':getIP(request), 'challenge': _recaptcha_challenge_field, 'response': _recaptcha_response_field}
+    data = {'privatekey': '6LfWhe0SAAAAAEkkiS0DD2w0u2xWA1gxpvFGt7YP', 'remoteip': getIP(request), 'challenge': _recaptcha_challenge_field, 'response': _recaptcha_response_field}
     re = requests.post(verify_url, data)
     reDict = {'wallet': _wallet, 'tips': True, 'success': u'true' in re.text}
     return render_to_response('freebtc/verify.html', reDict)

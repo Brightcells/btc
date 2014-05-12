@@ -42,17 +42,17 @@ def getpnsl(p, maxp):
             √ maxp - max page
         @returns: (prev, next, showlist) tuple
     '''
-    prev = p-1 if maxp != 1 and p != 1 else -1
-    next = p+1 if maxp != 1 and p != maxp else -1
-    if p-2 >= 1 and p+3 <= maxp+1:
-        start = p-2
-        end = p+3
-    elif p-2 < 1:
+    prev = p - 1 if maxp != 1 and p != 1 else -1
+    next = p + 1 if maxp != 1 and p != maxp else -1
+    if p - 2 >= 1 and p + 3 <= maxp + 1:
+        start = p - 2
+        end = p + 3
+    elif p - 2 < 1:
         start = 1
-        end = 6 if 6 <= maxp+1 else maxp+1
-    elif p+3 > maxp+1:
-        start = maxp-4 if maxp-4>1 else 1
-        end = maxp+1
+        end = 6 if 6 <= maxp + 1 else maxp + 1
+    elif p + 3 > maxp + 1:
+        start = maxp - 4 if maxp - 4 > 1 else 1
+        end = maxp + 1
     showlist = range(start, end)
     return prev, next, showlist
 
@@ -69,12 +69,12 @@ def addRank(scores, _from):
 
 def scores(request, p=1):
     _p = int(p)
-    _from = (_p-1)*100
-    _to = _p*100
+    _from = (_p - 1) * 100
+    _to = _p * 100
     _maxp = (Scores.objects.using('baiduchengjiu').all().count() + 100 - 1) / 100
     prev, next, showlist = getpnsl(_p, _maxp)
     scores = Scores.objects.using('baiduchengjiu').filter().order_by('-score')[_from: _to]
-    reDict = {'nav': getNav(request), 'scores': addRank(scores, _from+1), 'prev': prev, 'cur': _p, 'next': next, 'showlist': showlist}
+    reDict = {'nav': getNav(request), 'scores': addRank(scores, _from + 1), 'prev': prev, 'cur': _p, 'next': next, 'showlist': showlist}
     return render_to_response('baiduchengjiu/scores.html', reDict)
 
 
@@ -103,6 +103,6 @@ def getrank(request):
         rank = Scores.objects.using('baiduchengjiu').filter(score__gt=uinfo['score']).count() + 1
         return HttpResponse(json.dumps({'code': '200', 'msg': uinfo, 'rank': rank}))
     except:
-        info=sys.exc_info()
-        #print info[0],":",info[1]
+        info = sys.exc_info()
+        # print info[0],":",info[1]
         return HttpResponse(json.dumps({'code': '404', 'msg': str(info[1])}))

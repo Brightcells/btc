@@ -60,12 +60,12 @@ def getLastVisitTime(request, siteid):
     else:
         lvt = visitSetList.values('visitTime')[0]['visitTime']
         interval = Site.objects.get(id=siteid).interval
-        #lt = interval - int((timezone.now() - lvt).total_seconds())/60
+        # lt = interval - int((timezone.now() - lvt).total_seconds())/60
         # refer: http://docs.python.org/2/library/datetime.html#datetime.timedelta.total_seconds
         # total_seconds is New in version 2.7.
         # so we can use 'td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10**6' which equals to total_seconds
         td = (timezone.now() - lvt)
-        lt = interval - int((td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6) / 10**6)/60
+        lt = interval - int((td.microseconds + (td.seconds + td.days * 24 * 3600) * 10 ** 6) / 10 ** 6) / 60
         lt = lt if lt >= 0 else 0
         return lvt, lt
 
@@ -189,7 +189,7 @@ def fav(request):
 def getNumSite(request, num):
     qs = Site.objects.filter(classify__nav__navName='freebtc', display=0).exclude(classify__in=[36, 30, 27, 6, 5])
     try:
-        return qs[num], num+1
+        return qs[num], num + 1
     except:
         return qs[0], 1
 
@@ -197,7 +197,7 @@ def getNumSite(request, num):
 def getCsyNumSite(request, num, csyid):
     qs = Site.objects.filter(classify_id=csyid, display=0)
     try:
-        return qs[num], num+1
+        return qs[num], num + 1
     except:
         return qs[0], 1
 
@@ -248,7 +248,7 @@ def submitsite(request):
     else:
         _recaptcha_challenge_field = request.POST.get('recaptcha_challenge_field', '')
         _recaptcha_response_field = request.POST.get('recaptcha_response_field', '')
-        data = {'privatekey': '6LfWhe0SAAAAAEkkiS0DD2w0u2xWA1gxpvFGt7YP', 'remoteip':getIP(request), 'challenge': _recaptcha_challenge_field, 'response': _recaptcha_response_field}
+        data = {'privatekey': '6LfWhe0SAAAAAEkkiS0DD2w0u2xWA1gxpvFGt7YP', 'remoteip': getIP(request), 'challenge': _recaptcha_challenge_field, 'response': _recaptcha_response_field}
         re = requests.post(verify_url, data)
 
         if u'true' in re.text:
@@ -305,15 +305,30 @@ def evaluate(request, siteid):
 
 
 def proof(request, siteid):
+    verify_url = 'http://www.google.com/recaptcha/api/verify'
+
     _proof = request.POST.get('proof', '')
+
+    robots = False
     if _proof == '':
         print 'Just get Proofs!!!'
     else:
-        s = Site.objects.get(id=siteid)
-        s.siteProofNum = s.siteProofNum + 1
-        s.save()
-        Proof.objects.create(site_id=siteid, proofContent=_proof)
-    return render_to_response('freebtc123/evaluate.html', getEvaluateDict(request, siteid))
+        _recaptcha_challenge_field = request.POST.get('recaptcha_challenge_field', '')
+        _recaptcha_response_field = request.POST.get('recaptcha_response_field', '')
+        data = {'privatekey': '6LfWhe0SAAAAAEkkiS0DD2w0u2xWA1gxpvFGt7YP', 'remoteip': getIP(request), 'challenge': _recaptcha_challenge_field, 'response': _recaptcha_response_field}
+        re = requests.post(verify_url, data)
+
+        if u'true' in re.text:
+            s = Site.objects.get(id=siteid)
+            s.siteProofNum = s.siteProofNum + 1
+            s.save()
+            Proof.objects.create(site_id=siteid, proofContent=_proof)
+        else:
+            robots = True
+    print robots
+
+    reDict = dict(robots=robots, **getEvaluateDict(request, siteid))
+    return render_to_response('freebtc123/evaluate.html', reDict)
 
 
 def siteLikeChange(_siteid, _flag, _num):

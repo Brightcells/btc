@@ -35,7 +35,7 @@ TIME_OUT = 8
 
 
 def getScoreGrade(u):
-    re = requests.get('http://www.baidu.com/p/'+u+'?from=ur', timeout=TIME_OUT)
+    re = requests.get('http://www.baidu.com/p/' + u + '?from=ur', timeout=TIME_OUT)
     _img = re.text.split('class=portrait-img src=\\x22')[1].split('?')[0].replace('\\', '')
     uDataUrl = re.text.split('urprincessindex')[1].split("');")[0]
     re = requests.get('http://www.baidu.com/ur/show/urprincessindex' + uDataUrl, timeout=TIME_OUT)

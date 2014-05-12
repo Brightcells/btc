@@ -9,9 +9,9 @@ A Navigation Site For BTC
 * 执行命令运行服务
 
   >执行： python manage.py syncdb （PS： 请按照提示设置登录后台管理界面的帐户和密码）
-  
+
   >执行： python manage.py collectstatic
-  
+
   >执行： python manage.py runserver 0.0.0.0:80
 
 * 本机通过IP访问 或者 通过127.0.0.1访问，IP/admin 或者 127.0.0.1/admin访问后台管理界面

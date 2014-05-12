@@ -20,8 +20,8 @@ SQLITE_PATH = os.path.join(PROJECT_DIR, 'baiduchengjiu.db3')
 
 
 def getScoreGrade(u):
-    re = requests.get('http://www.baidu.com/p/'+u+'?from=ur')
-    #_img = re.text.split('class=portrait-img src=\\x22')[1].split('?')[0].replace('\\', '')
+    re = requests.get('http://www.baidu.com/p/' + u + '?from=ur')
+    # _img = re.text.split('class=portrait-img src=\\x22')[1].split('?')[0].replace('\\', '')
     uDataUrl = re.text.split('urprincessindex')[1].split("');")[0]
     re = requests.get('http://www.baidu.com/ur/show/urprincessindex' + uDataUrl)
     _grade = re.text.split('{"curLevel":+"')[1].split('"')[0]
@@ -34,10 +34,10 @@ def _connect():
        ##  连接数据库、设置游标
     """
     cx = sqlite3.connect(SQLITE_PATH)   # Connect SQLite Database File
-    #print cx
-    #cx.text_factory = str
+    # print cx
+    # cx.text_factory = str
     cur = cx.cursor()   # Set a youbiao
-    #print cur
+    # print cur
     return cx, cur
 
 
@@ -56,7 +56,7 @@ def _update(num_list):
         try:
             _uid = cur.execute(iSQL, (_id, )).fetchone()[1]
             _score, _grade = getScoreGrade(_uid)
-            #print _id, _uid, _score, _grade, _img
+            # print _id, _uid, _score, _grade, _img
             cur.execute('update scores set score=?, grade=? where uid = ?', (_score, _grade, _uid))
         except:
             pass
@@ -73,8 +73,8 @@ iSQL = 'select * from scores where id = ?'
 flag = True
 num = 0
 while flag:
-    _from = num*50+1
-    _to = (num+1)*50+1
+    _from = num * 50 + 1
+    _to = (num + 1) * 50 + 1
     print '>>> Now Begin %d' % (_from)
     _update(range(_from, _to))
     num += 1
