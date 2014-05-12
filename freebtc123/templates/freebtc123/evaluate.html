@@ -43,24 +43,6 @@
         </div>
     {% endif %}
 
-    {% if eva %}
-        <div class="container">
-            <div class="row block">
-                <div class="span12 margintb">
-                    <div class="hero-unit nopaddinglr nomarginb">
-                        {% for e in eva %}
-                            <div class="evaluate">
-                                {{ e.evaDateTime|date:"Y-m-d H:i:s" }}</br>
-                                <span class="content">{{ e.evaContent }}</span>
-                            </div>
-                            {% if forloop.last %}{% else %}<hr>{% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
-
     <div class="container">
         <div class="row block">
             <div class="span12 margintb">
@@ -98,17 +80,10 @@
             <div class="span12 margintb">
                 <div class="hero-unit nopaddinglr nomarginb">
                     <div class="divCenter">
-                        <form class="form-horizontal nomarginb" action="{% url 'freebtc123:evaluate' siteid %}" method='post'>
-                            <div class="control-group">
-                                <label class="control-label" for="inputEvaluateContent"><b>评论内容：</b></label>
-                                <div class="controls">
-                                    <textarea id="inputEvaluateContent" name="content" cols="50" rows="2" onscroll="this.rows++;" placeholder="评论内容"></textarea>
-                                </div>
-                            </div>
-                            <div class="control-group text-center nomarginb">
-                                    <button type="submit" class="btn">提交</button>
-                            </div>
-                        </form>
+                        <!-- UY BEGIN -->
+                        <div id="uyan_frame"></div>
+                        <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1902715"></script>
+                        <!-- UY END -->
                     </div>
                 </div>
             </div>
