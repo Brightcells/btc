@@ -95,19 +95,6 @@ function removeClass(ele,cls) {
   }
 }
 
-function controlbg() {
-	bObj = document.getElementById("bodyer");
-	fObj = document.getElementById("footer");
-	
-	if(hasClass(bObj, "hide")) {
-		removeClass(bObj, "hide");
-		removeClass(fObj, "hide");
-	} else {
-		addClass(bObj, "hide");
-		addClass(fObj, "hide");
-	}
-};
-
 /**
  * @description add link for url when string contains url
  * 

@@ -147,8 +147,14 @@
 	<script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
 	<script src="{% static 'js/pam.js' %}" type="text/javascript"></script> 
 	<script>
-		var res = ["{% static 'img/background.jpg' %}",];
-		_bg(0, res, 10000);
+		init({
+			site: "freebtc123",
+			usr: "{{ usr|default:'' }}",
+			device: "{% if request.mobile %}M{% else %}C{% endif %}",
+			display: true,
+			slide_image_classify: "{{ slide_image_classify|default:'' }}"
+		});
+		_bg(1, 0, 10000);
 	</script>
 </body>
 </html>

@@ -185,14 +185,7 @@
 					<div class="wflink">
 						<div class="row-fluid text-center">
 							<ul>
-								<li><a href="http://www.btcbbb.com/forum.php" target="_blank" title="比特币（Bitcoin）论坛BTCBBB.COM是中文比特币交流社区，你可以了解比特币入门、比特币挖矿、比特币技术方面的相关知识。论坛还提供担保交易及比特币商店的相关业务。">比特币交流论坛</a></li>
-							</ul>
-						</div>
-						<div class="row-fluid text-center">
-							<ul>
 								<li><a href="http://freebtc123.com/" target="_blank" title="FreeBTC123 - 免费获取比特币网址导航">FreeBTC123</a></li>
-								<li><a href="http://herebtc.com/" target="_blank" title="HereBTC - 免费获取比特币网址导航">HereBTC</a></li>
-								<li><a href="http://www.bitcoinvester.com/" target="_blank" title="BitcoinVester - 免费获取比特币网址导航">BitcoinVester</a></li>
 								<li><a href="http://freebtc.qiniudn.com/" target="_blank" title="FreeBTC.QiNiu - 免费获取比特币网址导航">FreeBTC.QiNiu</a></li>
 							</ul>
 						</div>
@@ -246,7 +239,6 @@
 		<!-- /container -->
 	</div>
 	
-	<a id="controlbg" class="controlbg" href="javascript:controlbg();"></a>
 	<a id="backtop" class="backtop" href="javascript:backtop();"></a>
 
 	<!-- Begin BShare -->
@@ -297,8 +289,14 @@
 			}); 
 		}); 
 		
-		var res = ["{% static 'img/background.jpg' %}",];
-		_bg(0, res, 10000);
+		init({
+			site: "freebtc123",
+			usr: "{{ usr|default:'' }}",
+			device: "{% if request.mobile %}M{% else %}C{% endif %}",
+			display: true,
+			slide_image_classify: "{{ slide_image_classify|default:'' }}"
+		});
+		_bg(1, 0, 10000);
 		
 		function init(){
 			$("table").each(function(){

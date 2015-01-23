@@ -196,11 +196,6 @@
 	
 	<div class="container margintop">
 		<div class="text-center"><h3>百度成就排行榜</h3><h5>非官方</h5></div>
-		</br>
-		<div class="text-center">
-			<a href="http://url.cn/Q5Oj9g"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" class="img-polaroid iconlong" alt="百度成就精英BOSS团: 7430246" title="百度成就精英BOSS团: 7430246"></a>
-			<b class="qun">欢迎加入百度成就精英BOSS团: <a href="http://url.cn/Q5Oj9g">7430246</a></b>
-		</div>
 	</div>
 	
 	<div id="ranktable" class="container">
@@ -254,11 +249,6 @@
 	<div id="footer" class="footer">
 		<div class="container">
 			<div class="row block">
-			    </br>
-				<div class="span12 text-center">
-					<a href="http://url.cn/Q5Oj9g"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" class="img-polaroid iconlong" alt="百度成就精英BOSS团: 7430246" title="百度成就精英BOSS团: 7430246"></a>
-					<b class="qun">欢迎加入百度成就精英BOSS团: <a href="http://url.cn/Q5Oj9g">7430246</a></b>
-				</div>
 				<div class="span12 margintads">
 					<div class="ads">
 						<p class="pull-right"><iframe scrolling="no" style="border: 0; width: 468px; height: 60px;" src="//coinurl.com/get.php?id=21870"></iframe></p>
@@ -280,8 +270,14 @@
 	<script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
 	<script src="{% static 'js/pam.js' %}" type="text/javascript"></script> 
 	<script>
-		var res = ["{% static 'img/background.jpg' %}",];
-		_bg(0, res, 10000);
+		init({
+			site: "freebtc123",
+			usr: "{{ usr|default:'' }}",
+			device: "{% if request.mobile %}M{% else %}C{% endif %}",
+			display: true,
+			slide_image_classify: "{{ slide_image_classify|default:'' }}"
+		});
+		_bg(1, 0, 10000);
 		
 		// Firefox, Google Chrome, Opera, Safari, Internet Explorer from version 9
         function OnInput(event) {
